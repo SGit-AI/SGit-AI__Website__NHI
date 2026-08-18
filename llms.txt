@@ -8,7 +8,7 @@
 > thesis with evidence, a reproducible research method, dated option assessments, and a
 > curated collection of the underlying corpus.
 
-Site version: v0.1.5 (18 August 2026). Published by the sgit project — participant
+Site version: v0.1.6 (18 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## The research
@@ -48,6 +48,25 @@ disclosure at /about/participant.html. All content CC BY 4.0.
   ladder of workflows that replace hope — enumerate, map the closure, bound spend and
   time, observe independently, and issue no credential at all (the serialised pull
   request).
+
+## The industry map
+
+- [Grouped by layer](https://nhi.sgit.ai/industry/index.html): NHI discovery/posture/
+  governance (Astrix, Entro, Oasis, Token Security, Veza, SailPoint), workload IAM
+  (Aembit), secrets & detection (HashiCorp Vault, CyberArk, Akeyless, GitGuardian),
+  machine identity (Keyfactor, Venafi), and human-IAM platforms extending to agents
+  (Microsoft Entra Agent ID, Okta). One profile page per provider, from published
+  materials, dated 18 Aug 2026.
+- [SPIFFE / SPIRE explained](https://nhi.sgit.ai/industry/spiffe.html): how attested
+  workload identity works — SPIFFE IDs and SVIDs, the SPIRE issuance flow, federation —
+  and why the mechanism is unavailable by construction for agents you rent.
+
+## The documents
+
+- [The original briefs, readable in-page](https://nhi.sgit.ai/documents/index.html):
+  each with a summary, key concepts, key ideas, an infographic slot, and the full
+  markdown rendered from the raw source under /briefs/. Currently: the NHI site brief,
+  the shared-drives research brief, and the pki.sgit.ai brief.
 
 ## PKI — preparing pki.sgit.ai
 

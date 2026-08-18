@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The industry map — NHI products and services, grouped by what they answer · nhi.sgit.ai</title>
+<meta name="description" content="The main non-human-identity products and services on the market, grouped by focus and capability: discovery & governance, workload IAM, secrets, machine identity, and human IAM extended to agents. One profile page per provider, from published materials.">
+<link rel="canonical" href="https://nhi.sgit.ai/industry/index.html">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">nhi<span>.sgit.ai</span></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.6</a>
+  <a class="nl" href="../thesis/index.html">Thesis</a>
+  <a class="nl" href="../hope/index.html">Hope</a>
+  <a class="nl" href="../method/index.html">Method</a>
+  <a class="nl" href="../options/index.html">Options</a>
+  <a class="nl here" href="index.html">Industry</a>
+  <a class="nl" href="../collection/index.html">Collection</a>
+  <a class="nl" href="../frameworks/aomm.html">AOMM</a>
+  <a class="nl" href="../pki/index.html">PKI</a>
+  <a class="nl" href="../documents/index.html">Docs</a>
+  <a class="nl" href="../infographics/index.html">Infographics</a>
+  <a class="nl" href="../admin/comms.html">Comms</a>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__NHI">★ GitHub</a>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">nhi.sgit.ai</a> / industry</div>
+<h1>The industry map</h1>
+<p class="lead">The main NHI products and services on the market, grouped by what part of the question they answer — because most answer <em>part</em>, and a mature programme combines a discovery-and-posture layer, a secrets layer and a workload-identity layer under one policy. Each provider has a profile page compiled from published materials; nothing here is a hands-on assessment (those live under <a href="../options/index.html">Options</a>, with the scenario and the columns).</p>
+
+<div class="evbox ev-warn"><span class="evtag">Map status</span>
+<p>Grouping and vendor claims are drawn from the <a href="https://aembit.io/blog/10-identity-security-vendors-for-ai-agents-strengths-tradeoffs-and-how-they-fit/">Aembit vendor guide</a> and the <a href="https://guptadeepak.com/top-non-human-identity-nhi-management-tools-2026/">2026 NHI tools survey</a>, plus vendor materials. <b>Date verified: 18 August 2026</b> — this market moves monthly; corrections via <a href="../admin/comms.html">comms</a>. Vendors are mapped as complementary layers, not ranked: the cited guidance is that most enterprises use several parts of this stack.</p></div>
+
+<h2 id="standards">Open standards &amp; reference implementations</h2>
+<div class="tablewrap"><table>
+  <thead><tr><th>Name</th><th>What it is</th><th>Profile</th></tr></thead>
+  <tbody>
+    <tr><td><b>SPIFFE / SPIRE</b></td><td>The open, vendor-neutral workload identity standard: attested, short-lived cryptographic identities without long-lived secrets. The mature answer for agents you run — and the clearest illustration of the thesis, since it requires infrastructure you control.</td><td><a href="spiffe.html">Concept page, with diagrams →</a></td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="governance">NHI discovery, posture &amp; governance</h2>
+<p class="small dim">Who exists, what can each reach, who owns it, when does it die. The layer the CSA survey found most organisations missing.</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>Provider</th><th>Focus</th><th>Profile</th></tr></thead>
+  <tbody>
+    <tr><td><b>Astrix Security</b> (Cisco)</td><td>Shadow-agent and NHI discovery, privilege analysis, lifecycle governance; Agent Control Plane</td><td><a href="astrix.html">Profile →</a></td></tr>
+    <tr><td><b>Entro Security</b></td><td>Secrets-centric: agent-to-credential mapping, ownership, exposure, detection &amp; response</td><td><a href="entro.html">Profile →</a></td></tr>
+    <tr><td><b>Oasis Security</b></td><td>One programme for service accounts, machine identities and agents; intent-aware access</td><td><a href="oasis.html">Profile →</a></td></tr>
+    <tr><td><b>Token Security</b></td><td>Machine-first identity security across hybrid environments</td><td><a href="token-security.html">Profile →</a></td></tr>
+    <tr><td><b>Veza</b> (ServiceNow)</td><td>The authorization graph: effective permissions, excessive access, least privilege</td><td><a href="veza.html">Profile →</a></td></tr>
+    <tr><td><b>SailPoint</b></td><td>Identity governance extended to agents: ownership, certification, lifecycle</td><td><a href="sailpoint.html">Profile →</a></td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="workload-iam">Workload IAM &amp; runtime access</h2>
+<p class="small dim">Authenticate the workload, evaluate policy, deliver credentials just-in-time — no standing secrets.</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>Provider</th><th>Focus</th><th>Profile</th></tr></thead>
+  <tbody>
+    <tr><td><b>Aembit</b></td><td>Secretless, policy-based runtime access for workloads and agents; MCP Identity Gateway</td><td><a href="aembit.html">Profile →</a></td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="secrets">Secrets management &amp; detection</h2>
+<p class="small dim">Where credentials live, how they rotate — and how you find the ones that leaked.</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>Provider</th><th>Focus</th><th>Profile</th></tr></thead>
+  <tbody>
+    <tr><td><b>HashiCorp Vault</b> (IBM)</td><td>The reference secrets manager; dynamic credentials; now issues SPIFFE identities natively</td><td><a href="hashicorp-vault.html">Profile →</a></td></tr>
+    <tr><td><b>CyberArk</b> (Palo Alto Networks)</td><td>PAM + Conjur secrets + the Venafi machine-identity line; agent discovery, MCP identity broker</td><td><a href="cyberark.html">Profile →</a></td></tr>
+    <tr><td><b>Akeyless</b></td><td>SaaS-delivered secrets and key management, multi-cloud</td><td><a href="akeyless.html">Profile →</a></td></tr>
+    <tr><td><b>GitGuardian</b></td><td>Secrets detection in code and pipelines — the leaked-credential compensating control</td><td><a href="gitguardian.html">Profile →</a></td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="machine-id">Machine identity &amp; certificates</h2>
+<p class="small dim">Certificate lifecycle at machine scale — the layer an agent-key registry would sit beside.</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>Provider</th><th>Focus</th><th>Profile</th></tr></thead>
+  <tbody>
+    <tr><td><b>Keyfactor</b></td><td>PKI automation, short-lived certificates, crypto-agility</td><td><a href="keyfactor.html">Profile →</a></td></tr>
+    <tr><td><b>Venafi</b> (CyberArk)</td><td>TLS and code-signing certificate lifecycle automation</td><td><a href="cyberark.html">Covered in the CyberArk profile →</a></td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="human-iam">Human IAM platforms extending to agents</h2>
+<p class="small dim">Agents managed through the same identity provider as the workforce — the platform-native answers.</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>Provider</th><th>Focus</th><th>Profile</th></tr></thead>
+  <tbody>
+    <tr><td><b>Microsoft Entra</b> (Agent ID)</td><td>Agents as first-class identities inside the Microsoft ecosystem</td><td><a href="entra.html">Profile →</a></td></tr>
+    <tr><td><b>Okta</b> (+ Auth0)</td><td>Agent discovery, registration and governance through the workforce IdP</td><td><a href="okta.html">Profile →</a></td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="how-to-read">How to read this map against the thesis</h2>
+<p>Every group above serves the population that runs its own workloads, or governs the credentials the other population hands over. That is not a criticism — it is <a href="../thesis/index.html">the thesis</a>, observable in a market map: attestation-based identity requires infrastructure you control; discovery, governance, secrets and detection make the do-nothing baseline more survivable without changing its nature; and the platform IdPs offer per-agent identity exactly as far as their platform boundary. The <a href="../research/shared-drives.html">shared-drives research</a> is the same observation at scenario level, and the <a href="../pki/index.html">PKI section</a> is the design for the missing piece.</p>
+
+<div class="pagenav">
+  <a href="../options/index.html">← The assessed options</a>
+  <a href="spiffe.html">SPIFFE, explained →</a>
+</div>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">nhi<span>.sgit.ai</span></div>
+    <p>Non-human identity, blast radius and agentic security — anchored by the two-populations thesis. All content CC BY 4.0.</p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.6</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The research</h4>
+    <a href="../thesis/index.html">The thesis</a>
+    <a href="../method/index.html">Method</a>
+    <a href="../options/index.html">Options</a>
+    <a href="index.html">Industry</a>
+  </div>
+  <div>
+    <h4>The collection</h4>
+    <a href="../collection/index.html">By question</a>
+    <a href="../frameworks/aomm.html">The AOMM</a>
+    <a href="../hope/index.html">Hope</a>
+    <a href="../pki/index.html">PKI</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../admin/comms.html">Comms</a>
+    <a href="../admin/versions.html">Versions</a>
+    <a href="../llms.txt">llms.txt</a>
+    <a href="https://sgit.ai">sgit.ai</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

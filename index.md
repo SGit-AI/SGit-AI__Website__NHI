@@ -5,7 +5,7 @@
 > people actually name is the second. For those, the honest current answer is: hand over
 > a broad credential, and hope.
 
-*Source: <https://nhi.sgit.ai/index.html> · site v0.1.5 · markdown twin of the front page.*
+*Source: <https://nhi.sgit.ai/index.html> · site v0.1.6 · markdown twin of the front page.*
 
 ---
 

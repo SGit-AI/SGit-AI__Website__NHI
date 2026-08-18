@@ -165,3 +165,26 @@ footer.site .verline a{display:inline;color:var(--accent-dk);padding:0}
   h1,h2,h3,h4{break-after:avoid}
   p,li{orphans:3;widows:3}
 }
+
+/* ---------- in-page markdown reader (documents/*) ---------- */
+.mdread{border:1px solid var(--line);border-radius:12px;background:var(--panel);
+  padding:1.6rem 1.8rem;margin:1.4rem 0;box-shadow:var(--shadow)}
+.mdread h1{font-family:var(--serif);font-size:1.7rem;color:#101114;margin:.2rem 0 .8rem}
+.mdread h2{font-family:var(--serif);font-size:1.25rem;color:#101114;margin:1.8rem 0 .6rem}
+.mdread h3{font-size:1rem;color:#101114;margin:1.4rem 0 .4rem}
+.mdread p,.mdread li{color:#34363c;font-size:.94rem;line-height:1.65}
+.mdread table{display:block;overflow-x:auto;border-collapse:collapse;font-size:.85rem;margin:1rem 0}
+.mdread th{background:var(--panel2);text-align:left;padding:.5rem .7rem;font-size:.7rem;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--dim);border:1px solid var(--line)}
+.mdread td{padding:.5rem .7rem;border:1px solid var(--line);color:#34363c;vertical-align:top}
+.mdread blockquote{margin:1.2rem 0;padding:.8rem 1.1rem;border-left:4px solid var(--warm);
+  background:var(--panel2);border-radius:0 8px 8px 0;color:#34363c}
+.mdread pre{background:var(--term-bg);color:#c9d1d9;border-radius:8px;padding:.8rem 1rem;
+  font-size:.78rem;overflow-x:auto;line-height:1.6}
+.mdread hr{border:none;border-top:1px solid var(--line);margin:1.6rem 0}
+.mdread a{overflow-wrap:anywhere}
+.docmeta{display:grid;grid-template-columns:auto 1fr;gap:.25rem 1rem;background:var(--panel);
+  border:1px solid var(--line);border-radius:10px;padding:.9rem 1.1rem;box-shadow:var(--shadow);
+  font-size:.86rem;margin:1rem 0 1.4rem}
+.docmeta .k{color:var(--dim);font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;padding-top:.15rem}
+.docmeta .v{color:#34363c}
