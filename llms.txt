@@ -8,7 +8,7 @@
 > thesis with evidence, a reproducible research method, dated option assessments, and a
 > curated collection of the underlying corpus.
 
-Site version: v0.1.7 (18 August 2026). Published by the sgit project — participant
+Site version: v0.1.8 (18 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## The research
@@ -65,8 +65,12 @@ disclosure at /about/participant.html. All content CC BY 4.0.
 
 - [The original briefs, readable in-page](https://nhi.sgit.ai/documents/index.html):
   each with a summary, key concepts, key ideas, an infographic slot, and the full
-  markdown rendered from the raw source under /briefs/. Currently: the NHI site brief,
-  the shared-drives research brief, and the pki.sgit.ai brief.
+  markdown rendered from the raw source under /briefs/. Eleven documents: the NHI site
+  brief, the shared-drives research, the pki.sgit.ai brief, the serialised pull request,
+  ambient authority/capability grants, the AOMM, the sandbox-escape incident analysis,
+  who-can-pull-the-plug and the plug-profile probe, the catastrophic-risk board thesis,
+  and the hope-driven authorization brief. Raw markdown for all of them under
+  https://nhi.sgit.ai/briefs/ — the source of truth.
 
 ## PKI — preparing pki.sgit.ai
 
