@@ -18,5 +18,23 @@
   }).then(function (t) {
     if (!window.marked) return fail();
     el.innerHTML = marked.parse(t);
+    /* Render ```mermaid fences as diagrams. Best-effort: if the mermaid module
+       cannot load, the fence stays visible as a code block — never a blank hole. */
+    var fences = el.querySelectorAll('code.language-mermaid');
+    if (fences.length) {
+      fences.forEach(function (c) {
+        var holder = document.createElement('pre');
+        holder.className = 'mermaid';
+        holder.textContent = c.textContent;
+        (c.parentElement.tagName === 'PRE' ? c.parentElement : c).replaceWith(holder);
+      });
+      import('https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs')
+        .then(function (m) {
+          m.default.initialize({ startOnLoad: false, theme: 'neutral',
+            themeVariables: { fontFamily: 'ui-sans-serif, system-ui, sans-serif' } });
+          m.default.run({ nodes: el.querySelectorAll('pre.mermaid') });
+        })
+        .catch(function () { /* fences remain readable as code */ });
+    }
   }).catch(fail);
 })();

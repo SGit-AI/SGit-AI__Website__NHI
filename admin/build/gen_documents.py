@@ -226,6 +226,7 @@ PAGE = """<!doctype html>
   <a class="nl" href="../frameworks/aomm.html">AOMM</a>
   <a class="nl" href="../pki/index.html">PKI</a>
   <a class="nl here" href="index.html">Docs</a>
+  <a class="nl" href="../packs/index.html">Packs</a>
   <a class="nl" href="../infographics/index.html">Infographics</a>
   <a class="nl" href="../admin/comms.html">Comms</a>
   <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__NHI">★ GitHub</a>

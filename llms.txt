@@ -8,7 +8,7 @@
 > thesis with evidence, a reproducible research method, dated option assessments, and a
 > curated collection of the underlying corpus.
 
-Site version: v0.1.8 (18 August 2026). Published by the sgit project — participant
+Site version: v0.1.9 (18 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## The research
@@ -71,6 +71,21 @@ disclosure at /about/participant.html. All content CC BY 4.0.
   who-can-pull-the-plug and the plug-profile probe, the catastrophic-risk board thesis,
   and the hope-driven authorization brief. Raw markdown for all of them under
   https://nhi.sgit.ai/briefs/ — the source of truth.
+
+## Dev packs
+
+- [Packs hub](https://nhi.sgit.ai/packs/index.html): implementation-plan packs authored
+  by dev agents, captured verbatim with a reader page per document.
+- [Static publishing pack](https://nhi.sgit.ai/packs/static-publishing/index.html)
+  (17 Aug 2026, build spec): a vault publishes to a folder — ciphertext plus a declared
+  plaintext surface — readable by a browser via a loader and by `sgit clone` over plain
+  GETs from any static host, no server, no auth. Five invariants (byte-identical
+  ciphertext everywhere; the key never reaches a server; keyless custody via mandatory
+  manifest.json; byte-identical loader; plaintext only where the key is published),
+  14 test cells collapsed from 240 combinations, 7 shippable phases, and measured
+  evidence including: GitHub Pages sends access-control-allow-origin:* by default, and
+  object ids hash ciphertext with random IVs so a fork is unlinkable. Raw sources under
+  https://nhi.sgit.ai/packs/static-publishing/src/
 
 ## PKI — preparing pki.sgit.ai
 

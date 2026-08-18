@@ -194,3 +194,7 @@ footer.site .verline a{display:inline;color:var(--accent-dk);padding:0}
   font-size:.86rem;margin:1rem 0 1.4rem}
 .docmeta .k{color:var(--dim);font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;padding-top:.15rem}
 .docmeta .v{color:#34363c}
+
+/* mermaid diagrams (concept pages + rendered inside .mdread) */
+pre.mermaid{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:1rem;
+  margin:1.2rem 0;box-shadow:var(--shadow);text-align:center;overflow-x:auto;font-size:.8rem}
