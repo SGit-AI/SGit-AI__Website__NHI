@@ -8,7 +8,7 @@
 > thesis with evidence, a reproducible research method, dated option assessments, and a
 > curated collection of the underlying corpus.
 
-Site version: v0.1.6 (18 August 2026). Published by the sgit project — participant
+Site version: v0.1.7 (18 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## The research

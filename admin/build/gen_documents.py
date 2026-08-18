@@ -135,6 +135,7 @@ PAGE = """<!doctype html>
 <div class="warnbox"><b>Slot reserved.</b> The matching LinkedIn infographic has not yet been linked — the request list is on the <a href="../infographics/index.html">infographics page</a> (N1 on <a href="../admin/comms.html">comms</a>). Once identified it will appear here, pointing back to this document.</div>
 
 <h2 id="read">Read the document</h2>
+<div class="mdread-label">📄 Original document · {version} · {date} · rendered from the <a href="../briefs/{md}">raw markdown</a> (the source of truth)</div>
 <div class="mdread" id="mdread" data-src="../briefs/{md}"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="../briefs/{md}">open the raw markdown</a>.</p></noscript></div>
 
 <div class="pagenav">
