@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PKI — the cryptographic half of the identity gap · nhi.sgit.ai</title>
+<meta name="description" content="Staging ground for pki.sgit.ai: a public key registry for agents, designed from the documented 2019 keyserver failure. The failure page, the four registry rules, and identity vs. mandate as separately revocable signed statements.">
+<link rel="canonical" href="https://nhi.sgit.ai/pki/index.html">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">nhi<span>.sgit.ai</span></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.5</a>
+  <a class="nl" href="../thesis/index.html">Thesis</a>
+  <a class="nl" href="../hope/index.html">Hope</a>
+  <a class="nl" href="../method/index.html">Method</a>
+  <a class="nl" href="../options/index.html">Options</a>
+  <a class="nl" href="../collection/index.html">Collection</a>
+  <a class="nl" href="../frameworks/aomm.html">AOMM</a>
+  <a class="nl here" href="index.html">PKI</a>
+  <a class="nl" href="../infographics/index.html">Infographics</a>
+  <a class="nl" href="../admin/comms.html">Comms</a>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__NHI">★ GitHub</a>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">nhi.sgit.ai</a> / pki</div>
+<h1>PKI: the cryptographic half of the identity gap</h1>
+<p class="lead">This section is the staging ground for <b>pki.sgit.ai</b> — a site collecting the published work on public key infrastructure, and a registry of agent keys designed from a documented failure. It lives here first because it is the cryptographic half of this site's thesis: the <a href="../research/shared-drives.html">shared-drives research</a> found that <em>no available system</em> gives an agent its own identity, agent-level attribution, or encryption to a specific agent. Per-agent keys in a registry are what would fill those empty rows.</p>
+
+<div class="note"><b>Source.</b> This section is built from the pki.sgit.ai strategy brief (v0.33.59, 16 Aug 2026), captured verbatim with all citations: <a href="../briefs/v0.33.59__strategy-brief__pki-sgit-keyserver-failure-append-only-ownership-rule.md">the source brief</a>. The historical claims are externally verifiable, so the participant discipline applies lightly here — the design claims are ours and are stated as checkable rules.</div>
+
+<h2 id="pages">The pages</h2>
+<div class="cards" style="padding:0">
+  <a class="card" href="keyserver-failure.html"><span class="tag">The history</span><h3>Why good public key repositories don't exist</h3><p>The global keyserver network was destroyed in 2019 by an attack its own maintainer called unsalvageable — and the cause was a stated design goal, not a bug. The three abused properties, and what the replacement gave up.</p><span class="go">Read →</span></a>
+  <a class="card" href="registry-rules.html"><span class="tag">The design</span><h3>The four rules, published before the registry exists</h3><p>Only the owner writes to their own record; revocation is a signed append; records are size-bounded; every entry is signed. Plus: identity vs. mandate, and what vaults do and don't supply.</p><span class="go">Read →</span></a>
+</div>
+
+<h2 id="why-now">Why attempt this now</h2>
+<p>The registry idea is old; what changed is that vaults supply the layer a key server had to build itself: <b>distribution</b> (a published vault is readable from static hosting and mirrorable by anybody), <b>custody without access</b> (untrusted mirrors are safe by construction), and <b>versioning</b> (the state of a key at any past date is answerable natively). What vaults do <em>not</em> supply — the ownership rule, the size bound, signature checking — is the registry logic, and it is the part to build carefully. The registry becomes a product of existing infrastructure rather than a new system.</p>
+
+<h2 id="depth">The material exists, in depth</h2>
+<p>729 files in the corpus mention the subject, with dedicated documents going back to February 2026: an architecture debrief, a messaging implementation, model-integration research, a document identity brief, operating modes, a provenance treatment, and a brand strategy. So pki.sgit.ai is a <b>publication and curation problem</b>, like this site — organise by the question a reader arrives with, promote the strongest artefacts to pages. The curation queue is tracked on <a href="../admin/comms.html">comms</a>.</p>
+
+<h2 id="order">Build order (from the brief)</h2>
+<ol>
+  <li><b>The collection</b>, organised by question, with the February–March architecture material promoted.</li>
+  <li><b>The failure page</b> — short, useful, independent of anything being built. <a href="keyserver-failure.html">Done, here</a>.</li>
+  <li><b>The four rules</b>, published as the registry's stated design before the registry exists. <a href="registry-rules.html">Done, here</a>.</li>
+  <li><b>A private registry</b>, for our own agents — the smaller problem, with a real user.</li>
+  <li><b>Mandate statements</b>, separate from identity statements, revocable independently.</li>
+  <li><b>A public registry</b>, last: it inherits every hard problem of the private one, plus trust roots and abuse.</li>
+</ol>
+<p>The load-bearing ordering: <b>a registry with one organisation's agents in it is testable; a global one is a commitment.</b></p>
+
+<h2 id="relation">How this connects to the rest of the site</h2>
+<ul>
+  <li><a href="../thesis/index.html">The thesis</a> — the identity gap this is the cryptographic half of.</li>
+  <li><a href="../research/shared-drives.html">Shared drives research</a> — the three empty rows a per-agent key registry would address.</li>
+  <li><a href="../hope/index.html#segregation">Hope § attribution from content</a> — signed writes are the attribution mechanism; the registry is where the verifying keys would live.</li>
+</ul>
+
+<div class="pagenav">
+  <a href="../research/shared-drives.html">← The empty rows this addresses</a>
+  <a href="keyserver-failure.html">The failure page →</a>
+</div>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">nhi<span>.sgit.ai</span></div>
+    <p>Non-human identity, blast radius and agentic security — anchored by the two-populations thesis. All content CC BY 4.0.</p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.5</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The research</h4>
+    <a href="../thesis/index.html">The thesis</a>
+    <a href="../method/index.html">Method</a>
+    <a href="../options/index.html">Options</a>
+    <a href="../research/shared-drives.html">Shared drives</a>
+  </div>
+  <div>
+    <h4>The collection</h4>
+    <a href="../collection/index.html">By question</a>
+    <a href="../frameworks/aomm.html">The AOMM</a>
+    <a href="../hope/index.html">Hope</a>
+    <a href="index.html">PKI</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../admin/comms.html">Comms</a>
+    <a href="../admin/versions.html">Versions</a>
+    <a href="../llms.txt">llms.txt</a>
+    <a href="https://sgit.ai">sgit.ai</a>
+  </div>
+</div></footer>
+
+</body>
+</html>
