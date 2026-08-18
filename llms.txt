@@ -1,0 +1,62 @@
+# nhi.sgit.ai — non-human identity, blast radius and agentic security
+
+> The question "how do I give an identity to my agents?" splits into two populations —
+> agents you run and agents you rent — and the industry only answers the first. For the
+> agents people actually name (hosted coding assistants, chat interfaces, API-run agents)
+> there is no way to issue a scoped, short-lived, attested identity today; the honest
+> current practice is to hand over a broad credential and hope. This site publishes that
+> thesis with evidence, a reproducible research method, dated option assessments, and a
+> curated collection of the underlying corpus.
+
+Site version: v0.1.0 (18 August 2026). Published by the sgit project — participant
+disclosure at /about/participant.html. All content CC BY 4.0.
+
+## The research
+
+- [The thesis](https://nhi.sgit.ai/thesis/index.html): two populations, the evidence
+  (open feature request, documented over-scope, Black Hat disclosure), why it is
+  falsifiable and defensible.
+- [The method](https://nhi.sgit.ai/method/index.html): one concrete scenario (four
+  agents, four vaults, one repository, no shared access) answered per option in the same
+  columns — privileges granted is the differentiating column; "works for rented agents"
+  and "date verified" are the columns that make it worth doing.
+- [Options](https://nhi.sgit.ai/options/index.html): assessments, currently preliminary
+  (from cited sources, not yet re-run hands-on):
+  - [SPIFFE / SPIRE, the open standard](https://nhi.sgit.ai/options/spiffe.html) —
+    strongest privileges story; requires infrastructure you control; multi-year cost.
+  - [A commercial workload-identity broker](https://nhi.sgit.ai/options/broker.html) —
+    buys the engineering time back; still attests only workloads you run.
+  - [Do nothing: broad credential + hope](https://nhi.sgit.ai/options/do-nothing.html) —
+    the incumbent baseline, assessed honestly; the only option that works for rented
+    agents, which is the thesis in one cell.
+
+## Hope — concepts and workflows
+
+- [Hope is not a control](https://nhi.sgit.ai/hope/index.html): hope-driven development
+  named; the two hopes (behaviour, discovery); the real authorization as the transitive
+  closure of the grant; the expected-vs-unexpected delta; the two awareness gaps; and the
+  ladder of workflows that replace hope — enumerate, map the closure, bound spend and
+  time, observe independently, and issue no credential at all (the serialised pull
+  request).
+
+## The collection
+
+- [Organised by question](https://nhi.sgit.ai/collection/index.html): what is an agent
+  allowed to do; what happens when one is compromised; how do you bound spend and time;
+  who can pull the plug; could your agents reach someone else; how do you attribute an
+  action. Sources link to the open corpus repository (SGraph-AI__App__Send, CC BY 4.0).
+- [The Agentic Outbound Maturity Model](https://nhi.sgit.ai/frameworks/aomm.html): the
+  five preconditions (capability, motive, reach, freedom, silence) and the conjunctive
+  ladder (Unaware, Enumerated, Bounded, Observed, Contained, Accountable); the lethal
+  trifecta corrected for the outbound case; budget and elapsed time as containment
+  controls.
+- [Infographics](https://nhi.sgit.ai/infographics/index.html): request list — awaiting
+  LinkedIn post links from the project lead.
+
+## Site
+
+- [Participant disclosure and where our approach loses](https://nhi.sgit.ai/about/participant.html)
+- [Comms: tasks, requests, decisions](https://nhi.sgit.ai/admin/comms.html)
+- [Release history](https://nhi.sgit.ai/admin/versions.html)
+- [How the site is built](https://nhi.sgit.ai/admin/index.html)
+- Related: [sgit.ai](https://sgit.ai) and its [llms.txt](https://sgit.ai/llms.txt)

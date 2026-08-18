@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The thesis — two populations, one industry answer · nhi.sgit.ai</title>
+<meta name="description" content="The full argument: agent identity splits into agents you run and agents you rent. The mature industry answer assumes attestation of workloads you control. For rented agents there is no equivalent — and that asymmetry is defensible, evidenced, and unsaid by anybody selling into the market.">
+<link rel="canonical" href="https://nhi.sgit.ai/thesis/index.html">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">nhi<span>.sgit.ai</span></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.0</a>
+  <a class="nl here" href="index.html">Thesis</a>
+  <a class="nl" href="../hope/index.html">Hope</a>
+  <a class="nl" href="../method/index.html">Method</a>
+  <a class="nl" href="../options/index.html">Options</a>
+  <a class="nl" href="../collection/index.html">Collection</a>
+  <a class="nl" href="../frameworks/aomm.html">AOMM</a>
+  <a class="nl" href="../infographics/index.html">Infographics</a>
+  <a class="nl" href="../admin/comms.html">Comms</a>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__NHI">★ GitHub</a>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">nhi.sgit.ai</a> / thesis</div>
+<h1>The question splits into two populations, and the industry only answers one of them</h1>
+<p class="lead">The question practitioners actually ask is concrete: <em>"how do I give an identity to my agents — the ones I have running in Claude, in Claude Code, in Claude Web, the ones that run in Codex, the ones I just run through an API?"</em> Its concreteness is what exposes the gap.</p>
+
+<h2 id="split">Agents you run vs. agents you rent</h2>
+<p><b>Every one of the agents named above is an agent you rent, not an agent you run.</b> And the entire industry answer assumes the opposite.</p>
+<div class="tablewrap"><table>
+  <thead><tr><th></th><th>Agents you run</th><th>Agents you rent</th></tr></thead>
+  <tbody>
+    <tr><td><b>Where it executes</b></td><td>Your infrastructure</td><td>Somebody else's</td></tr>
+    <tr><td><b>Can you attest the workload?</b></td><td>Yes — that is the mechanism</td><td><b>No</b></td></tr>
+    <tr><td><b>Can you install an identity agent?</b></td><td>Yes</td><td><b>No</b></td></tr>
+    <tr><td><b>What you control</b></td><td>Everything</td><td><b>The credential you hand over</b></td></tr>
+    <tr><td><b>Industry answer</b></td><td>Mature, and expensive</td><td><b>None</b></td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="mature">The mature answer — for the population that isn't asking</h2>
+<p>For agents you run, the answer is real and it works. An open standard (SPIFFE) assigns each workload a cryptographic identity and issues short-lived certificates that rotate automatically, without long-lived secrets. A major secrets product now issues those identities natively. A mid-2026 reference architecture pairs that identity layer with relationship-based authorisation and an enforcement layer that checks every tool call.</p>
+<p><b>It also costs what it costs.</b> Practitioner analysis describes the reference implementation as a significant multi-year engineering project with compounding operational costs, demanding a dedicated team to deploy, scale, maintain and secure — alongside datastores, certificate infrastructure, proxy configuration, policy and monitoring. The same analysis notes it does not solve the software-as-a-service access problem, legacy credential types, or agent identity specifically.</p>
+<p>All of it rests on one precondition: <b>a workload you control, that something you installed can attest.</b> A rented agent — in a hosted coding tool, a chat interface, or behind an API — fails that precondition by construction. You cannot install an attestation agent in somebody else's infrastructure. You have exactly one lever: which credential you hand over, and what it can reach.</p>
+
+<h2 id="evidence">For rented agents, the gap is evidenced</h2>
+<p>The corpus established this on 14 August 2026, with three checkable facts:</p>
+<ul>
+  <li><b>The capability does not exist.</b> The platform feature request for user-minted, short-lived, repository-scoped tokens for AI agents (June 2026) is open — noting that personal access tokens are long-lived and app installation tokens require administrative setup. <a href="https://github.com/orgs/community/discussions/200185">The open request</a>.</li>
+  <li><b>The over-scope is documented.</b> One coding assistant held a token scoped to <em>every repository its developer had authorised</em>, with a practitioner assessment that agents use far more permission than a human would. <a href="https://venturebeat.com/security/six-exploits-broke-ai-coding-agents-iam-never-saw-them">The reporting</a>.</li>
+  <li><b>The exploitation is disclosed.</b> Research presented at Black Hat on 5 August 2026 showed that a repository issue opened by an account with <em>no repository privileges</em> reached continuous-integration secrets in three vendors' own repositories, under their own default configurations. <a href="https://labs.cloudsecurityalliance.org/research/csa-research-note-ai-coding-agent-cicd-secrets-20260808-csa/">The disclosure</a>.</li>
+</ul>
+<p>So the practitioner's honest position today is: <b>hand over a broad credential, and hope.</b> That is worth saying plainly, with evidence, because nobody selling into this market has a reason to say it. <a href="../hope/index.html">The Hope section</a> takes that sentence seriously.</p>
+
+<h2 id="defensible">Why this position holds up</h2>
+<p>Three reasons this is a thesis rather than a complaint.</p>
+<ul>
+  <li><b>It is falsifiable.</b> The claim is that for rented agents there is no way to issue a scoped, short-lived, attested identity. Anybody who can show one refutes it — and this site improves. Refutations are welcome: <a href="../admin/comms.html">tell us</a>.</li>
+  <li><b>It is evidenced rather than asserted.</b> An open feature request, a documented over-broad token, and a public disclosure are all checkable, above.</li>
+  <li><b>It explains the failures people are already seeing.</b> 2026 industry commentary frames the gap as visibility not being enforcement; surveys report low confidence in preventing identity-based attacks and a substantial share of organisations not tracking creation of agent-related identities at all. The two-populations split explains why: the tools that provide enforcement require a workload you control, and the agents causing concern are not.</li>
+</ul>
+
+<h2 id="not">What this site is not</h2>
+<ul>
+  <li><b>Not a vendor directory.</b> Those exist and date immediately. The research here answers <a href="../method/index.html">one concrete scenario per option</a>, dated and re-runnable.</li>
+  <li><b>Not neutral.</b> A participant, disclosed upfront, publishing a re-runnable method. <a href="../about/participant.html">Who is writing this, and where our own approach loses</a>.</li>
+  <li><b>Not a chronological archive.</b> The <a href="../collection/index.html">collection</a> is organised by the question a reader arrives with.</li>
+</ul>
+<p>The measure of success: somebody with four agents and four vaults can read this site and know what to do next — including when the answer is that nothing available does what they want.</p>
+
+<h2 id="sources">Sources</h2>
+<ul class="small">
+  <li>SPIFFE for agentic AI and non-human actors; native issuance of workload identities by a major secrets product: <a href="https://www.hashicorp.com/en/blog/spiffe-securing-the-identity-of-agentic-ai-and-non-human-actors">hashicorp.com</a></li>
+  <li>Practitioner analysis of the reference implementation as a multi-year project with compounding operational costs: <a href="https://aembit.io/blog/everyone-wants-spiffe-almost-no-one-can-afford-to-build-it-right/">aembit.io</a>; vendor landscape: <a href="https://aembit.io/blog/10-identity-security-vendors-for-ai-agents-strengths-tradeoffs-and-how-they-fit/">aembit.io</a></li>
+  <li>Mature programmes as discovery + secrets + workload-identity layers under one policy: <a href="https://guptadeepak.com/top-non-human-identity-nhi-management-tools-2026/">guptadeepak.com</a></li>
+  <li>Mid-2026 reference architecture pairing SPIFFE with relationship-based authorisation and per-tool-call enforcement: <a href="https://stacklok.com/blog/agentic-identity-explained-how-to-apply-spiffe-and-relationship-based-authorization-to-ai-agents-in-2026/">stacklok.com</a></li>
+  <li>The governance gap: low confidence in preventing identity-based attacks; agent identities untracked; visibility is not enforcement: <a href="https://labs.cloudsecurityalliance.org/research/csa-whitepaper-nonhuman-identity-agentic-ai-governance-v1-cs/">cloudsecurityalliance.org</a></li>
+</ul>
+
+<div class="pagenav">
+  <a href="../index.html">← Home</a>
+  <a href="../hope/index.html">Next: Hope — concepts &amp; workflows →</a>
+</div>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">nhi<span>.sgit.ai</span></div>
+    <p>Non-human identity, blast radius and agentic security — anchored by the two-populations thesis. All content CC BY 4.0.</p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.0</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The research</h4>
+    <a href="index.html">The thesis</a>
+    <a href="../method/index.html">Method</a>
+    <a href="../options/index.html">Options</a>
+  </div>
+  <div>
+    <h4>The collection</h4>
+    <a href="../collection/index.html">By question</a>
+    <a href="../frameworks/aomm.html">The AOMM</a>
+    <a href="../hope/index.html">Hope</a>
+    <a href="../infographics/index.html">Infographics</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../admin/comms.html">Comms</a>
+    <a href="../admin/versions.html">Versions</a>
+    <a href="../llms.txt">llms.txt</a>
+    <a href="https://sgit.ai">sgit.ai</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

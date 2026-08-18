@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The method — one scenario, same columns, published before the findings · nhi.sgit.ai</title>
+<meta name="description" content="The research method: one concrete scenario answered per option, with the same columns every time — privileges granted as the differentiating column, costs split into setup, per-identity and per-use, and a verification date on everything.">
+<link rel="canonical" href="https://nhi.sgit.ai/method/index.html">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">nhi<span>.sgit.ai</span></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.0</a>
+  <a class="nl" href="../thesis/index.html">Thesis</a>
+  <a class="nl" href="../hope/index.html">Hope</a>
+  <a class="nl here" href="index.html">Method</a>
+  <a class="nl" href="../options/index.html">Options</a>
+  <a class="nl" href="../collection/index.html">Collection</a>
+  <a class="nl" href="../frameworks/aomm.html">AOMM</a>
+  <a class="nl" href="../infographics/index.html">Infographics</a>
+  <a class="nl" href="../admin/comms.html">Comms</a>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__NHI">★ GitHub</a>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">nhi.sgit.ai</a> / method</div>
+<h1>The method, published before the findings</h1>
+<p class="lead">The risk in this research is producing a vendor list, which is worthless and dates in weeks. Instead, every option answers <b>one concrete scenario</b> in <b>the same columns</b> — which makes the options comparable, the claims checkable, and the whole thing re-runnable by anybody. Publishing the method before any option is assessed is what makes a participant's comparison credible, and it is impossible to claim afterwards.</p>
+
+<h2 id="scenario">The scenario</h2>
+<blockquote class="challenge">I have four agents. Each needs its own identity. Each needs access to a different vault, which means each needs a secret. One also needs access to one repository. Nobody should be able to use another's access. Show me how, what it costs to set up, what it costs per agent per month, and what each agent could reach if it were compromised.</blockquote>
+<p>Every option gets this scenario — no substitutions, no "in the enterprise case" escapes. An option that cannot express the scenario says so in its assessment.</p>
+
+<h2 id="columns">The columns</h2>
+<div class="tablewrap"><table>
+  <thead><tr><th>Column</th><th>Why it is there</th></tr></thead>
+  <tbody>
+    <tr><td><b>Steps to working</b></td><td>Countable, disputable on facts</td></tr>
+    <tr><td><b>Prerequisites</b></td><td>Accounts, subscriptions, infrastructure, a team</td></tr>
+    <tr><td><b>Privileges granted</b></td><td>What one compromised agent reaches. <b>The differentiating column</b></td></tr>
+    <tr><td><b>Setup cost</b></td><td>Once, including engineering time honestly estimated</td></tr>
+    <tr><td><b>Cost per identity per month</b></td><td>The scaling axis</td></tr>
+    <tr><td><b>Cost per use</b></td><td>Where metered</td></tr>
+    <tr><td><b>Runs where</b></td><td>Their infrastructure, yours, or serverless</td></tr>
+    <tr><td><b>Works for rented agents</b></td><td><b>The question the thesis turns on</b></td></tr>
+    <tr><td><b>Date verified</b></td><td>Because this dates in weeks</td></tr>
+  </tbody>
+</table></div>
+<p>The last two columns are what make this research worth doing rather than repeating what exists.</p>
+
+<h2 id="scope">Scope boundaries</h2>
+<p>Five things get bundled under "identity" and they are different markets. Naming them keeps the research from sprawling:</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>Concern</th><th>The question</th><th>In scope?</th></tr></thead>
+  <tbody>
+    <tr><td><b>Authentication</b></td><td>How does the thing prove it is who it says?</td><td>Yes — the scenario touches it</td></tr>
+    <tr><td><b>Authorisation</b></td><td>What may it then do?</td><td>Yes — the scenario touches it</td></tr>
+    <tr><td><b>Secret storage</b></td><td>Where do its credentials live?</td><td>Yes — the scenario touches it</td></tr>
+    <tr><td><b>Audit</b></td><td>What did it do, attributably?</td><td>Noted per option, not investigated in depth</td></tr>
+    <tr><td><b>Lifecycle</b></td><td>Who created it, who owns it, when does it die?</td><td>Noted per option, not investigated in depth</td></tr>
+  </tbody>
+</table></div>
+<p>One finding carried in from scoping: mature programmes combine a discovery-and-posture layer, a secrets layer and a workload-identity layer under one policy. Most options answer <b>part</b> of the question — so the assessments record which part, rather than scoring options as if they competed head-on.</p>
+
+<h2 id="discipline">The reproducible-test discipline</h2>
+<ul>
+  <li><b>Every assessment carries a verification date</b> and states the method to re-run it.</li>
+  <li><b>Anyone can dispute on facts.</b> Steps are countable; privileges are enumerable; costs are stated with their assumptions.</li>
+  <li><b>Assessments go stale honestly.</b> A stale date is displayed, not hidden; the re-run queue is tracked on the <a href="../admin/comms.html">comms page</a>.</li>
+  <li><b>The dominant cost is engineering time</b>, and it is the number most likely to be argued with — so each estimate states what it includes and what analysis it relies on.</li>
+</ul>
+
+<h2 id="participant">The participant problem</h2>
+<p>This site is hosted on the sgit domain, and vaults are a candidate answer to where an agent's secrets live. So this is a participant publishing a comparison. The treatment, visible rather than buried:</p>
+<ul>
+  <li><b>State who is writing it.</b> Done, on <a href="../about/participant.html">its own page</a> and in every footer.</li>
+  <li><b>Publish the method and make it re-runnable.</b> This page — before any findings.</li>
+  <li><b>Publish where our own approach loses.</b> Vaults do not solve attestation, do not provide lifecycle governance, and do not answer the rented-agent problem either. <a href="../about/participant.html#loses">Stated in full</a>.</li>
+</ul>
+
+<h2 id="order">Build order</h2>
+<ol>
+  <li><b>The thesis page</b> — done: <a href="../thesis/index.html">two populations</a>.</li>
+  <li><b>The scenario and the columns</b> — this page, published before any option is assessed.</li>
+  <li><b>Three options assessed</b>, chosen to be different in kind: <a href="../options/spiffe.html">the open standard</a>, <a href="../options/broker.html">a commercial broker</a>, and <a href="../options/do-nothing.html">the do-nothing baseline</a>. Currently <b>preliminary</b>: sourced from published analysis, not yet re-run hands-on. Each page says so.</li>
+  <li><b>The collection</b>, <a href="../collection/index.html">organised by question</a>, with <a href="../frameworks/aomm.html">the maturity model promoted to a page</a>.</li>
+  <li><b>The infographics</b>, <a href="../infographics/index.html">linked to their sources</a>.</li>
+  <li><b>More options over time</b>, each dated, each re-runnable.</li>
+</ol>
+
+<div class="pagenav">
+  <a href="../hope/index.html">← Hope</a>
+  <a href="../options/index.html">Next: the options →</a>
+</div>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">nhi<span>.sgit.ai</span></div>
+    <p>Non-human identity, blast radius and agentic security — anchored by the two-populations thesis. All content CC BY 4.0.</p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.0</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The research</h4>
+    <a href="../thesis/index.html">The thesis</a>
+    <a href="index.html">Method</a>
+    <a href="../options/index.html">Options</a>
+  </div>
+  <div>
+    <h4>The collection</h4>
+    <a href="../collection/index.html">By question</a>
+    <a href="../frameworks/aomm.html">The AOMM</a>
+    <a href="../hope/index.html">Hope</a>
+    <a href="../infographics/index.html">Infographics</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../admin/comms.html">Comms</a>
+    <a href="../admin/versions.html">Versions</a>
+    <a href="../llms.txt">llms.txt</a>
+    <a href="https://sgit.ai">sgit.ai</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

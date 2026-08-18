@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Engineering — how this site is built · nhi.sgit.ai</title>
+<meta name="description" content="How nhi.sgit.ai is built and released: static pages in the sgit.ai design language, validated then auto-tagged and deployed to GitHub Pages by CI on every push to dev.">
+<link rel="canonical" href="https://nhi.sgit.ai/admin/index.html">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">nhi<span>.sgit.ai</span></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="versions.html" title="Site release history">v0.1.0</a>
+  <a class="nl" href="../thesis/index.html">Thesis</a>
+  <a class="nl" href="../hope/index.html">Hope</a>
+  <a class="nl" href="../method/index.html">Method</a>
+  <a class="nl" href="../options/index.html">Options</a>
+  <a class="nl" href="../collection/index.html">Collection</a>
+  <a class="nl" href="../frameworks/aomm.html">AOMM</a>
+  <a class="nl" href="../infographics/index.html">Infographics</a>
+  <a class="nl" href="comms.html">Comms</a>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__NHI">★ GitHub</a>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">nhi.sgit.ai</a> / admin</div>
+<h1>How this site is built</h1>
+<p class="lead">Static HTML in the sgit.ai design language, released the same way as <a href="https://sgit.ai">the main site</a>: every push to <code>dev</code> is validated, auto-tagged, and deployed to GitHub Pages.</p>
+
+<h2 id="pipeline">The release pipeline</h2>
+<ol>
+  <li><b>validate</b> — <code>node admin/build/validate.js</code>: internal links resolve, version agrees everywhere, and a key-leak tripwire bans anything shaped like a vault key from the tree. A failure stops the release: no tag, no publish.</li>
+  <li><b>tag-release</b> — every push to <code>dev</code> ends tagged <code>v{release}.{major}.{minor}</code>. The version is owned by <code>admin/build/version.txt</code>, bumped exactly once per release, and must agree with the release commit's subject (<code>site vX.Y.Z: ...</code>). CI verifies the two agree and that the bump is the next minor (or a deliberate major), then tags. The first run backfills tags for historical releases from commit subjects. Adapted from the SGit-AI__Website workflow.</li>
+  <li><b>deploy</b> — publishes the tagged working tree to GitHub Pages. Runs on manual dispatch even without a tag, never when validation failed.</li>
+</ol>
+
+<h2 id="release">Releasing a change</h2>
+<pre class="shell">
+<span class="d"># 1. bump the version — exactly once per release</span>
+echo "v0.1.1" > admin/build/version.txt
+<span class="d"># 2. add a row to admin/versions.html, update admin/comms.html</span>
+<span class="d"># 3. validate locally</span>
+node admin/build/validate.js
+<span class="d"># 4. commit with the version in the subject, push to dev</span>
+git commit -am "site v0.1.1: what changed"
+git push origin dev
+</pre>
+
+<h2 id="conventions">Conventions carried from sgit.ai</h2>
+<ul>
+  <li>Light theme, same design tokens, same honest-limitations posture.</li>
+  <li>Evidence status stated per claim (the <code>evbox</code> pattern on option pages).</li>
+  <li>Machine-readable entry points: <a href="../llms.txt">llms.txt</a>, <a href="../index.md">index.md</a>. Full <code>.md</code> twins and <code>llms-full.txt</code> are queued (T8 on <a href="comms.html">comms</a>).</li>
+  <li>The git-and-sgit co-existence pattern (site tree simultaneously a vault) is queued (T12) — the MVP is plain git.</li>
+</ul>
+
+<div class="pagenav">
+  <a href="versions.html">← Release history</a>
+  <a href="comms.html">Comms →</a>
+</div>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">nhi<span>.sgit.ai</span></div>
+    <p>Non-human identity, blast radius and agentic security — anchored by the two-populations thesis. All content CC BY 4.0.</p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="versions.html">v0.1.0</a> · <a href="index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The research</h4>
+    <a href="../thesis/index.html">The thesis</a>
+    <a href="../method/index.html">Method</a>
+    <a href="../options/index.html">Options</a>
+  </div>
+  <div>
+    <h4>The collection</h4>
+    <a href="../collection/index.html">By question</a>
+    <a href="../frameworks/aomm.html">The AOMM</a>
+    <a href="../hope/index.html">Hope</a>
+    <a href="../infographics/index.html">Infographics</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="comms.html">Comms</a>
+    <a href="versions.html">Versions</a>
+    <a href="../llms.txt">llms.txt</a>
+    <a href="https://sgit.ai">sgit.ai</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

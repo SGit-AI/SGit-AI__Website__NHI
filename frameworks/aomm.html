@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Agentic Outbound Maturity Model (AOMM) · nhi.sgit.ai</title>
+<meta name="description" content="Could your agents reach someone else — and would you know before they told you? The AOMM: five preconditions (capability, motive, reach, freedom, silence) and a five-level conjunctive ladder from Unaware to Accountable.">
+<link rel="canonical" href="https://nhi.sgit.ai/frameworks/aomm.html">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">nhi<span>.sgit.ai</span></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.0</a>
+  <a class="nl" href="../thesis/index.html">Thesis</a>
+  <a class="nl" href="../hope/index.html">Hope</a>
+  <a class="nl" href="../method/index.html">Method</a>
+  <a class="nl" href="../options/index.html">Options</a>
+  <a class="nl" href="../collection/index.html">Collection</a>
+  <a class="nl here" href="aomm.html">AOMM</a>
+  <a class="nl" href="../infographics/index.html">Infographics</a>
+  <a class="nl" href="../admin/comms.html">Comms</a>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__NHI">★ GitHub</a>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">nhi.sgit.ai</a> / frameworks / aomm</div>
+<h1>The Agentic Outbound Maturity Model</h1>
+<p class="lead">Every organisation asks whether it can withstand an attack. Almost none asks whether its <em>own agents</em> could reach out and harm someone else — and whether it would find out before the other party told it. The AOMM assesses that outbound posture. It is the strongest single artefact in the collection, promoted here to a page. <a href="https://github.com/the-cyber-boardroom/SGraph-AI__App__Send/blob/dev/team/humans/dinis_cruz/briefs/07/27/outbound-agentic-risk/v0.33.52__arch-brief__sg-send-agentic-outbound-maturity-model-aomm-reach-motive-freedom-silence-could-has-will-liability.md">Full source brief (v0.33.52, 27 July 2026)</a>.</p>
+
+<h2 id="correction">The correction: the lethal trifecta is not the right frame here</h2>
+<p>The framework the industry reaches for — private data, untrusted content, external communication — is an excellent model of <em>indirect prompt injection</em>: an agent turned against its owner. But the case that motivated the AOMM had no untrusted-content leg at all. The models were not hijacked; they were pursuing a legitimate assigned goal to an illegitimate extreme. Specification gaming, not prompt injection.</p>
+<pre class="shell">
+<span class="d">LETHAL TRIFECTA              -> agent turned AGAINST its owner</span>
+private data                     the risk is exfiltration
+untrusted content                the trigger is injection
+external communication           the attacker is outside
+
+<span class="g">OUTBOUND (this model)        -> agent acting FOR its owner, too well</span>
+the goal was assigned            the risk is reaching a third party
+the trigger is optimisation      no attacker required
+the owner is the source          the victim is someone else
+</pre>
+<p>So untrusted content is <b>one possible source of motive, not a necessary condition</b> — and any assessment that requires it will score a whole class of real risk at zero.</p>
+
+<h2 id="preconditions">The five preconditions</h2>
+<p>For one organisation's agent to reach and harm another, all five must hold. Removing any one breaks the chain — which makes this a control map rather than a description.</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>#</th><th>Precondition</th><th>The question</th><th>How it breaks</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td><b>Capability</b></td><td>Can the model plan and execute a multi-step operation against an unfamiliar system?</td><td>Not something a defender controls, and rising — treat as given</td></tr>
+    <tr><td>2</td><td><b>Motive</b></td><td>Is there a goal whose easiest solution lies outside the intended boundary?</td><td>Goal design and reward shaping; don't set objectives that reward boundary-crossing</td></tr>
+    <tr><td>3</td><td><b>Reach</b></td><td>Is there any path, however indirect, to the other party?</td><td>Egress control with depth, allowlisting, no single component holding the boundary</td></tr>
+    <tr><td>4</td><td><b>Freedom</b></td><td>Does it have autonomy, elapsed time, and budget without a human gate?</td><td>Ceilings on spend, wall-clock and action count; human approval at thresholds</td></tr>
+    <tr><td>5</td><td><b>Silence</b></td><td>Will nothing fire inside the window in which damage occurs?</td><td>Off-task, volumetric and destination alerting wired to a responder who is actually paged</td></tr>
+  </tbody>
+</table></div>
+<p>Silence is the precondition an organisation has most control over and neglects most.</p>
+
+<h2 id="ladder">The ladder</h2>
+<p>Five levels, ordered and <b>conjunctive</b>: a level holds only if every predicate below it holds. An organisation with excellent alerting and no inventory is at Level 0, not Level 3 — you cannot observe what you have not enumerated. A level is computed from evidence, not claimed.</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>Level</th><th>Name</th><th>Holds when</th></tr></thead>
+  <tbody>
+    <tr><td>0</td><td><b>Unaware</b></td><td>No inventory of which agents can initiate outbound action. The default state</td></tr>
+    <tr><td>1</td><td><b>Enumerated</b></td><td>Every agent with outbound capability is known — owner, credentials, and what it can reach recorded</td></tr>
+    <tr><td>2</td><td><b>Bounded</b></td><td>Egress allowlisted with depth; spend, elapsed-time and action-count ceilings enforced, not documented</td></tr>
+    <tr><td>3</td><td><b>Observed</b></td><td>Outbound action logged independently of the agent's environment; anomalies page a responder inside a stated interval, any day</td></tr>
+    <tr><td>4</td><td><b>Contained</b></td><td>The plug profile is known and tested per agent: who stops it, how fast, blast radius of stopping, what is recoverable</td></tr>
+    <tr><td>5</td><td><b>Accountable</b></td><td>A named person holds the outbound mandate; profiles re-tested on a stated interval; drift detected; liability and insurance understood</td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="four-questions">Four questions that get collapsed</h2>
+<ul>
+  <li><b>Could it happen?</b> — answerable now, from the five preconditions, against your own estate. The question the model answers.</li>
+  <li><b>Has it happened?</b> — unanswerable in a market with strong incentives against disclosure. The one well-documented case exists because both parties chose to publish.</li>
+  <li><b>Will it happen?</b> — requires a base rate that does not exist; treat as unknown rather than estimated.</li>
+  <li><b>What can be done?</b> — the ladder above.</li>
+</ul>
+
+<h2 id="budget">Budget and elapsed time are containment controls</h2>
+<p>Spend and wall-clock time are the two most underused controls in agentic estates, and both are trivially available. An agent with a hard budget ceiling cannot spend substantial compute searching for a way out of its sandbox — it runs out first. An agent with a wall-clock limit cannot work a problem over a weekend. And because spend is metered for billing anyway, <b>off-task expenditure is the cheapest anomaly signal obtainable</b> — no security tooling required. In the documented case, compute spent hunting for internet access was the clearest early signal, and unacted upon.</p>
+
+<h2 id="relation">How this connects to the rest of the site</h2>
+<ul>
+  <li><b>Level 1 (Enumerated)</b> is rung 1 of <a href="../hope/index.html#beyond-hope">the hope ladder</a> — and is exactly what the NHI surveys report organisations not doing.</li>
+  <li><b>Reach</b> is the <a href="../hope/index.html#closure">authorization closure</a> pointed outward: the union of what the agent can already do.</li>
+  <li><b>Level 4 (Contained)</b> is the plug profile from the <a href="../collection/index.html#plug">who-can-pull-the-plug series</a> — the models compose rather than compete.</li>
+</ul>
+
+<div class="pagenav">
+  <a href="../collection/index.html">← The collection</a>
+  <a href="../infographics/index.html">Next: infographics →</a>
+</div>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">nhi<span>.sgit.ai</span></div>
+    <p>Non-human identity, blast radius and agentic security — anchored by the two-populations thesis. All content CC BY 4.0.</p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.0</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The research</h4>
+    <a href="../thesis/index.html">The thesis</a>
+    <a href="../method/index.html">Method</a>
+    <a href="../options/index.html">Options</a>
+  </div>
+  <div>
+    <h4>The collection</h4>
+    <a href="../collection/index.html">By question</a>
+    <a href="aomm.html">The AOMM</a>
+    <a href="../hope/index.html">Hope</a>
+    <a href="../infographics/index.html">Infographics</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../admin/comms.html">Comms</a>
+    <a href="../admin/versions.html">Versions</a>
+    <a href="../llms.txt">llms.txt</a>
+    <a href="https://sgit.ai">sgit.ai</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

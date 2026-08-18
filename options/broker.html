@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Option: a commercial workload-identity broker · nhi.sgit.ai</title>
+<meta name="description" content="Commercial products that broker access for non-human workloads without standing secrets — assessed against the four-agents-four-vaults scenario, including what they can and cannot do for rented agents.">
+<link rel="canonical" href="https://nhi.sgit.ai/options/broker.html">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">nhi<span>.sgit.ai</span></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.0</a>
+  <a class="nl" href="../thesis/index.html">Thesis</a>
+  <a class="nl" href="../hope/index.html">Hope</a>
+  <a class="nl" href="../method/index.html">Method</a>
+  <a class="nl here" href="index.html">Options</a>
+  <a class="nl" href="../collection/index.html">Collection</a>
+  <a class="nl" href="../frameworks/aomm.html">AOMM</a>
+  <a class="nl" href="../infographics/index.html">Infographics</a>
+  <a class="nl" href="../admin/comms.html">Comms</a>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__NHI">★ GitHub</a>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">nhi.sgit.ai</a> / <a href="index.html">options</a> / broker</div>
+<h1>Option: a commercial workload-identity broker</h1>
+<p class="lead">The buy-side of the run-your-own population: a commercial product attests your workloads and brokers their access to downstream systems without standing secrets — the credential is issued at access time, scoped, and short-lived. This assessment covers the category, not one vendor; a per-vendor pass belongs to the re-run queue.</p>
+
+<div class="evbox ev-warn"><span class="evtag">Preliminary</span>
+<p>Assessment from published vendor and analyst material (cited below), not yet re-run hands-on. <b>Date verified: 18 August 2026.</b> A full re-run requires: a trial deployment expressing the four-agent scenario, with list-price cost per identity recorded.</p></div>
+
+<h2 id="scenario">Against the scenario</h2>
+<div class="tablewrap"><table>
+  <thead><tr><th>Column</th><th>Assessment</th></tr></thead>
+  <tbody>
+    <tr><td><b>Steps to working</b></td><td>Sign up; install the broker's edge component where workloads run; register the four agents; define access policies to the four vaults and the repository. Days-to-weeks, not team-years — that is the category's pitch against building SPIFFE yourself.</td></tr>
+    <tr><td><b>Prerequisites</b></td><td>A subscription; infrastructure you control for the edge component; the downstream systems must be ones the broker can front.</td></tr>
+    <tr><td><b>Privileges granted</b></td><td>Strong where the broker mediates: each agent's access is policy-scoped and issued per-use, so a compromised agent reaches what policy allows during the exposure window. The broker itself becomes a high-value target — a concentration the self-hosted standard does not have in the same shape.</td></tr>
+    <tr><td><b>Setup cost</b></td><td>Low engineering time relative to SPIFFE; commercial licence instead. Engineering-time saving is the product.</td></tr>
+    <tr><td><b>Cost per identity per month</b></td><td>The pricing axis of the category — typically per-identity or per-workload subscription. Numbers date fast; recorded per-vendor in the re-run, not here.</td></tr>
+    <tr><td><b>Cost per use</b></td><td>Generally not metered per call; depends on vendor.</td></tr>
+    <tr><td><b>Runs where</b></td><td>Control plane in the vendor's cloud; enforcement where your workloads run — so still: infrastructure you control.</td></tr>
+    <tr><td><b>Works for rented agents</b></td><td><span class="opt-verdict opt-part">Partially</span> — the attestation story still requires your infrastructure. Some products in the category address the SaaS-access and discovery/posture parts of the problem, which touches rented agents' credentials at the edges (finding them, vaulting them, rotating them) without being able to attest the agent itself. The lever remains the credential you hand over; a broker can narrow and rotate it, not attest its holder.</td></tr>
+    <tr><td><b>Date verified</b></td><td>18 August 2026 (preliminary, from sources)</td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="part">Which part of the question it answers</h2>
+<p>Authentication and authorisation for workloads it can attest; secret storage largely dissolved for those. For rented agents: discovery, posture and rotation of the credentials you were going to hand over anyway — useful, and not the same thing as identity. Lifecycle and audit: often the category's strongest differentiators over self-hosted, noted rather than assessed here.</p>
+
+<h2 id="sources">Sources</h2>
+<ul class="small">
+  <li>The vendor landscape for AI-agent identity, strengths and trade-offs: <a href="https://aembit.io/blog/10-identity-security-vendors-for-ai-agents-strengths-tradeoffs-and-how-they-fit/">aembit.io</a></li>
+  <li>Mature programmes as discovery + secrets + workload-identity layers under one policy: <a href="https://guptadeepak.com/top-non-human-identity-nhi-management-tools-2026/">guptadeepak.com</a></li>
+  <li>Least-privilege analysis: in each studied incident the agent held credentials it did not need: <a href="https://www.cequence.ai/blog/ai/ai-agent-least-privilege-access/">cequence.ai</a></li>
+</ul>
+
+<div class="pagenav">
+  <a href="spiffe.html">← The open standard</a>
+  <a href="do-nothing.html">Next: the do-nothing baseline →</a>
+</div>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">nhi<span>.sgit.ai</span></div>
+    <p>Non-human identity, blast radius and agentic security — anchored by the two-populations thesis. All content CC BY 4.0.</p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.0</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The research</h4>
+    <a href="../thesis/index.html">The thesis</a>
+    <a href="../method/index.html">Method</a>
+    <a href="index.html">Options</a>
+  </div>
+  <div>
+    <h4>The collection</h4>
+    <a href="../collection/index.html">By question</a>
+    <a href="../frameworks/aomm.html">The AOMM</a>
+    <a href="../hope/index.html">Hope</a>
+    <a href="../infographics/index.html">Infographics</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../admin/comms.html">Comms</a>
+    <a href="../admin/versions.html">Versions</a>
+    <a href="../llms.txt">llms.txt</a>
+    <a href="https://sgit.ai">sgit.ai</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

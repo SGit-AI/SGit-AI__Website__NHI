@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>nhi.sgit.ai — agents you run, agents you rent, and the identity gap</title>
+<meta name="description" content="The question of how to give an identity to AI agents splits into two populations — agents you run and agents you rent — and the industry only answers one of them. Evidence, method, and honest options for the other.">
+<link rel="canonical" href="https://nhi.sgit.ai/index.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="nhi.sgit.ai">
+<meta property="og:url" content="https://nhi.sgit.ai/index.html">
+<meta property="og:title" content="nhi.sgit.ai — agents you run, agents you rent, and the identity gap">
+<meta property="og:description" content="Non-human identity for AI agents: the industry's mature answer assumes workloads you can attest. The agents people actually name run in somebody else's infrastructure. That asymmetry is this site's thesis.">
+<meta name="twitter:card" content="summary">
+<link rel="alternate" type="text/markdown" href="index.md" title="This page as markdown">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="index.html">nhi<span>.sgit.ai</span></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="admin/versions.html" title="Site release history">v0.1.0</a>
+  <a class="nl" href="thesis/index.html">Thesis</a>
+  <a class="nl" href="hope/index.html">Hope</a>
+  <a class="nl" href="method/index.html">Method</a>
+  <a class="nl" href="options/index.html">Options</a>
+  <a class="nl" href="collection/index.html">Collection</a>
+  <a class="nl" href="frameworks/aomm.html">AOMM</a>
+  <a class="nl" href="infographics/index.html">Infographics</a>
+  <a class="nl" href="admin/comms.html">Comms</a>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__NHI">★ GitHub</a>
+</div></nav>
+
+<header class="hero">
+  <div class="eyebrow">Non-human identity · blast radius · agentic security</div>
+  <h1>The question splits into two populations,<br>and the industry only answers one</h1>
+  <p class="sub">"How do I give an identity to my agents?" splits into <b>agents you run</b> and <b>agents you rent</b> — and everything the industry sells assumes the first, while every agent you actually name is the second. For those, the honest current answer is: hand over a broad credential, and hope.</p>
+  <div class="ctas">
+    <a class="cta1" href="thesis/index.html">Read the thesis →</a>
+    <a class="cta2" href="hope/index.html">Why "hope" is the current workflow →</a>
+    <a class="cta2" href="method/index.html">The method, published first →</a>
+  </div>
+</header>
+
+<!-- the split -->
+<section class="band" id="split">
+  <h2>Two populations, one question</h2>
+  <p class="blurb">The question asked is concrete: how do I give an identity to the agents running in Claude, in Claude Code, in Codex, or behind an API? Every one of those is an agent you <em>rent</em>. The industry answer assumes agents you <em>run</em>.</p>
+  <div class="split">
+    <table>
+      <thead><tr><th></th><th class="run">Agents you run</th><th class="rent">Agents you rent</th></tr></thead>
+      <tbody>
+        <tr><td><b>Where it executes</b></td><td>Your infrastructure</td><td>Somebody else's</td></tr>
+        <tr><td><b>Can you attest the workload?</b></td><td><b class="yes">Yes</b> — that is the mechanism</td><td><b class="no">No</b></td></tr>
+        <tr><td><b>Can you install an identity agent?</b></td><td><b class="yes">Yes</b></td><td><b class="no">No</b></td></tr>
+        <tr><td><b>What you control</b></td><td>Everything</td><td><b class="no">The credential you hand over</b></td></tr>
+        <tr><td><b>Industry answer</b></td><td>Mature — and expensive</td><td><b class="no">None</b></td></tr>
+      </tbody>
+    </table>
+    <p class="cap">For the first population, an open standard (SPIFFE) issues short-lived cryptographic identities based on workload attestation — described by practitioners as a multi-year engineering project needing a dedicated team. For the second, the equivalent capability is an open feature request. <a href="thesis/index.html">The full argument, with citations →</a></p>
+  </div>
+</section>
+
+<!-- hope -->
+<section class="band alt" id="hope">
+  <h2>Hope is not a control</h2>
+  <p class="blurb">When you hand an agent a broad credential you are making two hopes: that it will not misuse what it holds, and that it will not find the rest of what that credential actually reaches. Neither hope changes your accountability — which runs all the way to the board.</p>
+  <div class="cards">
+    <a class="card" href="hope/index.html#two-hopes"><span class="tag">Concept</span><h3>The two hopes</h3><p>Hope about behaviour, and hope about discovery. Hope-driven development named as the anti-pattern behind today's agent deployments.</p><span class="go">Read →</span></a>
+    <a class="card" href="hope/index.html#closure"><span class="tag">Concept</span><h3>The real authorization is the closure</h3><p>Inbox access is every account resettable by email. Desktop access is every stored credential. The grant is not the words — it is everything reachable from them.</p><span class="go">Read →</span></a>
+    <a class="card" href="hope/index.html#beyond-hope"><span class="tag">Workflows</span><h3>From hope to controls</h3><p>Enumerate, bound, observe, contain, account — and workflows like the serialised pull request, where the agent holds no credential at all.</p><span class="go">Read →</span></a>
+  </div>
+</section>
+
+<!-- evidence -->
+<section class="band" id="evidence">
+  <h2>The gap is evidenced, not asserted</h2>
+  <p class="blurb">Three checkable facts establish that rented agents have no scoped-credential mechanism today.</p>
+  <div class="cards">
+    <div class="card"><span class="tag">Open feature request</span><h3>The capability does not exist</h3><p>The platform feature request for user-minted, short-lived, repository-scoped tokens for AI agents (June 2026) is still open. Personal access tokens are long-lived; app installation tokens need admin setup.</p></div>
+    <div class="card"><span class="tag">Documented over-scope</span><h3>One token, every repository</h3><p>One coding assistant held a token scoped to every repository its developer had authorised — far more than the surgical changes it was making required.</p></div>
+    <div class="card"><span class="tag">Public disclosure</span><h3>An issue reached pipeline secrets</h3><p>Research disclosed at Black Hat (5 Aug 2026): a repository issue opened by an account with no privileges reached CI secrets in three vendors' own repositories, under default configurations.</p></div>
+  </div>
+  <p class="blurb" style="margin-top:1.6rem;margin-bottom:0"><a href="thesis/index.html#evidence">Sources and links →</a></p>
+</section>
+
+<!-- the research -->
+<section class="band alt" id="research">
+  <h2>One scenario, same columns, every option</h2>
+  <p class="blurb">Not a vendor list. Four agents, four vaults, one repository, nobody able to use another's access. Every option answers the same scenario in the same columns — with <b>privileges granted</b> as the differentiating column, and a verification date on everything, because this dates in weeks.</p>
+  <div class="cards">
+    <a class="card" href="method/index.html"><span class="tag">Step 1</span><h3>The method</h3><p>The scenario and the columns, published before any option is assessed. A participant's comparison is credible only in that order.</p><span class="go">Read →</span></a>
+    <a class="card" href="options/spiffe.html"><span class="tag">Option</span><h3>The open standard</h3><p>SPIFFE/SPIRE: attested, short-lived, cryptographic — and a multi-year project with compounding operational costs.</p><span class="go">Read →</span></a>
+    <a class="card" href="options/broker.html"><span class="tag">Option</span><h3>A commercial broker</h3><p>Products that broker access without standing secrets — for workloads in infrastructure you control.</p><span class="go">Read →</span></a>
+    <a class="card" href="options/do-nothing.html"><span class="tag">Baseline</span><h3>Do nothing (credential + hope)</h3><p>What almost everybody actually does, assessed with the same honesty as everything else.</p><span class="go">Read →</span></a>
+  </div>
+</section>
+
+<!-- collection -->
+<section class="band" id="collection">
+  <h2>The collection, organised by question</h2>
+  <p class="blurb">Over 120 published documents mention non-human identity and over 300 mention blast radius. You arrive with a problem, not an interest in chronology — so the collection is organised by the question you are asking.</p>
+  <div class="cards">
+    <a class="card" href="collection/index.html#allowed"><span class="tag">Question</span><h3>What is an agent allowed to do?</h3><p>The union of everything possible — not the words of the grant.</p><span class="go">Browse →</span></a>
+    <a class="card" href="collection/index.html#compromised"><span class="tag">Question</span><h3>What happens when one is compromised?</h3><p>Blast radius over the transitive closure of the credential.</p><span class="go">Browse →</span></a>
+    <a class="card" href="collection/index.html#bound"><span class="tag">Question</span><h3>How do you bound spend and time?</h3><p>The two cheapest unimplemented controls in agentic estates.</p><span class="go">Browse →</span></a>
+    <a class="card" href="collection/index.html#attribute"><span class="tag">Question</span><h3>How do you attribute an action?</h3><p>Provenance, per-agent keys, and reviewable artefacts.</p><span class="go">Browse →</span></a>
+    <a class="card" href="frameworks/aomm.html"><span class="tag">Framework</span><h3>The Agentic Outbound Maturity Model</h3><p>Could your agents reach someone else — and would you know before they told you? The strongest artefact in the collection, promoted to a page.</p><span class="go">Read →</span></a>
+  </div>
+</section>
+
+<!-- participant -->
+<section class="band alt" id="participant">
+  <h2>Who is writing this</h2>
+  <p class="blurb">This site is hosted on the sgit domain, and encrypted vaults are a candidate answer to where an agent's secrets live. So this is a participant publishing a comparison — stated here, upfront, not in a footer. The method is published before the findings, everything is dated and re-runnable, and <a href="about/participant.html">we publish where our own approach loses</a>: vaults do not solve attestation, do not provide lifecycle governance, and do not answer the rented-agent problem either.</p>
+  <div class="ctas">
+    <a class="cta2" href="about/participant.html">The participant disclosure, in full →</a>
+  </div>
+</section>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">nhi<span>.sgit.ai</span></div>
+    <p>A site collecting published work on non-human identity, blast radius and agentic security — anchored by one thesis: the identity question splits into agents you run and agents you rent, and the industry only answers the first. All content CC BY 4.0.</p>
+    <p class="partnote">⚠ Participant disclosure: this site is published by the sgit project. Vaults are a candidate answer to part of the question studied here. <a href="about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="admin/versions.html">v0.1.0</a> · <a href="admin/index.html">engineering</a> · <a href="index.md">this page as markdown</a></p>
+  </div>
+  <div>
+    <h4>The research</h4>
+    <a href="thesis/index.html">The thesis</a>
+    <a href="method/index.html">Method: scenario &amp; columns</a>
+    <a href="options/index.html">Options assessed</a>
+    <a href="options/spiffe.html">The open standard</a>
+    <a href="options/broker.html">A commercial broker</a>
+    <a href="options/do-nothing.html">Do-nothing baseline</a>
+  </div>
+  <div>
+    <h4>The collection</h4>
+    <a href="collection/index.html">Organised by question</a>
+    <a href="frameworks/aomm.html">The AOMM</a>
+    <a href="hope/index.html">Hope: concepts &amp; workflows</a>
+    <a href="infographics/index.html">Infographics</a>
+    <a href="about/participant.html">Where we lose</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="admin/comms.html">Comms: tasks &amp; requests</a>
+    <a href="admin/versions.html">Release history</a>
+    <a href="admin/index.html">How this site is built</a>
+    <a href="llms.txt">llms.txt</a>
+    <a href="https://sgit.ai">sgit.ai</a>
+    <a href="https://github.com/SGit-AI/SGit-AI__Website__NHI">GitHub</a>
+  </div>
+</div></footer>
+
+</body>
+</html>

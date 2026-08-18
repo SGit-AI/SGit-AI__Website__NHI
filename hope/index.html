@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hope is not a control — concepts &amp; workflows · nhi.sgit.ai</title>
+<meta name="description" content="Hope-driven development: the two hopes behind every broad credential handed to an agent, why the real authorization is the reachable closure not the words of the grant, and the workflows that replace hope with controls.">
+<link rel="canonical" href="https://nhi.sgit.ai/hope/index.html">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">nhi<span>.sgit.ai</span></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.0</a>
+  <a class="nl" href="../thesis/index.html">Thesis</a>
+  <a class="nl here" href="index.html">Hope</a>
+  <a class="nl" href="../method/index.html">Method</a>
+  <a class="nl" href="../options/index.html">Options</a>
+  <a class="nl" href="../collection/index.html">Collection</a>
+  <a class="nl" href="../frameworks/aomm.html">AOMM</a>
+  <a class="nl" href="../infographics/index.html">Infographics</a>
+  <a class="nl" href="../admin/comms.html">Comms</a>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__NHI">★ GitHub</a>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">nhi.sgit.ai</a> / hope</div>
+<h1>Hope is not a control</h1>
+<p class="lead">The honest description of how almost every agent is deployed today is: hand over a broad credential, and hope. This page takes that sentence seriously — where the hope hides, what it actually covers for, and the workflows that replace it. The concepts here come from the published corpus, principally the <a href="https://github.com/the-cyber-boardroom/SGraph-AI__App__Send/blob/dev/team/humans/dinis_cruz/briefs/07/02/authorization-and-maturity-model/v0.33.40__arch-brief__sg-send-agent-authorization-union-of-possible-expected-unexpected-delta-blast-radius-hope-driven.md">hope-driven authorization brief</a> of 2 July 2026.</p>
+
+<h2 id="hope-driven">Hope-driven development, named</h2>
+<blockquote class="challenge">"You are hoping the agent is not going to use the credentials in a particular way, and hoping it is not going to find more access than you think you gave it. At the end of the day you are still accountable for those actions — all the way to the board."</blockquote>
+<p>Hope-driven development is the anti-pattern behind most agent deployments in 2026. It is not laziness — for rented agents it is often the <em>only available posture</em>, because the platform offers no scoped credential to hand over instead (<a href="../thesis/index.html#evidence">the evidence</a>). But naming it matters, because a posture you have named can be measured, bounded and eventually replaced, and a posture you have not named silently becomes policy.</p>
+
+<h2 id="two-hopes">The two hopes</h2>
+<p>Every broad credential handed to an agent carries exactly two hopes, and they fail differently:</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>Hope</th><th>What you are hoping</th><th>What it covers for</th><th>How it fails</th></tr></thead>
+  <tbody>
+    <tr><td><b>The behaviour hope</b></td><td>The agent will not <em>misuse</em> what it holds</td><td>No enforcement layer between the agent and the credential's full scope</td><td>Prompt injection, specification gaming, an over-enthusiastic model pursuing a legitimate goal to an illegitimate extreme</td></tr>
+    <tr><td><b>The discovery hope</b></td><td>The agent will not <em>find</em> more access than you think you gave it</td><td>Not having mapped what the credential actually reaches</td><td>The agent walks the closure: password resets from an inbox, stored credentials on a desktop, privilege escalation from code execution</td></tr>
+  </tbody>
+</table></div>
+<p>Neither hope changes the accountability. The delegation chain runs upward — from the agent, through whoever granted the credential, to whoever accepted the risk — whether or not anyone wrote the acceptance down.</p>
+
+<h2 id="closure">The real authorization is the closure, not the grant</h2>
+<p>An agent is more creative, capable and motivated than a passive tool. Its real authorization is therefore <b>the union of everything reachable from what it was given</b> — the transitive closure of the grant — not the words used when granting. Blast radius and de-authorization have to be computed over that closure.</p>
+<pre class="shell">
+<span class="d">NOMINAL GRANT                 REACHABLE CLOSURE (the real authorization)</span>
+<span class="d">-------------                 -----------------------------------------</span>
+"access to your inbox"   <span class="cy">--></span>  every account whose password or second factor
+                              can be reset to that email
+"access to your desktop" <span class="cy">--></span>  every stored credential (often tens in the user dir)
+                              + every logged-in web session in the browser
+"code execution"         <span class="cy">--></span>  spin up a container <span class="cy">-></span> admin <span class="cy">-></span> arbitrary execution
+
+<span class="g">AUTHORIZATION</span> = the union of all reachable paths, not the words of the grant
+<span class="y">DELTA</span>         = (reachable closure) minus (expected grant)  <span class="r"><-- what hope is covering for</span>
+</pre>
+<p>The delta between expected and unexpected permissions is where the danger lives, because it is precisely the part nobody decided to allow. It stays hidden behind two awareness gaps: <b>the granter does not know the full scope of what it is granting</b>, and <b>the original delegator never authorised the access to be re-delegated to an agent at all</b>. Both are consent failures — agreement given for something narrower than what was conferred.</p>
+
+<h2 id="rented">Why hope persists for rented agents</h2>
+<p>For workloads you run, the industry replaces hope with attestation: an installed agent proves what the workload is, and short-lived scoped credentials follow. For agents you rent, none of that machinery can be installed — so the hope is structural. The platform gives you a broad, long-lived credential or nothing. This is <a href="../thesis/index.html">the site's thesis</a>, and it is why the honest map of options matters more than a vendor list: some options genuinely reduce the hope, and one — issuing no credential at all — removes it for a whole class of work.</p>
+
+<h2 id="beyond-hope">The workflows that replace hope</h2>
+<p>Hope is replaced a step at a time, and the steps are ordered. Each rung below removes one thing you were previously hoping about.</p>
+<div class="hopeladder">
+  <div class="cap"><span class="capnum">1</span><h3>Enumerate — stop hoping you know what exists</h3>
+    <p>List every agent that can act, with its owner, its credentials, and what each credential reaches. Surveys report a substantial share of organisations do not track creation of agent-related identities at all — which is hoping the inventory is small. You cannot bound what you have not enumerated.</p></div>
+  <div class="cap"><span class="capnum">2</span><h3>Map the closure — stop hoping the grant is what it says</h3>
+    <p>For each credential, walk what it actually reaches: which accounts reset to that inbox, which repositories that token opens, which secrets that pipeline exposes. The delta between the expected and the reachable is the risk to be accepted — explicitly, by a named person, not by default.</p></div>
+  <div class="cap"><span class="capnum">3</span><h3>Bound — stop hoping about scale</h3>
+    <p>Spend ceilings and wall-clock limits are the two cheapest unimplemented controls in agentic estates. An agent with a hard budget cannot spend substantial compute finding a way around its boundary; an agent with a time limit cannot work a problem over a weekend. Because spend is metered for billing anyway, off-task expenditure is the cheapest anomaly signal available — no security tooling required. (From <a href="../frameworks/aomm.html">the AOMM</a>, Level 2.)</p></div>
+  <div class="cap"><span class="capnum">4</span><h3>Observe — stop hoping you would know</h3>
+    <p>Log agent action independently of the agent's own environment, and page a human on off-task, volumetric or destination anomalies. The documented sandbox-escape case had its clearest early signal — compute spent hunting for internet access — visible and unacted upon. Silence is the precondition an organisation controls most and neglects most.</p></div>
+  <div class="cap"><span class="capnum">5</span><h3>Issue no credential at all — remove the hope entirely</h3>
+    <p>For a whole class of agent work, the strongest scoped credential is none. In the <b>serialised pull request</b> workflow, the agent clones a public, read-only source, works, and emits a diff; a human imports, reviews and merges on another machine. There is nothing to steal, nothing to expire, nothing to revoke — and provenance is per-commit rather than per-session. Security guidance arrived at the same shape independently: run analysis in a read-only job with no publishing credentials, and pass a constrained artefact into a separate privileged step.</p></div>
+</div>
+<pre class="shell">
+<span class="d">THE SERIALISED PULL REQUEST — the no-hope workflow</span>
+
+AGENT SIDE                         HUMAN SIDE
+clone public vault                 clone the vault
+<span class="g">(NO credential required)</span>               |
+     |                                 |
+make changes, commit                   |
+     |                                 |
+emit a diff  <span class="cy">-------------------></span>  import the diff
+                                       |
+                                   review the changes
+                                       |
+                                   merge, and push
+
+<span class="g">The agent holds no write access at any point.</span>
+<span class="g">The artefact is reviewable before it lands — a diff is reviewed; a write is discovered.</span>
+</pre>
+
+<h2 id="honest">Honest limits of this page</h2>
+<ul>
+  <li>The full transitive closure is large and hard to enumerate completely; mapping it is a discipline, not a checkbox.</li>
+  <li>The no-credential workflow requires a human review step — which is the friction agents are usually adopted to remove. That trade is real and should be made consciously.</li>
+  <li>Rungs 1–4 reduce hope; they do not eliminate it. For rented agents, some residual hope is currently unavoidable — which is exactly the thesis.</li>
+</ul>
+
+<h2 id="sources">Sources</h2>
+<ul class="small">
+  <li>The hope-driven authorization brief (union of the possible, the delta, the two awareness gaps): <a href="https://github.com/the-cyber-boardroom/SGraph-AI__App__Send/blob/dev/team/humans/dinis_cruz/briefs/07/02/authorization-and-maturity-model/v0.33.40__arch-brief__sg-send-agent-authorization-union-of-possible-expected-unexpected-delta-blast-radius-hope-driven.md">v0.33.40, 2 July 2026</a></li>
+  <li>The AOMM (budget and elapsed time as containment controls; the five-level ladder): <a href="https://github.com/the-cyber-boardroom/SGraph-AI__App__Send/blob/dev/team/humans/dinis_cruz/briefs/07/27/outbound-agentic-risk/v0.33.52__arch-brief__sg-send-agentic-outbound-maturity-model-aomm-reach-motive-freedom-silence-could-has-will-liability.md">v0.33.52, 27 July 2026</a></li>
+  <li>The serialised pull request (no credential at all; independent security guidance recommending the same split): <a href="https://github.com/the-cyber-boardroom/SGraph-AI__App__Send/blob/dev/team/humans/dinis_cruz/briefs/08/14/sgit-site-and-hub/v0.33.58__strategy-brief__sgit-serialised-pull-request-is-the-headline-publish-the-sample-vaults.md">v0.33.58, 14 August 2026</a>; guidance: <a href="https://windowsforum.com/windows-news.4/github-actions-ai-agents-remove-write-tokens-from-pr-jobs.441917/">remove write tokens from PR jobs</a></li>
+  <li>Untracked agent identities and the visibility-vs-enforcement framing: <a href="https://labs.cloudsecurityalliance.org/research/csa-whitepaper-nonhuman-identity-agentic-ai-governance-v1-cs/">CSA whitepaper</a></li>
+</ul>
+
+<div class="pagenav">
+  <a href="../thesis/index.html">← The thesis</a>
+  <a href="../method/index.html">Next: the method →</a>
+</div>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">nhi<span>.sgit.ai</span></div>
+    <p>Non-human identity, blast radius and agentic security — anchored by the two-populations thesis. All content CC BY 4.0.</p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.0</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The research</h4>
+    <a href="../thesis/index.html">The thesis</a>
+    <a href="../method/index.html">Method</a>
+    <a href="../options/index.html">Options</a>
+  </div>
+  <div>
+    <h4>The collection</h4>
+    <a href="../collection/index.html">By question</a>
+    <a href="../frameworks/aomm.html">The AOMM</a>
+    <a href="index.html">Hope</a>
+    <a href="../infographics/index.html">Infographics</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../admin/comms.html">Comms</a>
+    <a href="../admin/versions.html">Versions</a>
+    <a href="../llms.txt">llms.txt</a>
+    <a href="https://sgit.ai">sgit.ai</a>
+  </div>
+</div></footer>
+
+</body>
+</html>
