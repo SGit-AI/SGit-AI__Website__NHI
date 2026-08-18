@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>hub.sgit.ai: The Fractal Forge — dev pack · nhi.sgit.ai</title>
+<meta name="description" content="A design pack, readable in-page: the dev brief, the fractal model, the capability audit and its two findings, architecture &amp; flows, permissions as key topology, commercialisation, mockups, and the roadmap.">
+<link rel="canonical" href="https://nhi.sgit.ai/packs/hub-sgit-ai/index.html">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../../index.html">nhi<span>.sgit.ai</span></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../../admin/versions.html" title="Site release history">v0.1.10</a>
+  <a class="nl" href="../../thesis/index.html">Thesis</a>
+  <a class="nl" href="../../hope/index.html">Hope</a>
+  <a class="nl" href="../../method/index.html">Method</a>
+  <a class="nl" href="../../options/index.html">Options</a>
+  <a class="nl" href="../../industry/index.html">Industry</a>
+  <a class="nl" href="../../collection/index.html">Collection</a>
+  <a class="nl" href="../../frameworks/aomm.html">AOMM</a>
+  <a class="nl" href="../../pki/index.html">PKI</a>
+  <a class="nl" href="../../documents/index.html">Docs</a>
+  <a class="nl here" href="../index.html">Packs</a>
+  <a class="nl" href="../../infographics/index.html">Infographics</a>
+  <a class="nl" href="../../admin/comms.html">Comms</a>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__NHI">★ GitHub</a>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../../index.html">nhi.sgit.ai</a> / <a href="../index.html">packs</a> / hub-sgit-ai</div>
+<h1>hub.sgit.ai: The Fractal Forge</h1>
+<p class="lead">A <b>forge whose application layer is the browser</b>: the client holds the key, the server stores ciphertext and reads nothing. A hub is <b>itself a vault</b> — a cover, a catalogue and a loader — which means a hub can list other hubs and the network is <b>fractal by composition</b> rather than by new protocol; anyone can run one, because &ldquo;run a hub&rdquo; means &ldquo;publish a folder&rdquo;. The pack opens with two findings about the shipped CLI: the sub-vault primitive every brief builds permissions on <b>does not exist</b>, and a third access tier — the structure key, which decrypts a vault's shape but not its content — is <b>shipped, tested and unused</b>.</p>
+
+<div class="note"><b>Origin.</b> Authored by the Explorer/Architect agent in the SGit-AI__CLI repo (branch claude/sgit-architect-agent-review-3tl5ti), 18 August 2026, responding to the 15-document hub briefing pack (v0.33.56–v0.33.59) plus three maintainer-raised dimensions: community-run hubs, the fractal hub-of-hubs, and commercialisation. Status: design pack — two audit findings change the plan materially, and one (the sub-vault decision) should be resolved before hub architecture is written. Raw sources are captured verbatim under <code>src/</code> (linked from each document page); each document below has a reader page with the same apparatus as the site's <a href="../../documents/index.html">documents</a>.</div>
+
+<h2 id="files">The documents</h2>
+<div class="tablewrap"><table>
+  <thead><tr><th>Document</th><th>Role</th></tr></thead>
+  <tbody>
+    <tr><td><a href="dev-brief.html"><b>00 — The executable dev brief</b></a></td><td>The brief the hub-builder runs from: Step 0 before architecture, the six rules, the step table, what is not theirs to decide</td></tr>
+    <tr><td><a href="the-model-and-the-fractal.html"><b>01 — The model, and the fractal</b></a></td><td>The settled forge model, and the 18 Aug addition: a hub is a vault, so the network is fractal by composition</td></tr>
+    <tr><td><a href="capability-audit.html"><b>02 — Capability audit</b></a></td><td>The CLI-side inventory (done — facts), the two findings, and the web-side audit template that gates architecture</td></tr>
+    <tr><td><a href="architecture-and-flows.html"><b>03 — Architecture &amp; flows</b></a></td><td>The ciphertext boundary, the single-file data path, the fractal walk, and the five user flows</td></tr>
+    <tr><td><a href="permissions-topology.html"><b>04 — Permissions as key topology</b></a></td><td>Possession is access: the four key positions, worked topologies, the missing-primitive options, and CI by scope</td></tr>
+    <tr><td><a href="commercialisation.html"><b>05 — Commercialisation</b></a></td><td>What you can charge for when you cannot read: the inversion, four honest revenue lines, what must never be monetised</td></tr>
+    <tr><td><a href="mockups.html"><b>06 — Interface mockups</b></a></td><td>The one screen that matters (the live ciphertext panel), the hub index's four row states, key handling, fork = rekey</td></tr>
+    <tr><td><a href="roadmap-and-open.html"><b>07 — Roadmap &amp; open questions</b></a></td><td>Build order 0–10, the four absences stated plainly, blocking / important / answered questions, what each team owes</td></tr>
+  </tbody>
+</table></div>
+
+<h2 id="relevance">Why it is on this site</h2>
+<p>This pack is the site's arguments in the builder's seat. Finding 1 — every brief assumed a sub-vault primitive that no code implements — is the <a href='../../hope/index.html'>hope gap</a> caught by an audit before it shipped: enumerate what exists before you architect on it. The four key positions (vault, read, structure, none) are <a href='../../documents/ambient-authority.html'>capability attenuation</a> in practice — each weaker key derives one-way from the stronger. The CI section is this site's over-privileged-agent problem verbatim: a runner must read to build, and the only model-consistent answer is a scoped key — least authority for a non-human identity, with the honest open question of who assembles the scope. And &ldquo;revocation is not retroactive&rdquo; is the operational face of the <a href='../../pki/registry-rules.html'>registry rules</a>' supersede-not-delete: rotation protects the future and returns nothing already taken.</p>
+
+<h2 id="readme">The pack README</h2>
+<div class="mdread-label">📄 Pack overview · README.md · rendered from the <a href="src/README.md">raw markdown</a> (the source of truth)</div>
+<div class="mdread" id="mdread" data-src="src/README.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="src/README.md">open the raw markdown</a>.</p></noscript></div>
+
+<div class="pagenav">
+  <a href="../index.html">← All packs</a>
+  <a href="dev-brief.html">First document →</a>
+</div>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">nhi<span>.sgit.ai</span></div>
+    <p>Non-human identity, blast radius and agentic security — anchored by the two-populations thesis. All content CC BY 4.0.</p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project. <a href="../../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../../admin/versions.html">v0.1.10</a> · <a href="../../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The research</h4>
+    <a href="../../thesis/index.html">The thesis</a>
+    <a href="../../method/index.html">Method</a>
+    <a href="../../options/index.html">Options</a>
+    <a href="../../industry/index.html">Industry</a>
+  </div>
+  <div>
+    <h4>The collection</h4>
+    <a href="../../collection/index.html">By question</a>
+    <a href="../../documents/index.html">Documents</a>
+    <a href="../index.html">Packs</a>
+    <a href="../../pki/index.html">PKI</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../../admin/comms.html">Comms</a>
+    <a href="../../admin/versions.html">Versions</a>
+    <a href="../../llms.txt">llms.txt</a>
+    <a href="https://sgit.ai">sgit.ai</a>
+  </div>
+</div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+<script src="../../assets/mdreader.js"></script>
+</body>
+</html>

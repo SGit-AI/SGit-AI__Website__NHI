@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>04 — Permissions as key topology · hub.sgit.ai: The Fractal Forge · packs · nhi.sgit.ai</title>
+<meta name="description" content="Possession is access: the four key positions, worked topologies, the missing-primitive options, and CI by scope. Part of the hub.sgit.ai: The Fractal Forge dev pack — summary, key concepts and the full document, readable in-page.">
+<link rel="canonical" href="https://nhi.sgit.ai/packs/hub-sgit-ai/permissions-topology.html">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../../index.html">nhi<span>.sgit.ai</span></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../../admin/versions.html" title="Site release history">v0.1.10</a>
+  <a class="nl" href="../../thesis/index.html">Thesis</a>
+  <a class="nl" href="../../hope/index.html">Hope</a>
+  <a class="nl" href="../../method/index.html">Method</a>
+  <a class="nl" href="../../options/index.html">Options</a>
+  <a class="nl" href="../../industry/index.html">Industry</a>
+  <a class="nl" href="../../collection/index.html">Collection</a>
+  <a class="nl" href="../../frameworks/aomm.html">AOMM</a>
+  <a class="nl" href="../../pki/index.html">PKI</a>
+  <a class="nl" href="../../documents/index.html">Docs</a>
+  <a class="nl here" href="../index.html">Packs</a>
+  <a class="nl" href="../../infographics/index.html">Infographics</a>
+  <a class="nl" href="../../admin/comms.html">Comms</a>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__NHI">★ GitHub</a>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../../index.html">nhi.sgit.ai</a> / <a href="../index.html">packs</a> / <a href="index.html">hub-sgit-ai</a> / permissions-topology</div>
+<h1>04 — Permissions as key topology</h1>
+
+<div class="docmeta">
+  <span class="k">Pack</span><span class="v"><a href="index.html">hub.sgit.ai: The Fractal Forge</a></span>
+  <span class="k">Role</span><span class="v">Possession is access: the four key positions, worked topologies, the missing-primitive options, and CI by scope</span>
+  <span class="k">Date</span><span class="v">18 August 2026 · pack v0</span>
+  <span class="k">Origin</span><span class="v">Explorer/Architect agent, SGit-AI__CLI repo</span>
+  <span class="k">Source</span><span class="v"><a href="src/04__permissions-topology.md">raw markdown</a> · <a href="https://github.com/SGit-AI/SGit-AI__CLI/blob/claude/sgit-architect-agent-review-3tl5ti/team/explorer/architect/contracts/08/18/hub-sgit-ai/04__permissions-topology.md">original on GitHub</a></span>
+</div>
+
+<h2 id="summary">Summary</h2>
+<p>The part most likely to be got wrong, because it inverts a forge assumption: permissions here are not a policy a server enforces — possession of a key is access, there is no referee, and a cryptographic boundary has no bypass. It must be designed in advance, and revocation is not retroactive. Four positions exist today (vault key, read key, structure key, no key = custody), each derived one-way so the weaker discloses nothing about the stronger. Worked topologies for an open-source project, a mostly-private company estate, and a contractor — all expressible now as separate vaults plus key tiers. Then the missing primitive's three options: A, separate vaults plus a link convention (recommended — the fractal edge applied inside a vault, no format change); B, nested sub-vaults with derived keys (a real protocol project); C, per-path content keys (breaks CAS dedup — not recommended). CI is the genuine hole: a runner must read, and the model-consistent answer is a scoped vault, whose open question is who assembles it.</p>
+
+<h2 id="concepts">Key concepts</h2>
+<ul>
+  <li><a href="capability-audit.html"><b>The four key positions</b></a> — vault, read, structure, none — a ladder of one-way derivations; handing out the weaker key reveals nothing about the stronger</li>
+  <li><b>Option A: separate vaults + a link convention</b> — the same mechanism the fractal already needs, applied inside a vault; small, honest, and buildable today — B should not gate the hub</li>
+  <li><b>Revocation is not retroactive</b> — rotating a key protects future commits and returns nothing already taken; a git-hosted publication cannot revoke read access at all (measured)</li>
+</ul>
+
+<h2 id="ideas">Key ideas</h2>
+<ul>
+  <li>A shape you can see is easier to audit than a table of rules nobody has read — the honest counterweight to granularity costing structure.</li>
+  <li>The hub as a useful index of things it cannot read is the shape most organisations actually have.</li>
+  <li>Publish the two hard limits; do not let users discover them.</li>
+</ul>
+
+<h2 id="read">Read the document</h2>
+<div class="mdread-label">📄 Pack document · 04__permissions-topology.md · rendered from the <a href="src/04__permissions-topology.md">raw markdown</a> (the source of truth)</div>
+<div class="mdread" id="mdread" data-src="src/04__permissions-topology.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="src/04__permissions-topology.md">open the raw markdown</a>.</p></noscript></div>
+
+<div class="pagenav">
+  <a href="architecture-and-flows.html">← 03 — Architecture &amp; flows</a>
+  <a href="commercialisation.html">05 — Commercialisation →</a>
+</div>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">nhi<span>.sgit.ai</span></div>
+    <p>Non-human identity, blast radius and agentic security — anchored by the two-populations thesis. All content CC BY 4.0.</p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project. <a href="../../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../../admin/versions.html">v0.1.10</a> · <a href="../../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The research</h4>
+    <a href="../../thesis/index.html">The thesis</a>
+    <a href="../../method/index.html">Method</a>
+    <a href="../../options/index.html">Options</a>
+    <a href="../../industry/index.html">Industry</a>
+  </div>
+  <div>
+    <h4>The collection</h4>
+    <a href="../../collection/index.html">By question</a>
+    <a href="../../documents/index.html">Documents</a>
+    <a href="../index.html">Packs</a>
+    <a href="../../pki/index.html">PKI</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../../admin/comms.html">Comms</a>
+    <a href="../../admin/versions.html">Versions</a>
+    <a href="../../llms.txt">llms.txt</a>
+    <a href="https://sgit.ai">sgit.ai</a>
+  </div>
+</div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+<script src="../../assets/mdreader.js"></script>
+</body>
+</html>

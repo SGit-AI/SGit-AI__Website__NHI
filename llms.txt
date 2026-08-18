@@ -8,7 +8,7 @@
 > thesis with evidence, a reproducible research method, dated option assessments, and a
 > curated collection of the underlying corpus.
 
-Site version: v0.1.9 (18 August 2026). Published by the sgit project — participant
+Site version: v0.1.10 (18 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## The research
@@ -86,6 +86,18 @@ disclosure at /about/participant.html. All content CC BY 4.0.
   evidence including: GitHub Pages sends access-control-allow-origin:* by default, and
   object ids hash ciphertext with random IVs so a fork is unlinkable. Raw sources under
   https://nhi.sgit.ai/packs/static-publishing/src/
+- [The fractal forge pack](https://nhi.sgit.ai/packs/hub-sgit-ai/index.html)
+  (18 Aug 2026, design pack): hub.sgit.ai as a forge whose application layer is the
+  browser — the client holds the key, the server stores ciphertext and reads nothing. A
+  hub is itself a vault (cover + catalogue + loader), so hubs can list hubs and the
+  network is fractal by composition, with no federation protocol. Two findings about the
+  shipped CLI open the pack: the sub-vault primitive every brief builds permissions on
+  does not exist, and a third access tier — the structure key, which decrypts a vault's
+  shape but not its content — is shipped, tested and unused. Also: permissions as key
+  topology (four one-way-derived positions), commercialisation when you cannot read
+  ("we cannot sell you privacy, because you already have it"), and the four stated
+  absences including CI, whose model-consistent answer is a scoped key. Raw sources under
+  https://nhi.sgit.ai/packs/hub-sgit-ai/src/
 
 ## PKI — preparing pki.sgit.ai
 
