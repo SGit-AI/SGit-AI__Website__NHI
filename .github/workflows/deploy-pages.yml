@@ -17,7 +17,10 @@
 name: deploy-pages
 on:
   push:
-    branches: [dev]
+    # dev is the release branch: validate -> tag -> deploy. A push to main is
+    # deploy-only (tag-release skips), so main can serve as a deploy test or
+    # fallback while the github-pages environment still restricts dev.
+    branches: [dev, main]
   workflow_dispatch:
 permissions:
   contents: read
@@ -41,7 +44,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     needs: [validate]
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
     permissions:
       contents: write
     steps:

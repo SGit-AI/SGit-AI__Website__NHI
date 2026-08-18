@@ -47,8 +47,15 @@ for (const extra of ['llms.txt', 'index.md']) {
   if (!t.includes(VERSION)) errors.push(`${extra} does not mention ${VERSION}`);
 }
 const versTable = fs.readFileSync(path.join(ROOT, 'admin/versions.html'), 'utf8');
-if (!versTable.includes(`>${VERSION}<`)) {
+if (!versTable.includes(`class="vnum">${VERSION}<`)) {
   errors.push(`admin/versions.html has no row for ${VERSION}`);
+}
+// each release appears exactly once — a blanket version-bump sed that touches
+// the history table produces duplicates, which shipped once (v0.1.1)
+const rows = [...versTable.matchAll(/class="vnum">(v\d+\.\d+\.\d+)</g)].map(m => m[1]);
+for (const v of rows) if (rows.filter(x => x === v).length > 1) {
+  errors.push(`admin/versions.html lists ${v} more than once`);
+  break;
 }
 
 // --- 2. internal links ----------------------------------------------------
