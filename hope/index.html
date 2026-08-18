@@ -13,7 +13,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../index.html">nhi<span>.sgit.ai</span></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.3</a>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.4</a>
   <a class="nl" href="../thesis/index.html">Thesis</a>
   <a class="nl here" href="index.html">Hope</a>
   <a class="nl" href="../method/index.html">Method</a>
@@ -63,6 +63,13 @@
 
 <h2 id="rented">Why hope persists for rented agents</h2>
 <p>For workloads you run, the industry replaces hope with attestation: an installed agent proves what the workload is, and short-lived scoped credentials follow. For agents you rent, none of that machinery can be installed — so the hope is structural. The platform gives you a broad, long-lived credential or nothing. This is <a href="../thesis/index.html">the site's thesis</a>, and it is why the honest map of options matters more than a vendor list: some options genuinely reduce the hope, and one — issuing no credential at all — removes it for a whole class of work.</p>
+
+<h2 id="segregation">Granularity by segregation, and attribution from content</h2>
+<p>The <a href="../research/shared-drives.html">shared-drives research</a> (16 Aug 2026) added two load-bearing findings to this page's toolkit:</p>
+<ul>
+  <li><b>Granularity by segregation.</b> When possession of access is binary — a connector that acts entirely as you, a key that opens a whole store — real granularity comes from the <em>shape of what you store</em>, not from a policy on top: a dedicated drive (or vault) per agent, containing only what that agent should see. It is the only granularity hosted services actually offer today, it costs nothing, and it directly shrinks the closure the two hopes were covering for. Its cost is also real: one store per trust boundary multiplies quickly.</li>
+  <li><b>Attribution must come from the content, not the platform.</b> No surveyed platform can tell two of your sessions apart — the audit trail records the account. If knowing which agent did what matters, it has to be written into what the agents produce: each agent on its own paths, signing what it writes, or both. That is a design decision to make now, not a feature to wait for — and it is why provenance-preserving raw files beat curated memory, whose resolve-on-write behaviour destroys exactly this record.</li>
+</ul>
 
 <h2 id="beyond-hope">The workflows that replace hope</h2>
 <p>Hope is replaced a step at a time, and the steps are ordered. Each rung below removes one thing you were previously hoping about.</p>
@@ -123,7 +130,7 @@ emit a diff  <span class="cy">-------------------></span>  import the diff
     <div class="brandline">nhi<span>.sgit.ai</span></div>
     <p>Non-human identity, blast radius and agentic security — anchored by the two-populations thesis. All content CC BY 4.0.</p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.3</a> · <a href="../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.4</a> · <a href="../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The research</h4>

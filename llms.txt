@@ -8,7 +8,7 @@
 > thesis with evidence, a reproducible research method, dated option assessments, and a
 > curated collection of the underlying corpus.
 
-Site version: v0.1.3 (18 August 2026). Published by the sgit project — participant
+Site version: v0.1.4 (18 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## The research
@@ -29,6 +29,16 @@ disclosure at /about/participant.html. All content CC BY 4.0.
   - [Do nothing: broad credential + hope](https://nhi.sgit.ai/options/do-nothing.html) —
     the incumbent baseline, assessed honestly; the only option that works for rented
     agents, which is the thesis in one cell.
+
+## The thesis, tested
+
+- [Shared drives for agents](https://nhi.sgit.ai/research/shared-drives.html): a second
+  scenario fully scored (16 Aug 2026) — every available option runs on your identity so a
+  rogue session reaches everything every other session can reach; the only granularity is
+  segregation (a dedicated drive per agent), not scoping; nothing supports per-agent
+  keys; no attribution at the agent level; curated memory destroys provenance by
+  resolving conflicts on write. Source brief, verbatim with citations:
+  https://nhi.sgit.ai/briefs/v0.33.59__research-brief__shared-drives-for-agents-identity-segregation-no-per-agent-keys.md
 
 ## Hope — concepts and workflows
 

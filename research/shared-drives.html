@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Research: shared drives for agents — everything acts as you · nhi.sgit.ai</title>
+<meta name="description" content="The thesis, tested against a concrete scenario: give two agent sessions a shared file area. Everything available runs on your identity, granularity comes from segregation rather than scoping, and nothing supports per-agent keys.">
+<link rel="canonical" href="https://nhi.sgit.ai/research/shared-drives.html">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../index.html">nhi<span>.sgit.ai</span></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.4</a>
+  <a class="nl" href="../thesis/index.html">Thesis</a>
+  <a class="nl" href="../hope/index.html">Hope</a>
+  <a class="nl" href="../method/index.html">Method</a>
+  <a class="nl" href="../options/index.html">Options</a>
+  <a class="nl" href="../collection/index.html">Collection</a>
+  <a class="nl" href="../frameworks/aomm.html">AOMM</a>
+  <a class="nl" href="../infographics/index.html">Infographics</a>
+  <a class="nl" href="../admin/comms.html">Comms</a>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__NHI">★ GitHub</a>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../index.html">nhi.sgit.ai</a> / research / shared-drives</div>
+<h1>Shared drives for agents: everything acts as you</h1>
+<p class="lead">The site's thesis, tested against a concrete scenario: <em>give two agent sessions a shared working file area — whose identity does it run on, can one rogue session reach the other's data, can you attribute an action, and do per-agent keys exist?</em> The answer, scored against public sources: everything available runs on <b>your</b> identity, the only granularity is <b>segregation</b> rather than scoping, and <b>nothing supports per-agent keys</b>. Three requirement rows come back empty — which is the finding, not an omission.</p>
+
+<div class="evbox"><span class="evtag">Evidence status</span>
+<p>Research brief scored against public sources as of <b>16 August 2026</b>; captured on this site 18 August 2026. Source document, verbatim, with all citations: <a href="../briefs/v0.33.59__research-brief__shared-drives-for-agents-identity-segregation-no-per-agent-keys.md">the shared-drives research brief (v0.33.59)</a>. Prices and capabilities in this market move monthly — the re-verification queue is on <a href="../admin/comms.html">comms</a>. The <a href="../about/participant.html">participant note</a> applies: vaults with per-agent keys address several of the empty rows, and this is written by a party with an interest in that, so every claim is offered as checkable rather than concluded.</p></div>
+
+<h2 id="short">The short answer</h2>
+<p><b>No option provides per-agent identity, cryptographic scoping and raw provenance at the same time.</b> Four families exist, each answering part of the question:</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>Option</th><th>Cross-machine</th><th>Per-agent identity</th><th>Scoped access</th><th>Raw files</th><th>Keys</th></tr></thead>
+  <tbody>
+    <tr><td>Local shared folder via a protocol server</td><td><b>No</b></td><td>No</td><td>Path-level</td><td>Yes</td><td>No</td></tr>
+    <tr><td>Hosted drive connector</td><td>Yes</td><td><b>No — acts as you</b></td><td>Segregation only</td><td>Yes</td><td>No</td></tr>
+    <tr><td>Memory platform</td><td>Yes</td><td>Partial, by scope</td><td>Namespace</td><td><b>No — curated</b></td><td>No</td></tr>
+    <tr><td>Files in a versioned folder, built yourself</td><td>Yes</td><td>Whatever you build</td><td>Whatever you build</td><td>Yes</td><td>Whatever you build</td></tr>
+  </tbody>
+</table></div>
+<p>Notably, the ecosystem's dominant advice is the <em>opposite</em> of the question: isolate parallel sessions in separate working directories so they behave like independent developers. Sharing runs against the grain of the tooling — which is not a reason not to want it, and does explain why the options are thin.</p>
+
+<h2 id="identity">Identity: everything acts as you</h2>
+<p>The finding with the largest blast radius. Connector authorisation is <b>per identity, not per person</b>, and inherits the authorising account's permissions. Three consequences, answering the scenario's questions in order:</p>
+<ul>
+  <li><b>Whose identity?</b> Yours. There is no agent identity in any of these options. Every session authenticated through your connector <em>is</em> you.</li>
+  <li><b>If one agent goes rogue, can it affect the others?</b> Yes, entirely. All sessions share one identity and one permission set, so a compromised session reaches everything every other session can reach. There is no boundary between them because there is nothing to draw one with.</li>
+  <li><b>Can you attribute an action?</b> No. Two sessions writing to the same drive are indistinguishable in the audit trail, because the audit trail records the account — and multi-account sign-in can confuse even that record.</li>
+</ul>
+<p>This is the <a href="../thesis/index.html">two-populations thesis</a> in a single scenario: these are rented agents, nothing can be attested, and the one lever is the credential handed over — which turns out to be your entire identity. It is also the <a href="../hope/index.html#closure">authorization-closure</a> problem in its purest form: the grant says "the drive", the closure is "everything your account can see".</p>
+
+<h2 id="scope-paradox">The scope paradox, and granularity by segregation</h2>
+<p>The widely used file service classifies its narrow scope (files the application itself created) as <b>non-sensitive</b>, and both readable scopes as <b>restricted</b> — with nothing in between. The narrow scope means the agent cannot read anything you already had, defeating the purpose of a shared working area; the broad scope exposes everything the account can see and <b>cannot be narrowed to a folder</b>. The practitioner answer that has emerged is not a permission at all:</p>
+<blockquote class="challenge">Create a shared drive dedicated to the agent, and put in it only what you are comfortable with the agent reading.</blockquote>
+<p>That is <b>granularity by segregation</b>: when possession of access is binary, granularity comes from the shape of what you store, not from a policy on top of it. The corpus reached the same conclusion about vaults and keys on 14 August — the industry has arrived at the same answer for a completely different system, which is reassuring about the principle and unflattering about the tooling. The cost is real: one drive per trust boundary multiplies quickly.</p>
+
+<h2 id="keys">Cryptography: nobody</h2>
+<p>Nothing surveyed supports per-agent public and private keys. Drive and file services authenticate with bearer tokens; memory platforms with application keys; repository hosts with tokens. In every case the credential is a shared secret, and possessing it grants whatever it is scoped to. The model where a step is encrypted to a recipient and signed by a sender — so only the intended agent can read or write it — is not available in any of them.</p>
+
+<h2 id="memory">Memory platforms: curation destroys provenance</h2>
+<p>Curated memory is not raw shared files, and the difference is sharper than it looks: memory platforms extract facts and <b>resolve conflicting facts on write</b> — which is precisely the operation that destroys provenance. After it runs you have the resolved fact, not the two things that disagreed, nor which agent said which, nor when. For personalisation that is the desired behaviour; for explainability it is the failure mode. The alternative the comparison literature itself names — markdown files in a versioned folder, indexed, with a query interface and a write-to-review-folder — keeps the raw record, stays portable, and costs only infrastructure.</p>
+
+<h2 id="gap">The gap, stated carefully</h2>
+<div class="tablewrap"><table>
+  <thead><tr><th>Requirement</th><th>Best available today</th></tr></thead>
+  <tbody>
+    <tr><td>Two sessions share files</td><td>A hosted drive, or a folder on one machine</td></tr>
+    <tr><td>Each agent has its own identity</td><td><b>Nothing</b></td></tr>
+    <tr><td>One agent cannot reach another's data</td><td><b>Segregation only: a separate drive per agent</b></td></tr>
+    <tr><td>Attributable record of who did what</td><td><b>Nothing, at the agent level</b></td></tr>
+    <tr><td>Encrypted to a specific agent</td><td><b>Nothing</b></td></tr>
+    <tr><td>Raw files with full history</td><td>Build it, or a versioned folder</td></tr>
+    <tr><td>Per-call cost</td><td><b>Nothing</b> — every option bills monthly; no micropayments anywhere</td></tr>
+  </tbody>
+</table></div>
+<p>Anybody who can fill an empty row refutes this usefully — <a href="../admin/comms.html">tell us</a>.</p>
+
+<h2 id="do">What to do with this, today</h2>
+<ol>
+  <li><b>Use segregation, whatever else happens.</b> A dedicated drive containing only what an agent should see is the only granularity actually available on hosted services. It costs nothing and bounds the blast radius that per-identity authorisation otherwise leaves unbounded.</li>
+  <li><b>Do not expect attribution from the platform.</b> If knowing which agent did what matters, it must come from the <em>content</em>: agents writing to their own paths, signing what they write, or both. A design decision to make now, not a feature to wait for.</li>
+  <li><b>Treat the isolation-vs-sharing tension as real.</b> The ecosystem recommends separation; some tasks genuinely need sharing. Both can be right for different tasks.</li>
+</ol>
+
+<h2 id="sources">Sources and re-run method</h2>
+<p>All fourteen sources — the scope-tier documentation, the connector permission analyses, the memory-platform pricing surveys, the isolation guidance, and the protocol-server limitations — are cited in <a href="../briefs/v0.33.59__research-brief__shared-drives-for-agents-identity-segregation-no-per-agent-keys.md">the source brief</a>. Re-run method: re-check each cited page's claims against the vendor's current documentation, and re-score the two tables above; the figures move monthly.</p>
+
+<div class="pagenav">
+  <a href="../thesis/index.html">← The thesis this tests</a>
+  <a href="../hope/index.html">Hope: concepts &amp; workflows →</a>
+</div>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">nhi<span>.sgit.ai</span></div>
+    <p>Non-human identity, blast radius and agentic security — anchored by the two-populations thesis. All content CC BY 4.0.</p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../admin/versions.html">v0.1.4</a> · <a href="../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The research</h4>
+    <a href="../thesis/index.html">The thesis</a>
+    <a href="../method/index.html">Method</a>
+    <a href="../options/index.html">Options</a>
+    <a href="shared-drives.html">Shared drives</a>
+  </div>
+  <div>
+    <h4>The collection</h4>
+    <a href="../collection/index.html">By question</a>
+    <a href="../frameworks/aomm.html">The AOMM</a>
+    <a href="../hope/index.html">Hope</a>
+    <a href="../infographics/index.html">Infographics</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../admin/comms.html">Comms</a>
+    <a href="../admin/versions.html">Versions</a>
+    <a href="../llms.txt">llms.txt</a>
+    <a href="https://sgit.ai">sgit.ai</a>
+  </div>
+</div></footer>
+
+</body>
+</html>
