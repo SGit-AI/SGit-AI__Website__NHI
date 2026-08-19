@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>07 — The publish output · Static Publishing, sgit vault serve, and the Publishing Matrix · packs · nhi.sgit.ai</title>
-<meta name="description" content="Revised 19 Aug: publish takes no target — one fixed folder, target-agnostic, and the override question resolved at deployment. Part of the Static Publishing, sgit vault serve, and the Publishing Matrix dev pack — summary, key concepts and the full document, readable in-page.">
+<meta name="description" content="Revised 19 Aug (twice): publish takes no target and copies no ciphertext — it emits the plaintext surface only; the served root is composed at deployment. Part of the Static Publishing, sgit vault serve, and the Publishing Matrix dev pack — summary, key concepts and the full document, readable in-page.">
 <link rel="canonical" href="https://nhi.sgit.ai/packs/static-publishing/publish-target.html">
 <link rel="stylesheet" href="../../assets/site.css">
 </head>
@@ -13,7 +13,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../../index.html">nhi<span>.sgit.ai</span></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../../admin/versions.html" title="Site release history">v0.1.14</a>
+  <a class="ver" href="../../admin/versions.html" title="Site release history">v0.1.15</a>
   <a class="nl" href="../../thesis/index.html">Thesis</a>
   <a class="nl" href="../../hope/index.html">Hope</a>
   <a class="nl" href="../../method/index.html">Method</a>
@@ -35,20 +35,20 @@
 
 <div class="docmeta">
   <span class="k">Pack</span><span class="v"><a href="index.html">Static Publishing, `sgit vault serve`, and the Publishing Matrix</a></span>
-  <span class="k">Role</span><span class="v">Revised 19 Aug: publish takes no target — one fixed folder, target-agnostic, and the override question resolved at deployment</span>
+  <span class="k">Role</span><span class="v">Revised 19 Aug (twice): publish takes no target and copies no ciphertext — it emits the plaintext surface only; the served root is composed at deployment</span>
   <span class="k">Date</span><span class="v">17–19 August 2026 · pack v0</span>
   <span class="k">Origin</span><span class="v">Architect-review agent, SGit-AI__CLI repo</span>
   <span class="k">Source</span><span class="v"><a href="src/07__publish-target.md">raw markdown</a> · <a href="https://github.com/SGit-AI/SGit-AI__CLI/blob/claude/sgit-architect-agent-review-3tl5ti/team/explorer/dev/impl-plans/08/17/static-publishing/07__publish-target.md">original on GitHub</a></span>
-  <span class="k">Captured</span><span class="v">19 August 2026, at commit <a href="https://github.com/SGit-AI/SGit-AI__CLI/commit/a3b4ccfbf432a467921820cc3a85bd1f6f179489"><code>a3b4ccf</code></a> — the raw file under <code>src/</code> is byte-identical to that commit</span>
+  <span class="k">Captured</span><span class="v">19 August 2026, at commit <a href="https://github.com/SGit-AI/SGit-AI__CLI/commit/a1d5ce6ce5e681ab37aa6875a9ac76629d3b1e98"><code>a1d5ce6</code></a> — the raw file under <code>src/</code> is byte-identical to that commit</span>
 </div>
 
 <h2 id="summary">Summary</h2>
-<p>The first version of this file was a rule policing where an output directory may live — the maintainer removed the question instead: sgit publish takes no target, writes .sg_vault/publish/ and nothing else on disk, and deployment is a separate act. Five things disappear at once: the containment rule, the --force-on-an-ancestor disaster, the amplification loop (gone by construction, since .sg_vault is always ignored), the escape hatch, and the naming decision. The folder is a finished, target-agnostic artefact — no CNAME, no .nojekyll, no netlify.toml; those belong to the deployer — which is what keeps the published bytes identical regardless of destination. And the two index.html files are kept apart at last: the loader is generated plaintext, always sgit's template; the vault's own index.html is encrypted content — the choice between them happens at deployment, where decryption creates the second candidate, and the decrypted page wins.</p>
+<p>The first version of this file was a rule policing where an output directory may live — the maintainer removed the question instead: sgit publish takes no target, writes .sg_vault/publish/ and nothing else on disk, and deployment is a separate act. Then r9 removed the last copy too: the output is the plaintext surface only — loader, cover, manifest, key file, optional API docs — and never contains ciphertext. The manifest enumerates the store (ids, sizes, sha256), so publishing is O(KB) regardless of vault size (measured: 5 files, ~5 KB, for a 22-object store), and re-publishing never churns a gigabyte store. The served root is composed at deployment — co-located (the one-repo pattern: serve the repo, zero copies) or assembled by a keyless copy of bare/ into place — and sgit vault serve composes virtually by routing. Invariant I1 becomes true by construction: what is served is the store. The two index.html files stay apart: the loader is generated plaintext, always sgit's template; the vault's own index.html is encrypted content — the decrypted page wins at expanded deployment.</p>
 
 <h2 id="concepts">Key concepts</h2>
 <ul>
   <li><b>Remove the question rather than police it</b> — no target argument means no containment rule, no refusal messages, no escape hatch — and the amplification loop is impossible by construction, not by rule</li>
-  <li><b>A deployer can be dumb</b> — rsync, s3 sync, git add, or a static server pointed at the folder — nothing needs to interpret the contents, because nothing target-specific is in them</li>
+  <li><b>The surface, not the store</b> — publish emits O(KB) of plaintext; the ciphertext is never duplicated on disk or in git — composition happens at deployment, by keyless copy or by serving the repo itself</li>
   <li><a href="tabletop-github-pages.html"><b>The two index.html files</b></a> — the loader (generated, plaintext, byte-identical everywhere) versus the vault's own page (ordinary encrypted content) — conflating them was the earlier framing's one real error</li>
 </ul>
 
@@ -74,7 +74,7 @@
     <div class="brandline">nhi<span>.sgit.ai</span></div>
     <p>Non-human identity, blast radius and agentic security — anchored by the two-populations thesis. All content CC BY 4.0.</p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project. <a href="../../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../../admin/versions.html">v0.1.14</a> · <a href="../../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../../admin/versions.html">v0.1.15</a> · <a href="../../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The research</h4>

@@ -13,7 +13,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../../index.html">nhi<span>.sgit.ai</span></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../../admin/versions.html" title="Site release history">v0.1.14</a>
+  <a class="ver" href="../../admin/versions.html" title="Site release history">v0.1.15</a>
   <a class="nl" href="../../thesis/index.html">Thesis</a>
   <a class="nl" href="../../hope/index.html">Hope</a>
   <a class="nl" href="../../method/index.html">Method</a>
@@ -39,7 +39,7 @@
   <span class="k">Date</span><span class="v">17–19 August 2026 · pack v0</span>
   <span class="k">Origin</span><span class="v">Architect-review agent, SGit-AI__CLI repo</span>
   <span class="k">Source</span><span class="v"><a href="src/10__tabletop__github-pages-one-repo.md">raw markdown</a> · <a href="https://github.com/SGit-AI/SGit-AI__CLI/blob/claude/sgit-architect-agent-review-3tl5ti/team/explorer/dev/impl-plans/08/17/static-publishing/10__tabletop__github-pages-one-repo.md">original on GitHub</a></span>
-  <span class="k">Captured</span><span class="v">19 August 2026, at commit <a href="https://github.com/SGit-AI/SGit-AI__CLI/commit/a3b4ccfbf432a467921820cc3a85bd1f6f179489"><code>a3b4ccf</code></a> — the raw file under <code>src/</code> is byte-identical to that commit</span>
+  <span class="k">Captured</span><span class="v">19 August 2026, at commit <a href="https://github.com/SGit-AI/SGit-AI__CLI/commit/a1d5ce6ce5e681ab37aa6875a9ac76629d3b1e98"><code>a1d5ce6</code></a> — the raw file under <code>src/</code> is byte-identical to that commit</span>
 </div>
 
 <h2 id="explainer">What is happening in this document — and why it is unusual</h2>
@@ -51,7 +51,7 @@
 </div>
 
 <h2 id="summary">Summary</h2>
-<p>The maintainer posed the scenario — one GitHub repo, served by Pages, carrying all three at once: the public read key, the decrypted files, and the encrypted vault store with its history — and the agent ran it rather than reasoning about it. Results, all from real runs: publish → push is a no-op, so the amplification loop is impossible by construction (invariant I6 checked with the shipped CLI); git content-addressing makes the double-commit nearly free — all 17 ciphertext projection copies share blobs with the store; the reader's clone over plain GETs comes back identical to the author's tree in both deployment modes; keyless custody verified every content-addressed object with zero key material; and the ordered commit list needed only the read key, so sgit publish never needs the vault key. The final table records what every party ends up holding — and that the one deliberate act that made the host able to read was publishing the key.</p>
+<p>The maintainer posed the scenario — one GitHub repo, served by Pages, carrying all three at once: the public read key, the decrypted files, and the encrypted vault store with its history — and the agent ran it rather than reasoning about it. Results, all from real runs: publish → push is a no-op, so the amplification loop is impossible by construction (invariant I6 checked with the shipped CLI); the reader's clone over plain GETs comes back identical to the author's tree in both deployment modes; keyless custody verified every content-addressed object with zero key material; and the ordered commit list needed only the read key, so sgit publish never needs the vault key. The final table records what every party ends up holding — and that the one deliberate act that made the host able to read was publishing the key. The document is kept as a historical record: a note marks that r9 later removed publish's ciphertext copy (making the run's git-dedup measurement moot), and that mode B — cloning straight off the repo's own .sg_vault/, verified here with zero projection involved — is exactly the shape the r9 spec generalises.</p>
 
 <h2 id="concepts">Key concepts</h2>
 <ul>
@@ -63,6 +63,7 @@
 <h2 id="ideas">Key ideas</h2>
 <ul>
   <li>Two systems ignore each other's private half mechanically: .git is in sgit's always-ignored set, .sg_vault/local/ is in .gitignore — and the tabletop caught the one leak (F1: the root .gitignore is itself vault content).</li>
+  <li>The exercise changed the spec it tested: mode B's zero-projection clone became r9's design — publish emits the surface only, and the store is composed in at deployment.</li>
   <li>A refused push still rewrote mutable ref bytes (F2) — spurious git dirty states, filed as a code issue: the kind of bug only an executed exercise surfaces.</li>
   <li>Pages' max-age=600 means a reader can see the old head ref for up to ten minutes after a redeploy; immutable objects are unaffected.</li>
 </ul>
@@ -82,7 +83,7 @@
     <div class="brandline">nhi<span>.sgit.ai</span></div>
     <p>Non-human identity, blast radius and agentic security — anchored by the two-populations thesis. All content CC BY 4.0.</p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project. <a href="../../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../../admin/versions.html">v0.1.14</a> · <a href="../../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../../admin/versions.html">v0.1.15</a> · <a href="../../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The research</h4>
