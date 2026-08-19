@@ -25,6 +25,9 @@ later phase inside an earlier phase's PR.
 5. `04__invariants-and-tests.md` — what your phase must not break.
 6. `10__tabletop__github-pages-one-repo.md` — the whole flow, **executed**; if you are on
    P2, `scripts/tabletop__static_publishing/simulate_publish.py` is your first draft.
+7. `11__tabletop__publishing-pipelines.md` + `templates/github-pages.yml` — the CI story,
+   executed; if you are on P1 read finding F5, on P9 read F6 and
+   `scripts/tabletop__static_publishing/attach_simulated.py` (your first draft).
 
 Skim only as needed: `02__commands-and-ux.md` (exact user-facing strings),
 `03__flows.md`, `06__decisions-and-evidence.md`. If you are on P2 read `07__publish-target.md`
@@ -76,6 +79,9 @@ pass, so if you find yourself weakening one, stop and raise it instead.
   be checked with no key and no trust in the host. Do it unconditionally.
 - **`serve` binds `127.0.0.1` by default**, read-only, no directory listing, path-guarded
   (use `Vault__Path_Guard`), stdlib only — no new dependency.
+- **Key material never lands in git.** Any one-repo work uses the canonical repo-side
+  ignore set — `.sg_vault/local/`, `.sg_vault/backups/`, `.sg_vault_new/` (`07` §4). The
+  `backups/` line is not optional: a keyed backup zip contains the vault key itself.
 - **Writes on a static transport raise**, they never silently no-op.
 - **Never weaken the key rules shipped in `67c2ab6`**: `classify_key()` classifies by
   declaration, and an explicit prefix always beats the 64-hex heuristic.
@@ -107,6 +113,7 @@ Integration tests need the 3.12 venv (see `CLAUDE.md` → Integration Testing).
 | **P4b** | Published API docs — `api/openapi.json`, optional Swagger UI (CDN-pinned or bundled) | P2 | S |
 | **P7** | The 6 invariants + 14 test cells as a suite | P1–P5 | M |
 | **P8** | `sgit vault expand` — deployment-time expansion (**deferred, not v1**) | P2 | M |
+| **P9** | `sgit vault attach` — bind a key to an existing checkout (**CI-blocking**) | — | S |
 
 **Start with P1 and P3.** Together they are demonstrable value — clone from any GET host,
 browse any published folder locally — and they commit to nothing in the publish protocol
@@ -116,10 +123,11 @@ that is still being decided.
 
 Raise these; do not resolve them in code:
 
-- The eleven open decisions in `06__decisions-and-evidence.md` (canonical layout, loader
+- The fifteen open decisions in `06__decisions-and-evidence.md` (canonical layout, loader
   source-of-truth, key-file vs pointer, serve bind default, default visibility, ship order,
   Swagger UI delivery mode, whether the spec is always emitted, default publish target,
-  first-party asset origin, where expansion lives).
+  first-party asset origin, where expansion lives, ciphertext-never-copied, repo-side
+  gitignore ownership, the attach command, the workflow generator).
 - Anything that changes a **wire format** or a **key format** — those are cross-runtime
   contracts shared with SG/API and SG/Vault web.
 - Anything that widens the plaintext surface beyond the allow-list in `01`.

@@ -15,6 +15,7 @@ the publish protocol that is still under discussion.
 | P4b | Published API docs (`--api-spec` / `--api-docs`) | P2 | S | low |
 | P7 | Invariants + 14 cells as a suite | P1–P5 | M | — |
 | P8 | `sgit vault expand` — deployment-time plaintext expansion | P2 | M | **deferred — not in v1** (decision 11) |
+| P9 | `sgit vault attach` — bind a key to an existing `.sg_vault/bare` checkout | — | S | low — **CI-blocking** (decision 14) |
 
 ---
 
@@ -41,7 +42,11 @@ the publish protocol that is still under discussion.
 - [ ] Large-blob path works — `presigned_read_url` returns the object's own URL. **Add a
       >4 MB fixture**; small fixtures will not catch this.
 - [ ] Writes raise `Vault__Read_Only_Transport_Error` with an actionable message.
-- [ ] A 404 is `None` (absent), not an exception; per-object failures never abort the run.
+- [ ] **Only an HTTP 404** is `None` (absent); connection refused/reset/timeout **raises
+      loudly, naming the host** — a dead host must never diagnose as an empty vault
+      ("no branch index and no named ref"), which sends operators toward re-keying
+      instead of restarting a server (tabletop `11`, F5).
+- [ ] Per-object failures never abort the run.
 - [ ] Resolved transport appears in `sgit vault info`.
 
 **Watch out:** local fan-out should be 1 worker (parallelism on `open()` is pure overhead);
@@ -113,6 +118,27 @@ HTTP default 8.
 
 **Watch out:** no new dependency. The product's claim is that no server is needed; this one
 is a local convenience and must look like it.
+
+---
+
+## P9 — `sgit vault attach` (small, CI-blocking)
+
+A fresh `git clone` of a one-repo vault has `.sg_vault/bare/` but no `local/` — and no
+shipped command can bind a key to it. **Executed evidence (19 Aug):** `clone-headless`
+refuses inside a vault; `sgit status` errors "vault may be corrupted"; tabletop 10 step 9
+recovered with a lab script, which is the definition of a missing command.
+
+**Acceptance**
+- [ ] `sgit vault attach <vault-key | read-key + vault-id>` writes `local/` (config, key,
+      derived ids) against the **existing** `bare/`, validating that the derived ref file id
+      exists in `bare/refs/` before writing anything.
+- [ ] Works with a read key alone → read-only clone semantics (no write credential stored).
+- [ ] Refuses a key whose derived ids match nothing in `bare/` (wrong key, clear message).
+- [ ] After attach: `sgit status`, `sgit publish`, `sgit vault serve` all work.
+- [ ] Attach is **mode-exclusive**: switching read-only ↔ read-write removes the other
+      mode's artifacts, and `clone_mode.json` is written **Schema__Clone_Mode-exact** — the
+      shipped clone-mode guard refuses anything else, correctly (tabletop `11`, F6).
+- [ ] The tabletop lab script `ci_publish_readkey.py` is retired by it (11 step 2).
 
 ---
 

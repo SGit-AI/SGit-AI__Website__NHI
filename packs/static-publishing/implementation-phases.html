@@ -13,7 +13,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../../index.html">nhi<span>.sgit.ai</span></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../../admin/versions.html" title="Site release history">v0.1.18</a>
+  <a class="ver" href="../../admin/versions.html" title="Site release history">v0.1.19</a>
   <a class="nl" href="../../thesis/index.html">Thesis</a>
   <a class="nl" href="../../hope/index.html">Hope</a>
   <a class="nl" href="../../method/index.html">Method</a>
@@ -39,16 +39,16 @@
   <span class="k">Date</span><span class="v">17–19 August 2026 · pack v0</span>
   <span class="k">Origin</span><span class="v">Architect-review agent, SGit-AI__CLI repo</span>
   <span class="k">Source</span><span class="v"><a href="src/05__implementation-phases.md">raw markdown</a> · <a href="https://github.com/SGit-AI/SGit-AI__CLI/blob/claude/sgit-architect-agent-review-3tl5ti/team/explorer/dev/impl-plans/08/17/static-publishing/05__implementation-phases.md">original on GitHub</a></span>
-  <span class="k">Captured</span><span class="v">19 August 2026, at commit <a href="https://github.com/SGit-AI/SGit-AI__CLI/commit/a1d5ce6ce5e681ab37aa6875a9ac76629d3b1e98"><code>a1d5ce6</code></a> — the raw file under <code>src/</code> is byte-identical to that commit</span>
+  <span class="k">Captured</span><span class="v">19 August 2026, at commit <a href="https://github.com/SGit-AI/SGit-AI__CLI/commit/a7fb3f5af9f84b0c62024b25e8332c0362b11d50"><code>a7fb3f5</code></a> — the raw file under <code>src/</code> is byte-identical to that commit</span>
 </div>
 
 <h2 id="summary">Summary</h2>
-<p>Independently shippable phases, each one PR with green suites and its own acceptance criteria. P1 (static read transport — promote the spike, don't redesign it) and P3 (vault serve) start now: demonstrable value with zero commitment to the publish protocol still being decided; the revision adds P4b, the published API docs, gated on P2. Acceptance criteria are concrete down to the trap: add a >4 MB fixture, because small fixtures will not catch the large-blob path.</p>
+<p>Independently shippable phases, each one PR with green suites and its own acceptance criteria. P1 (static read transport — promote the spike, don't redesign it) and P3 (vault serve) start now: demonstrable value with zero commitment to the publish protocol still being decided; the revisions add P4b (the published API docs, gated on P2) and P9 (sgit vault attach — binding a key to a fresh git checkout, the gap both tabletops hit). Acceptance criteria are concrete down to the trap: add a >4 MB fixture, because small fixtures will not catch the large-blob path.</p>
 
 <h2 id="concepts">Key concepts</h2>
 <ul>
   <li><b>Promote the spike</b> — the P1 design already exists as running code — productionising it is the task</li>
-  <li><a href="decisions-and-evidence.html"><b>Ship value before protocol</b></a> — P1+P3 first is itself one of the twelve decisions, with a recommendation</li>
+  <li><a href="decisions-and-evidence.html"><b>Ship value before protocol</b></a> — P1+P3 first is itself one of the fifteen decisions, with a recommendation</li>
 </ul>
 
 <h2 id="ideas">Key ideas</h2>
@@ -72,7 +72,7 @@
     <div class="brandline">nhi<span>.sgit.ai</span></div>
     <p>Non-human identity, blast radius and agentic security — anchored by the two-populations thesis. All content CC BY 4.0.</p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project. <a href="../../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../../admin/versions.html">v0.1.18</a> · <a href="../../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../../admin/versions.html">v0.1.19</a> · <a href="../../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The research</h4>

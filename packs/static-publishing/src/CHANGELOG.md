@@ -12,6 +12,84 @@ are live findings from the executed tabletop (`10`).
 
 ---
 
+## 2026-08-19 — r12: r11's findings propagated into the spec files
+
+**Trigger:** maintainer — *"did you also update the other files like the architecture
+one?"* r11 updated `05`/README/template/CHANGELOG but left `01`, `02`, `03`, `00`, `04`,
+`07` carrying pre-tabletop-11 content. The pack's own lesson (r8) repeated: findings must
+land in every file that states the affected behaviour, not just where they were found.
+
+- `01`: transport contract now states F5 in the method table (**only 404 ⇒ absent;
+  connection errors raise, naming the host**) and gains §6 "the pipeline seam" — the CI
+  sequence with the runner's key posture; loader discovery renumbered to §7.
+- `02`: new §4 — `sgit vault attach` command surface (P9, marked FUTURE), strings taken
+  from the executed drill incl. the wrong-key "Nothing written" refusal (now a
+  load-bearing string); trailing sections renumbered.
+- `03`: flow 6 — the CI pipeline sequence diagram.
+- `00`: grounding read 7 (tabletop 11 + template; F5 for P1 builders, F6 + the attach
+  stand-in for P9 builders).
+- `04`: dead-host fixture requirement for F5 ("the error must not say 'no named ref'").
+- `07`: composing row links the committed workflow template.
+
+## 2026-08-19 — r11: tabletop 11 executed (simulated hosting)
+
+**Trigger:** maintainer — *"No need to create the repos, just simulate it and update the
+dev pack."* Executed all ten steps of the brief with real CLI/crypto and simulated
+GitHub/Actions/Pages; `11__tabletop__publishing-pipelines.md` is the transcript, and
+`templates/github-pages.yml` is now a committed artifact.
+
+- **Confirmed executed:** the keyed-backup leak (zip carries `VAULT-KEY`; `local/`-only
+  ignore stages it, canonical set excludes it); the attach drill (wrong key refused with
+  nothing written; read-only and read-write both open the vault); the workflow file swept
+  into the vault as content and arriving in the reader's clone (F1-generalisation policy:
+  ACCEPTED, demonstrated); the full public pipeline with a zero-secret runner; R3 key-file
+  drop on a forgotten `--visibility`; the keyless staleness check catching a forgotten
+  republish; rollback via `git revert` (the site follows the **repo** timeline, not the
+  vault's); provider-identical clone-backs (I1).
+- **New findings:** **F5** — a dead host is reported as "vault has no named ref"
+  (connection errors must raise loudly; only 404 means absent → P1 acceptance). **F6** —
+  attach must be mode-exclusive and `Schema__Clone_Mode`-exact; the shipped clone-mode
+  guard enforces this correctly (→ P9 acceptance). **F7** — `git checkout -- refs/` after
+  a successful push reverts the head and deploys a stale site (safe ordering now in the
+  workflow template). **F2 refined:** the pre-flight rewrites the local ref to server
+  bytes on a refused push only when bytes differ (repro sharpened for the fix).
+- Template hardened: fork guard file-tests the key glob (unmatched globs are truthy
+  literals); F2/F7 ordering comment. `simulate_publish.py` gains the read-only-clone path
+  (publish from `clone_mode.json` — C7 through the attach route); `attach_simulated.py`
+  added (P9's stand-in, named for retirement).
+- **Still owed to a real-GitHub run:** Pages propagation timing, secret masking in logs,
+  measured ACAO/cache-control/dot-dir rows for real providers.
+
+## 2026-08-19 — r10: the publish folder is committable; the gitignore that matters guards keys
+
+**Trigger:** maintainer — *"why are we `.gitignore *`-ing `.sg_vault/publish`? If that
+folder is not on GitHub, how can the corresponding GH Action know what to do?"* — plus the
+tabletop-11 brief from the nhi.sgit.ai session (landed as
+`11__tabletop-brief__publishing-pipelines.md`), whose §5 edits stand on code inspection.
+
+- **The publish folder's `*` self-ignore is removed.** In the canonical one-repo flow the
+  folder must reach GitHub — it is what the Pages workflow deploys — and after r9 it is a
+  few KB of generated plaintext with nothing sensitive (the key file is prompt-gated).
+  Plain `git add -A` now includes it; the `git add -f` step dies. Mockup surface counts
+  revert; the manifest example drops the `.gitignore` entry.
+- **The canonical repo-side `.gitignore` is three lines, and it guards key material**
+  (decision 13): `.sg_vault/local/` (live secrets), **`.sg_vault/backups/`** (backup zips
+  contain `bare/` + local config and, with `--include-key`, **the vault key itself as
+  `VAULT-KEY`** — verified in `Vault__Backup.py`), `.sg_vault_new/` (a second store incl.
+  its own secrets during a move). Tabletop 10's `local/`-only ignore was insufficient;
+  correction note added there. sgit should emit/maintain the set; `backup` in a git work
+  tree without the `backups/` line warns (new load-bearing string in `02`).
+- **The attach gap is executed evidence** (decision 14, **new phase P9**):
+  `sgit clone-headless` refuses inside a vault and `sgit status` errors on the missing
+  `local/vault_key` — no shipped command binds a key to a fresh git checkout of a one-repo
+  vault. `sgit vault attach` specified with acceptance criteria; it retires the tabletop
+  lab script.
+- **Decision 15 opened:** the deploy workflow comes from a **CLI generator** (recommended)
+  with the human-readable copy on sgit.ai — a docs-page copy cannot track publish
+  semantics that changed nine times in three days.
+- New rule in `00`: **key material never lands in git**; `04` gains the literal ignore-set
+  assertion and the keyed-backup cell.
+
 ## 2026-08-19 — r9: publish no longer copies the ciphertext
 
 **Trigger:** maintainer, reading `01` §3 after r8 — the

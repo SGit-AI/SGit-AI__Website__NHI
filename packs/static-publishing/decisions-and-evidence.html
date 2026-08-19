@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>06 — Decisions &amp; evidence · Static Publishing, sgit vault serve, and the Publishing Matrix · packs · nhi.sgit.ai</title>
-<meta name="description" content="Twelve open decisions for the maintainer, and the measured evidence that re-scoped the spec. Part of the Static Publishing, sgit vault serve, and the Publishing Matrix dev pack — summary, key concepts and the full document, readable in-page.">
+<meta name="description" content="Fifteen open decisions for the maintainer, and the measured evidence that re-scoped the spec. Part of the Static Publishing, sgit vault serve, and the Publishing Matrix dev pack — summary, key concepts and the full document, readable in-page.">
 <link rel="canonical" href="https://nhi.sgit.ai/packs/static-publishing/decisions-and-evidence.html">
 <link rel="stylesheet" href="../../assets/site.css">
 </head>
@@ -13,7 +13,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../../index.html">nhi<span>.sgit.ai</span></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../../admin/versions.html" title="Site release history">v0.1.18</a>
+  <a class="ver" href="../../admin/versions.html" title="Site release history">v0.1.19</a>
   <a class="nl" href="../../thesis/index.html">Thesis</a>
   <a class="nl" href="../../hope/index.html">Hope</a>
   <a class="nl" href="../../method/index.html">Method</a>
@@ -35,15 +35,15 @@
 
 <div class="docmeta">
   <span class="k">Pack</span><span class="v"><a href="index.html">Static Publishing, `sgit vault serve`, and the Publishing Matrix</a></span>
-  <span class="k">Role</span><span class="v">Twelve open decisions for the maintainer, and the measured evidence that re-scoped the spec</span>
+  <span class="k">Role</span><span class="v">Fifteen open decisions for the maintainer, and the measured evidence that re-scoped the spec</span>
   <span class="k">Date</span><span class="v">17–19 August 2026 · pack v0</span>
   <span class="k">Origin</span><span class="v">Architect-review agent, SGit-AI__CLI repo</span>
   <span class="k">Source</span><span class="v"><a href="src/06__decisions-and-evidence.md">raw markdown</a> · <a href="https://github.com/SGit-AI/SGit-AI__CLI/blob/claude/sgit-architect-agent-review-3tl5ti/team/explorer/dev/impl-plans/08/17/static-publishing/06__decisions-and-evidence.md">original on GitHub</a></span>
-  <span class="k">Captured</span><span class="v">19 August 2026, at commit <a href="https://github.com/SGit-AI/SGit-AI__CLI/commit/a1d5ce6ce5e681ab37aa6875a9ac76629d3b1e98"><code>a1d5ce6</code></a> — the raw file under <code>src/</code> is byte-identical to that commit</span>
+  <span class="k">Captured</span><span class="v">19 August 2026, at commit <a href="https://github.com/SGit-AI/SGit-AI__CLI/commit/a7fb3f5af9f84b0c62024b25e8332c0362b11d50"><code>a7fb3f5</code></a> — the raw file under <code>src/</code> is byte-identical to that commit</span>
 </div>
 
 <h2 id="summary">Summary</h2>
-<p>The maintainer's file: twelve decisions (up from six across the 18–19 Aug revisions — decision 11 making plaintext expansion a future sgit vault expand command, decision 12 making publish emit the surface only, with no ciphertext copy), each with a recommendation, none blocking P1/P3. And the evidence base that changed the spec: GitHub Pages sends access-control-allow-origin: * by default, so key-on-another-origin moved from 'probably unavailable' to 'supported, asserted at run time'; custody without access structurally requires a manifest, because every filename derives from the read key; object ids are sha256(ciphertext) with random IVs, so two vaults holding the same document share zero object ids — a fork is unlinkable; and Swagger UI measures 2.7× the vault it documents, which reversed decision 7 to a CDN-with-SRI default.</p>
+<p>The maintainer's file: fifteen decisions (up from six across the 18–19 Aug revisions — 11: plaintext expansion becomes a future sgit vault expand; 12: publish emits the surface only, no ciphertext copy; 13: the canonical three-line repo-side .gitignore guarding key material, emitted by sgit; 14: the sgit vault attach command; 15: the deploy workflow comes from a CLI generator, with the human-readable copy on sgit.ai), each with a recommendation, none blocking P1/P3. And the evidence base that changed the spec: GitHub Pages sends access-control-allow-origin: * by default, so key-on-another-origin moved from 'probably unavailable' to 'supported, asserted at run time'; custody without access structurally requires a manifest, because every filename derives from the read key; object ids are sha256(ciphertext) with random IVs, so two vaults holding the same document share zero object ids — a fork is unlinkable; and Swagger UI measures 2.7× the vault it documents, which reversed decision 7 to a CDN-with-SRI default.</p>
 
 <h2 id="concepts">Key concepts</h2>
 <ul>
@@ -73,7 +73,7 @@
     <div class="brandline">nhi<span>.sgit.ai</span></div>
     <p>Non-human identity, blast radius and agentic security — anchored by the two-populations thesis. All content CC BY 4.0.</p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project. <a href="../../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../../admin/versions.html">v0.1.18</a> · <a href="../../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../../admin/versions.html">v0.1.19</a> · <a href="../../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The research</h4>

@@ -8,7 +8,7 @@
 > thesis with evidence, a reproducible research method, dated option assessments, and a
 > curated collection of the underlying corpus.
 
-Site version: v0.1.18 (19 August 2026). Published by the sgit project — participant
+Site version: v0.1.19 (19 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## The research
@@ -77,7 +77,7 @@ disclosure at /about/participant.html. All content CC BY 4.0.
 - [Packs hub](https://nhi.sgit.ai/packs/index.html): implementation-plan packs authored
   by dev agents, captured verbatim with a reader page per document.
 - [Static publishing pack](https://nhi.sgit.ai/packs/static-publishing/index.html)
-  (17–19 Aug 2026, build spec; captured at SGit-AI__CLI commit a1d5ce6): a vault
+  (17–19 Aug 2026, build spec; captured at SGit-AI__CLI commit a7fb3f5): a vault
   publishes to a folder — ciphertext plus a declared plaintext surface — readable by a
   browser via a loader and by `sgit clone` over plain GETs from any static host, no
   server, no auth. Six invariants (byte-identical ciphertext everywhere; the key never
@@ -109,8 +109,23 @@ disclosure at /about/participant.html. All content CC BY 4.0.
   is ever copied, output is O(KB) for any vault, and the served root is composed at
   deployment (co-located, serving the repo itself with zero copies, or assembled by a
   keyless copy of bare/ into place; sgit vault serve composes virtually by routing).
-  The pack keeps its own change-control log
-  (https://nhi.sgit.ai/packs/static-publishing/changelog.html): r0–r9, newest first,
+  r10–r12 close a cross-session loop: a tabletop brief authored in the nhi.sgit.ai
+  working session (https://nhi.sgit.ai/packs/static-publishing/pipelines-brief.html)
+  pre-registered two code-inspection findings — .sg_vault/backups/ zips can carry the
+  vault key itself, so the canonical repo-side .gitignore is three lines (local/,
+  backups/, .sg_vault_new/), and no shipped command binds a key to a fresh git checkout
+  (now phase P9, sgit vault attach) — and a SECOND executed tabletop
+  (https://nhi.sgit.ai/packs/static-publishing/tabletop-pipelines.html) ran the full
+  CI story in simulated-hosting mode: canonical gitignore proven by staging-then-excluding
+  a keyed backup, zero-secret public pipeline, fork PRs skipping legibly, rollback as git
+  revert (the site follows the repo timeline, not the vault's), and new findings F5 (a
+  dead host reads as an empty vault — only a 404 means absent), F6 (attach must be
+  mode-exclusive and schema-exact) and F7 (mis-ordered ref restore deploys a stale site).
+  The publish folder's self-ignore is gone (r10) — it is what the Pages workflow deploys —
+  and the canonical workflow lives as a committed template
+  (https://nhi.sgit.ai/packs/static-publishing/src/templates/github-pages.yml). Fifteen
+  maintainer decisions. The pack keeps its own change-control log
+  (https://nhi.sgit.ai/packs/static-publishing/changelog.html): r0–r12, newest first,
   every revision with its trigger and the decisions it moved. Raw sources under
   https://nhi.sgit.ai/packs/static-publishing/src/
 - [The fractal forge pack](https://nhi.sgit.ai/packs/hub-sgit-ai/index.html)
