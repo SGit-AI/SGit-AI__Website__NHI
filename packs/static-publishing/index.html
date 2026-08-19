@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Static Publishing, sgit vault serve, and the Publishing Matrix — dev pack · nhi.sgit.ai</title>
-<meta name="description" content="A build-spec pack, readable in-page: the executable dev brief, architecture, commands &amp; UX, flows, invariants &amp; tests, phases, publish-target rules, published API docs, the asset-origin question, and decisions &amp; evidence.">
+<meta name="description" content="A build-spec pack, readable in-page: the executable dev brief, architecture, commands &amp; UX, flows, invariants &amp; tests, phases, the publish output, published API docs, the asset-origin question, decisions &amp; evidence, and an executed end-to-end tabletop exercise.">
 <link rel="canonical" href="https://nhi.sgit.ai/packs/static-publishing/index.html">
 <link rel="stylesheet" href="../../assets/site.css">
 </head>
@@ -13,7 +13,7 @@
 <nav class="site"><div class="row">
   <a class="brand" href="../../index.html">nhi<span>.sgit.ai</span></a>
   <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../../admin/versions.html" title="Site release history">v0.1.11</a>
+  <a class="ver" href="../../admin/versions.html" title="Site release history">v0.1.12</a>
   <a class="nl" href="../../thesis/index.html">Thesis</a>
   <a class="nl" href="../../hope/index.html">Hope</a>
   <a class="nl" href="../../method/index.html">Method</a>
@@ -34,7 +34,7 @@
 <h1>Static Publishing, `sgit vault serve`, and the Publishing Matrix</h1>
 <p class="lead">A vault publishes to a folder: encrypted objects plus a small, declared plaintext surface (loader, cover, manifest, and — only when the vault is deliberately public — the read key). That folder is readable by a browser through the loader and by <code>sgit clone</code> over ordinary GETs, from any HTTP host or a local folder, with no server and no auth. <code>sgit vault serve</code> exists because browsers give local files an opaque origin — the one case everybody tries first, double-clicking <code>index.html</code>, cannot work without it.</p>
 
-<div class="note"><b>Origin.</b> Authored by an Architect-review agent in the SGit-AI__CLI repo (branch claude/sgit-architect-agent-review-3tl5ti), 17 August 2026; revised 18–19 August with three new documents (publish target, API docs, asset origin) after maintainer review. Status: build spec, ready to implement — ten decisions await the maintainer; Phases 1 and 3 are unblocked. Captured 19 August 2026 at commit <a href="https://github.com/SGit-AI/SGit-AI__CLI/commit/65ebfbd17c5ef1488b747def5560960b5ca19b83"><code>65ebfbd</code></a>: the raw sources under <code>src/</code> are byte-identical to that commit's tree — verify with a diff against it. Each document below has a reader page with the same apparatus as the site's <a href="../../documents/index.html">documents</a>.</div>
+<div class="note"><b>Origin.</b> Authored by an Architect-review agent in the SGit-AI__CLI repo (branch claude/sgit-architect-agent-review-3tl5ti), 17 August 2026; revised 18–19 August through maintainer review — three added documents (publish output, API docs, asset origin), the no-target publish decision, and an executed end-to-end tabletop exercise. Status: build spec, ready to implement — Phases 1 and 3 are unblocked. Captured 19 August 2026 at commit <a href="https://github.com/SGit-AI/SGit-AI__CLI/commit/2cedd9a503b8782486b15993c9a61d9f856ccf91"><code>2cedd9a</code></a>: the raw sources under <code>src/</code> are byte-identical to that commit's tree — verify with a diff against it. Each document below has a reader page with the same apparatus as the site's <a href="../../documents/index.html">documents</a>.</div>
 
 <h2 id="files">The documents</h2>
 <div class="tablewrap"><table>
@@ -47,9 +47,10 @@
     <tr><td><a href="invariants-and-tests.html"><b>04 — Invariants &amp; tests</b></a></td><td>Six invariants asserted everywhere + fourteen test cells, collapsed from 240 combinations</td></tr>
     <tr><td><a href="implementation-phases.html"><b>05 — Implementation phases</b></a></td><td>P1–P7 (plus P4b, published API docs) with file lists, acceptance criteria and risk; start with P1 + P3</td></tr>
     <tr><td><a href="decisions-and-evidence.html"><b>06 — Decisions &amp; evidence</b></a></td><td>Ten open decisions for the maintainer, and the measured evidence that re-scoped the spec</td></tr>
-    <tr><td><a href="publish-target.html"><b>07 — Where a published folder may live</b></a></td><td>Added 18 Aug from the maintainer's observation: the amplification loop, the containment rule, and the safe default</td></tr>
+    <tr><td><a href="publish-target.html"><b>07 — The publish output</b></a></td><td>Revised 19 Aug: publish takes no target — one fixed folder, target-agnostic, and the override question resolved at deployment</td></tr>
     <tr><td><a href="api-docs.html"><b>08 — Published API docs</b></a></td><td>Added 18 Aug from the maintainer's proposal: openapi.json generated from the manifest, and Swagger UI as CDN-pinned or bundled</td></tr>
     <tr><td><a href="asset-origin.html"><b>09 — A first-party asset origin</b></a></td><td>Added 19 Aug from the maintainer's static.sgit.ai proposal: yes to the asset site, no to Pages, and never on the reader's critical path</td></tr>
+    <tr><td><a href="tabletop-github-pages.html"><b>10 — Tabletop: one repo carrying the key, the files, and the vault</b></a></td><td>An executed end-to-end tabletop exercise: the maintainer's scenario run for real with the shipped CLI, producing four live findings</td></tr>
   </tbody>
 </table></div>
 
@@ -71,7 +72,7 @@
     <div class="brandline">nhi<span>.sgit.ai</span></div>
     <p>Non-human identity, blast radius and agentic security — anchored by the two-populations thesis. All content CC BY 4.0.</p>
     <p class="partnote">⚠ Participant disclosure: published by the sgit project. <a href="../../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../../admin/versions.html">v0.1.11</a> · <a href="../../admin/index.html">engineering</a></p>
+    <p class="verline">site <a href="../../admin/versions.html">v0.1.12</a> · <a href="../../admin/index.html">engineering</a></p>
   </div>
   <div>
     <h4>The research</h4>

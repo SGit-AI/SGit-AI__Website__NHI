@@ -77,7 +77,7 @@ graph TD
 ## 3. The published layout
 
 ```
-<output>/
+.sg_vault/publish/          <- the only output; there is no target argument (07)
 ├── index.html                              PLAINTEXT  loader (generated, byte-identical)
 ├── cover.json                              PLAINTEXT  title/description/image/updated/access/public
 ├── manifest.json                           PLAINTEXT  REQUIRED — see §4
@@ -146,16 +146,24 @@ over loose objects.
 
 ## 5. The plaintext-surface rule
 
-**Fixed names in code. Never patterns.** If the surface were decided by matching vault
-content, anyone who can write to the vault — a collaborator, a compromised agent — could
-move a file into the plaintext surface by naming it. An explicit allow-list cannot be
-manipulated from inside the vault's content.
+**Fixed names in code. Never patterns, never a folder emitted wholesale.** If the surface
+were decided by matching vault content, anyone who can write to the vault — a collaborator, a
+compromised agent — could move a file into the plaintext surface by naming it. An explicit
+allow-list cannot be widened from inside the vault's content: a vault may *replace*
+`index.html`, it can never *add* `secrets.txt`.
 
-**The loader is always sgit's bundled template.** If the vault also contains a loader file,
-it is ordinary content: encrypted, and expanded only with a key. This makes invariant 4
-(byte-identical loader) true *by construction* rather than by discipline, and keeps
-"generated rather than hand-edited" honest. `sgit vault loader --install` may commit a copy
-into the vault so it travels with folder copies, but **publish never trusts it**.
+**The loader emitted by `publish` is always sgit's bundled template.** A vault may also
+contain its own root `index.html`, but at publish time that file is **ciphertext like
+everything else**, so it cannot influence the output — invariant 4 is true by construction, and
+`.sg_vault/publish/` holds no vault content at all.
+
+The two files meet only at **deployment**, and only when the deployer holds the key and expands
+plaintext. There the vault's own page takes precedence and simply replaces the loader — in a
+fully expanded deployment every file is already plaintext, so there is nothing left for a
+loader to do (`07` §3).
+
+> **The allow-list decides what `publish` may emit as plaintext. Expansion is a separate,
+> key-holding, deployment-time act.**
 
 ## 6. Key discovery in the loader
 

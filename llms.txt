@@ -8,7 +8,7 @@
 > thesis with evidence, a reproducible research method, dated option assessments, and a
 > curated collection of the underlying corpus.
 
-Site version: v0.1.11 (19 August 2026). Published by the sgit project — participant
+Site version: v0.1.12 (19 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## The research
@@ -77,7 +77,7 @@ disclosure at /about/participant.html. All content CC BY 4.0.
 - [Packs hub](https://nhi.sgit.ai/packs/index.html): implementation-plan packs authored
   by dev agents, captured verbatim with a reader page per document.
 - [Static publishing pack](https://nhi.sgit.ai/packs/static-publishing/index.html)
-  (17–19 Aug 2026, build spec; captured at SGit-AI__CLI commit 65ebfbd): a vault
+  (17–19 Aug 2026, build spec; captured at SGit-AI__CLI commit 2cedd9a): a vault
   publishes to a folder — ciphertext plus a declared plaintext surface — readable by a
   browser via a loader and by `sgit clone` over plain GETs from any static host, no
   server, no auth. Six invariants (byte-identical ciphertext everywhere; the key never
@@ -90,8 +90,23 @@ disclosure at /about/participant.html. All content CC BY 4.0.
   publish-into-work-tree amplification loop, refused before a byte is written), published
   API docs (openapi.json generated from the manifest; Swagger UI CDN-pinned with SRI or
   bundled), and the first-party asset origin (publish-time source yes, read-time origin
-  never — a zero-knowledge product cannot operate the beacon every reader pings). Raw
-  sources under https://nhi.sgit.ai/packs/static-publishing/src/
+  never — a zero-knowledge product cannot operate the beacon every reader pings). The
+  19 Aug revision then removed the publish target argument entirely (one fixed folder,
+  .sg_vault/publish/, target-agnostic; deployment is a separate act) and added an
+  EXECUTED tabletop exercise
+  (https://nhi.sgit.ai/packs/static-publishing/tabletop-github-pages.html): the agent ran
+  the maintainer's scenario — one GitHub repo carrying the public read key, the decrypted
+  files, and the encrypted vault store at once — with the real shipped CLI end to end,
+  playing author/host/reader/archivist/CI-runner, simulating only the unbuilt publish
+  command and GitHub's hosting. Measured results: publish → push is a no-op (the
+  amplification loop is impossible by construction); git content-addressing dedupes all
+  17 ciphertext projection copies; the reader's static clone matches the author's tree;
+  keyless custody verifies content-addressed objects with zero key material; a public
+  vault's CI can republish with zero secrets from the committed read-key filename. Four
+  live findings (F1–F4), including: a repo that commits the vault store is already
+  statically clonable with shipped code — publish adds the browser, custody and key
+  discovery, not clonability. Raw sources under
+  https://nhi.sgit.ai/packs/static-publishing/src/
 - [The fractal forge pack](https://nhi.sgit.ai/packs/hub-sgit-ai/index.html)
   (18 Aug 2026, design pack; captured at SGit-AI__CLI commit fbebe0c): hub.sgit.ai as a
   forge whose application layer is the

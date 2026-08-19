@@ -17,15 +17,15 @@ SITE_VERSION = (ROOT / "admin/build/version.txt").read_text().strip()
 PACKS = [
  dict(slug="static-publishing",
   name="Static Publishing, `sgit vault serve`, and the Publishing Matrix",
-  origin="Authored by an Architect-review agent in the SGit-AI__CLI repo (branch claude/sgit-architect-agent-review-3tl5ti), 17 August 2026; revised 18–19 August with three new documents (publish target, API docs, asset origin) after maintainer review. Status: build spec, ready to implement — ten decisions await the maintainer; Phases 1 and 3 are unblocked.",
+  origin="Authored by an Architect-review agent in the SGit-AI__CLI repo (branch claude/sgit-architect-agent-review-3tl5ti), 17 August 2026; revised 18–19 August through maintainer review — three added documents (publish output, API docs, asset origin), the no-target publish decision, and an executed end-to-end tabletop exercise. Status: build spec, ready to implement — Phases 1 and 3 are unblocked.",
   date="17–19 August 2026 · pack v0",
   origin_short="Architect-review agent, SGit-AI__CLI repo",
   gh_base="https://github.com/SGit-AI/SGit-AI__CLI/blob/claude/sgit-architect-agent-review-3tl5ti/team/explorer/dev/impl-plans/08/17/static-publishing/",
-  commit="65ebfbd", captured="19 August 2026",
-  commit_url="https://github.com/SGit-AI/SGit-AI__CLI/commit/65ebfbd17c5ef1488b747def5560960b5ca19b83",
+  commit="2cedd9a", captured="19 August 2026",
+  commit_url="https://github.com/SGit-AI/SGit-AI__CLI/commit/2cedd9a503b8782486b15993c9a61d9f856ccf91",
   row_date="17–19 Aug 2026 · build spec",
-  one_line="Publish a vault to any static host or folder; browse and clone it with no server and no auth. 11 documents.",
-  meta_desc="A build-spec pack, readable in-page: the executable dev brief, architecture, commands &amp; UX, flows, invariants &amp; tests, phases, publish-target rules, published API docs, the asset-origin question, and decisions &amp; evidence.",
+  one_line="Publish a vault to any static host or folder; browse and clone it with no server and no auth. 12 documents, including an executed tabletop exercise.",
+  meta_desc="A build-spec pack, readable in-page: the executable dev brief, architecture, commands &amp; UX, flows, invariants &amp; tests, phases, the publish output, published API docs, the asset-origin question, decisions &amp; evidence, and an executed end-to-end tabletop exercise.",
   readme="README.md",
   three_sentences="A vault publishes to a folder: encrypted objects plus a small, declared plaintext surface (loader, cover, manifest, and — only when the vault is deliberately public — the read key). That folder is readable by a browser through the loader and by <code>sgit clone</code> over ordinary GETs, from any HTTP host or a local folder, with no server and no auth. <code>sgit vault serve</code> exists because browsers give local files an opaque origin — the one case everybody tries first, double-clicking <code>index.html</code>, cannot work without it.",
   site_relevance="Two of this pack's measured findings connect straight to claims this site publishes: <b>custody without access requires a manifest</b> (every filename derives from the read key, so a keyless client cannot name a single file — sharpening the <a href='../../pki/registry-rules.html#vaults'>PKI section's custody row</a>), and <b>object ids hash ciphertext with random IVs, so a fork is unlinkable</b> — relevant to the <a href='../../collection/index.html#attribute'>attribution question</a>. The published-folder model is also the substrate the <a href='../../documents/serialised-pr.html'>serialised pull request</a> workflow rides on.",
@@ -62,7 +62,7 @@ PACKS = [
    dict(slug="commands-and-ux", file="02__commands-and-ux.md",
     title="02 — Commands & UX",
     role="The command surface and every CLI / loader mockup — intended user-facing output, word for word",
-    summary="Every block is the intended user-facing output, to be matched word for word — several strings are load-bearing because they are the only place a user learns why an irreversible thing is irreversible. The publish baseline is private-and-ciphertext-only; publishing the read key requires --visibility public and a stated-consequence confirmation: anyone with the URL can read every file, now and in every future publish, and copies cannot be recalled. The revision adds the publish-target refusals (a target inside the work tree exits non-zero and writes nothing) and the API-docs flags with the CDN default.",
+    summary="Every block is the intended user-facing output, to be matched word for word — several strings are load-bearing because they are the only place a user learns why an irreversible thing is irreversible. The publish baseline is private-and-ciphertext-only; publishing the read key requires --visibility public and a stated-consequence confirmation: anyone with the URL can read every file, now and in every future publish, and copies cannot be recalled. The 19 Aug revision removes the target argument — publish always writes .sg_vault/publish/ and deployment is a separate act — and adds the API-docs flags with the CDN default.",
     concepts=[
      ("Consequence stated, not implied", None, "the --visibility public confirmation is the disclosure moment, designed as such"),
      ("The safe default", None, "bare visibility: no key published, readers supply their own"),
@@ -122,18 +122,18 @@ PACKS = [
      "Everything measured is reproducible from named scripts — the same dated, re-runnable discipline this site uses.",
     ]),
    dict(slug="publish-target", file="07__publish-target.md",
-    title="07 — Where a published folder may live",
-    role="Added 18 Aug from the maintainer's observation: the amplification loop, the containment rule, and the safe default",
-    summary="The maintainer spotted that publishing into the vault's own work tree must not be allowed — and the pack shows it is worse than noise: published ciphertext becomes vault content on the next push, is re-encrypted and republished, and the store roughly doubles on every cycle, silently. Plus three more failures: a --force on an ancestor directory would delete .sg_vault itself; the published read key becomes tracked vault content; and a branch switch eats the output folder. The rule is checked on realpath before anything is written: no containment in either direction, with .sg_vault/publish/ as the always-ignored default for local preview, and an escape hatch that is user-declared (a target the vault's own ignore rules already cover), never magic.",
+    title="07 — The publish output",
+    role="Revised 19 Aug: publish takes no target — one fixed folder, target-agnostic, and the override question resolved at deployment",
+    summary="The first version of this file was a rule policing where an output directory may live — the maintainer removed the question instead: sgit publish takes no target, writes .sg_vault/publish/ and nothing else on disk, and deployment is a separate act. Five things disappear at once: the containment rule, the --force-on-an-ancestor disaster, the amplification loop (gone by construction, since .sg_vault is always ignored), the escape hatch, and the naming decision. The folder is a finished, target-agnostic artefact — no CNAME, no .nojekyll, no netlify.toml; those belong to the deployer — which is what keeps the published bytes identical regardless of destination. And the two index.html files are kept apart at last: the loader is generated plaintext, always sgit's template; the vault's own index.html is encrypted content — the choice between them happens at deployment, where decryption creates the second candidate, and the decrypted page wins.",
     concepts=[
-     ("The amplification loop", None, "publish → push → publish doubles the store each cycle with no error — the same silent-compounding shape as every bug the project has hunted"),
-     ("Refuse containment both ways", None, "a target inside the work tree amplifies; a target that is an ancestor plus --force deletes the vault — different failures, both refused before a byte is written"),
-     ("No new implicit ignore rule", "decisions-and-evidence.html", "adding .site to the always-ignored set would silently drop tracked content from existing vaults on upgrade — a data-loss-shaped change refused on principle"),
+     ("Remove the question rather than police it", None, "no target argument means no containment rule, no refusal messages, no escape hatch — and the amplification loop is impossible by construction, not by rule"),
+     ("A deployer can be dumb", None, "rsync, s3 sync, git add, or a static server pointed at the folder — nothing needs to interpret the contents, because nothing target-specific is in them"),
+     ("The two index.html files", "tabletop-github-pages.html", "the loader (generated, plaintext, byte-identical everywhere) versus the vault's own page (ordinary encrypted content) — conflating them was the earlier framing's one real error"),
     ],
     ideas=[
-     "The regression test is behavioural: publish, then push, then assert the object count is unchanged (now invariant I6).",
-     "The escape hatch is declared in a visible, versioned file — someone who wants ./docs published in place adds it to .gitignore, and it works because they said so.",
-     "Refusal messages name all three fixes and write nothing.",
+     ".sg_vault/publish/ contains no vault content at all, which is why it is safe to commit to a public repository even for a private vault.",
+     "The secondary vault.html loader copy was dropped: it guarded a partial-expansion mode that does not exist.",
+     "manifest.json records which file ended up at the served root and its hash, so the choice is auditable from the artefact rather than from console history.",
     ]),
    dict(slug="api-docs", file="08__api-docs.md",
     title="08 — Published API docs",
@@ -162,6 +162,26 @@ PACKS = [
      "The line is drawn by whether the consuming page may hold vault key material — sgit.ai and hub.sgit.ai yes, any published vault folder no.",
      "'It's just a logo' is exactly how a first-party origin ends up on every reader's critical path.",
      "Publish the SRI hash next to every asset, so consumers verify the mirror against upstream instead of trusting it.",
+    ]),
+   dict(slug="tabletop-github-pages", file="10__tabletop__github-pages-one-repo.md",
+    title="10 — Tabletop: one repo carrying the key, the files, and the vault",
+    role="An executed end-to-end tabletop exercise: the maintainer's scenario run for real with the shipped CLI, producing four live findings",
+    explainer=("What is happening in this document — and why it is unusual", [
+     "A <b>tabletop exercise</b> is a security-practice staple: before you build or deploy something, you walk the scenario end to end with every party at the table — here an author, a host (GitHub), a reader, an archivist who refuses keys, and a CI runner — and find out where the plan breaks while it is still cheap to fix. Normally a tabletop is a conversation: people around a whiteboard saying &ldquo;the author would now push, and we assume the push succeeds&rdquo;.",
+     "This one is different, and it is worth pausing on. It was run by the development agent (an LLM) <b>inside the real codebase, and it is executed, not imagined</b>. Every <code>sgit</code> command in the document actually ran — <code>init</code>, <code>commit</code>, <code>push</code>, <code>derive-keys</code>, key classification, the read-only static clone, decryption, verification — against a real local server, with the agent playing all five roles and pasting the genuine output. Only two things are simulated, and the document marks them every time they appear: the <code>sgit publish</code> command (not built yet — its stand-in uses the product's real cryptography classes) and GitHub's hosting (a local git repo plus a plain HTTP server).",
+     "This is not a common use of LLMs. Agents are mostly asked to write code or write prose; here the agent used the codebase as a <b>laboratory</b> — it designed the experiment, executed it, measured what happened (git blob dedup counts, cache lifetimes, object tallies), and reported findings that reading the specification could not have produced. Four live findings (F1–F4) came out of the run, one of which reversed an assumption the pack itself held: a repo that commits the vault store is <em>already</em> statically clonable with shipped code, no publish step involved. The CI drill even fails first — a fresh checkout holds no key material — and the recovery (a full republish from the committed public read key alone, zero secrets) was demonstrated rather than asserted.",
+     "What makes the result trustworthy is the discipline around it: every simulated element is labelled at each appearance, every claim is tied to real output, and the lab scripts are committed so the whole exercise re-runs. The design was tested before it was built — the same dated, re-runnable, evidence-over-assumption practice the rest of this site argues for, applied by an agent to its own team's specification.",
+    ]),
+    summary="The maintainer posed the scenario — one GitHub repo, served by Pages, carrying all three at once: the public read key, the decrypted files, and the encrypted vault store with its history — and the agent ran it rather than reasoning about it. Results, all from real runs: publish → push is a no-op, so the amplification loop is impossible by construction (invariant I6 checked with the shipped CLI); git content-addressing makes the double-commit nearly free — all 17 ciphertext projection copies share blobs with the store; the reader's clone over plain GETs comes back identical to the author's tree in both deployment modes; keyless custody verified every content-addressed object with zero key material; and the ordered commit list needed only the read key, so sgit publish never needs the vault key. The final table records what every party ends up holding — and that the one deliberate act that made the host able to read was publishing the key.",
+    concepts=[
+     ("Executed, not imagined", None, "every command block is real shipped-CLI output; the two simulated stand-ins (publish, GitHub hosting) are marked at every appearance and use the real crypto inside"),
+     ("F4: the repo is already a static vault", None, "the committed bare store cloned with no publish step involved — what publish adds is the browser, custody and key discovery, not clonability"),
+     ("The zero-secret CI republish", None, "a fresh checkout fails first (no key material — correct), then republishes from the committed public-read-key filename alone; a private vault's CI needs the read key as a secret and an explicit --visibility"),
+    ],
+    ideas=[
+     "Two systems ignore each other's private half mechanically: .git is in sgit's always-ignored set, .sg_vault/local/ is in .gitignore — and the tabletop caught the one leak (F1: the root .gitignore is itself vault content).",
+     "A refused push still rewrote mutable ref bytes (F2) — spurious git dirty states, filed as a code issue: the kind of bug only an executed exercise surfaces.",
+     "Pages' max-age=600 means a reader can see the old head ref for up to ten minutes after a redeploy; immutable objects are unaffected.",
     ]),
   ]),
  dict(slug="hub-sgit-ai",
@@ -372,7 +392,7 @@ DOC_PAGE = """<!doctype html>
   <span class="k">Source</span><span class="v"><a href="src/{file}">raw markdown</a> · <a href="{gh_base}{file}">original on GitHub</a></span>
   <span class="k">Captured</span><span class="v">{captured}, at commit <a href="{commit_url}"><code>{commit}</code></a> — the raw file under <code>src/</code> is byte-identical to that commit</span>
 </div>
-
+{explainer}
 <h2 id="summary">Summary</h2>
 <p>{summary}</p>
 
@@ -513,6 +533,14 @@ def concepts_li(items):
 def ideas_li(items):
     return "\n".join(f"  <li>{i}</li>" for i in items)
 
+def explainer_html(d):
+    ex = d.get("explainer")
+    if not ex:
+        return ""
+    title, paras = ex
+    body = "\n".join(f"<p>{p}</p>" for p in paras)
+    return f'\n<h2 id="explainer">{title}</h2>\n<div class="note">\n{body}\n</div>\n'
+
 section_rows = []
 for pack in PACKS:
     pdir = ROOT / "packs" / pack["slug"]
@@ -533,6 +561,7 @@ for pack in PACKS:
             pack_name=html.escape(pack["name"]), pack_name_plain=html.escape(plain),
             date=pack["date"], origin_short=pack["origin_short"], gh_base=pack["gh_base"],
             commit=pack["commit"], commit_url=pack["commit_url"], captured=pack["captured"],
+            explainer=explainer_html(d),
             role=d["role"], file=d["file"], summary=d["summary"],
             concepts=concepts_li(d["concepts"]), ideas=ideas_li(d["ideas"]),
             prev=prev, prev_label=html.escape(prev_label),
