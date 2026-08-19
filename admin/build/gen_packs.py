@@ -17,23 +17,25 @@ SITE_VERSION = (ROOT / "admin/build/version.txt").read_text().strip()
 PACKS = [
  dict(slug="static-publishing",
   name="Static Publishing, `sgit vault serve`, and the Publishing Matrix",
-  origin="Authored by an Architect-review agent in the SGit-AI__CLI repo (branch claude/sgit-architect-agent-review-3tl5ti), 17 August 2026. Status: build spec, ready to implement — six decisions await the maintainer; Phases 1 and 3 are unblocked.",
-  date="17 August 2026 · pack v0",
+  origin="Authored by an Architect-review agent in the SGit-AI__CLI repo (branch claude/sgit-architect-agent-review-3tl5ti), 17 August 2026; revised 18–19 August with three new documents (publish target, API docs, asset origin) after maintainer review. Status: build spec, ready to implement — ten decisions await the maintainer; Phases 1 and 3 are unblocked.",
+  date="17–19 August 2026 · pack v0",
   origin_short="Architect-review agent, SGit-AI__CLI repo",
   gh_base="https://github.com/SGit-AI/SGit-AI__CLI/blob/claude/sgit-architect-agent-review-3tl5ti/team/explorer/dev/impl-plans/08/17/static-publishing/",
-  row_date="17 Aug 2026 · build spec",
-  one_line="Publish a vault to any static host or folder; browse and clone it with no server and no auth. 8 documents.",
-  meta_desc="A build-spec pack, readable in-page: the executable dev brief, architecture, commands &amp; UX, flows, invariants &amp; tests, phases, and decisions &amp; evidence.",
+  commit="65ebfbd", captured="19 August 2026",
+  commit_url="https://github.com/SGit-AI/SGit-AI__CLI/commit/65ebfbd17c5ef1488b747def5560960b5ca19b83",
+  row_date="17–19 Aug 2026 · build spec",
+  one_line="Publish a vault to any static host or folder; browse and clone it with no server and no auth. 11 documents.",
+  meta_desc="A build-spec pack, readable in-page: the executable dev brief, architecture, commands &amp; UX, flows, invariants &amp; tests, phases, publish-target rules, published API docs, the asset-origin question, and decisions &amp; evidence.",
   readme="README.md",
   three_sentences="A vault publishes to a folder: encrypted objects plus a small, declared plaintext surface (loader, cover, manifest, and — only when the vault is deliberately public — the read key). That folder is readable by a browser through the loader and by <code>sgit clone</code> over ordinary GETs, from any HTTP host or a local folder, with no server and no auth. <code>sgit vault serve</code> exists because browsers give local files an opaque origin — the one case everybody tries first, double-clicking <code>index.html</code>, cannot work without it.",
   site_relevance="Two of this pack's measured findings connect straight to claims this site publishes: <b>custody without access requires a manifest</b> (every filename derives from the read key, so a keyless client cannot name a single file — sharpening the <a href='../../pki/registry-rules.html#vaults'>PKI section's custody row</a>), and <b>object ids hash ciphertext with random IVs, so a fork is unlinkable</b> — relevant to the <a href='../../collection/index.html#attribute'>attribution question</a>. The published-folder model is also the substrate the <a href='../../documents/serialised-pr.html'>serialised pull request</a> workflow rides on.",
   docs=[
    dict(slug="dev-brief", file="00__DEV-BRIEF.md",
     title="00 — The executable dev brief",
-    role="The brief a developer agent runs from: grounding reads, the five rules, per-phase tasks, definition of done",
-    summary="Written to be executed by a developer agent, not just read: the grounding reads in order, the five rules that override convenience, non-negotiable implementation constraints (fixed plaintext allow-list, fail-soft per object, unconditional hash verification, localhost-only serve, writes raise), a definition of done every phase must meet, and an explicit list of what is not the developer's to decide.",
+    role="The brief a developer agent runs from: grounding reads, the six rules, per-phase tasks, definition of done",
+    summary="Written to be executed by a developer agent, not just read: the grounding reads in order, the six rules that override convenience, non-negotiable implementation constraints (fixed plaintext allow-list, fail-soft per object, unconditional hash verification, localhost-only serve, writes raise), a definition of done every phase must meet, and an explicit list of what is not the developer's to decide. The 18–19 Aug revision added the sixth rule — publishing never changes the vault — and phase P4b for the published API docs.",
     concepts=[
-     ("The five rules", None, "byte-identical ciphertext everywhere; the key never reaches a server; keyless custody; byte-identical loader; plaintext only where the key is published"),
+     ("The six rules", None, "byte-identical ciphertext everywhere; the key never reaches a server; keyless custody; byte-identical loader; plaintext only where the key is published; publishing never changes the vault"),
      ("The plaintext allow-list", "architecture.html", "fixed in code, never pattern-derived — otherwise anyone who can write to the vault can move a file into the plaintext surface by naming it"),
      ("Not yours to decide", "decisions-and-evidence.html", "wire formats, key formats, the six open decisions, the loader's JavaScript"),
     ],
@@ -60,7 +62,7 @@ PACKS = [
    dict(slug="commands-and-ux", file="02__commands-and-ux.md",
     title="02 — Commands & UX",
     role="The command surface and every CLI / loader mockup — intended user-facing output, word for word",
-    summary="Every block is the intended user-facing output, to be matched word for word — several strings are load-bearing because they are the only place a user learns why an irreversible thing is irreversible. The publish baseline is private-and-ciphertext-only; publishing the read key requires --visibility public and a stated-consequence confirmation: anyone with the URL can read every file, now and in every future publish, and copies cannot be recalled.",
+    summary="Every block is the intended user-facing output, to be matched word for word — several strings are load-bearing because they are the only place a user learns why an irreversible thing is irreversible. The publish baseline is private-and-ciphertext-only; publishing the read key requires --visibility public and a stated-consequence confirmation: anyone with the URL can read every file, now and in every future publish, and copies cannot be recalled. The revision adds the publish-target refusals (a target inside the work tree exits non-zero and writes nothing) and the API-docs flags with the CDN default.",
     concepts=[
      ("Consequence stated, not implied", None, "the --visibility public confirmation is the disclosure moment, designed as such"),
      ("The safe default", None, "bare visibility: no key published, readers supply their own"),
@@ -83,24 +85,24 @@ PACKS = [
     ]),
    dict(slug="invariants-and-tests", file="04__invariants-and-tests.md",
     title="04 — Invariants & tests",
-    role="Five invariants asserted everywhere + fourteen test cells, collapsed from 240 combinations",
-    summary="Five dimensions produce 240 combinations, which is not a test plan; separating what must always hold from what genuinely varies collapses it to 5 invariant assertions applied in every cell, plus 14 cells. The invariants are behavioural checks, not code inspection — I2 asserts that no recorded request contained the key, rather than asserting the code doesn't send it. Two cells were re-scoped by measurement, and one (clone with no key at all) is structurally impossible by design.",
+    role="Six invariants asserted everywhere + fourteen test cells, collapsed from 240 combinations",
+    summary="Five dimensions produce 240 combinations, which is not a test plan; separating what must always hold from what genuinely varies collapses it to 6 invariant assertions applied in every cell, plus 14 cells — I6 (publishing never changes the vault: publish, push, assert the object count unchanged) was added in the 18 Aug revision to catch the amplification loop. The invariants are behavioural checks, not code inspection — I2 asserts that no recorded request contained the key, rather than asserting the code doesn't send it. Two cells were re-scoped by measurement, and one (clone with no key at all) is structurally impossible by design.",
     concepts=[
      ("Assert behaviour, not absence of code", None, "prove no request contained the key; don't restate the intent"),
      ("Structurally impossible ≠ untested", "decisions-and-evidence.html", "keyless clone can't name a file; the cell became mirror-with-manifest, with the no-manifest failure as part of the test"),
      ("Runtime-asserted platform facts", None, "cell 10 asserts the CORS header at run time, so a platform change fails the suite instead of quietly breaking the feature"),
     ],
     ideas=[
-     "240 combinations → 5 assertions + 14 cells is the test-design move worth stealing.",
+     "240 combinations → 6 assertions + 14 cells is the test-design move worth stealing.",
      "The fork round trip is the acceptance test.",
     ]),
    dict(slug="implementation-phases", file="05__implementation-phases.md",
     title="05 — Implementation phases",
-    role="P1–P7 with file lists, acceptance criteria and risk; start with P1 + P3",
-    summary="Seven independently shippable phases, each one PR with green suites and its own acceptance criteria. P1 (static read transport — promote the spike, don't redesign it) and P3 (vault serve) start now: demonstrable value with zero commitment to the publish protocol still being decided. Acceptance criteria are concrete down to the trap: add a >4 MB fixture, because small fixtures will not catch the large-blob path.",
+    role="P1–P7 (plus P4b, published API docs) with file lists, acceptance criteria and risk; start with P1 + P3",
+    summary="Independently shippable phases, each one PR with green suites and its own acceptance criteria. P1 (static read transport — promote the spike, don't redesign it) and P3 (vault serve) start now: demonstrable value with zero commitment to the publish protocol still being decided; the revision adds P4b, the published API docs, gated on P2. Acceptance criteria are concrete down to the trap: add a >4 MB fixture, because small fixtures will not catch the large-blob path.",
     concepts=[
      ("Promote the spike", None, "the P1 design already exists as running code — productionising it is the task"),
-     ("Ship value before protocol", "decisions-and-evidence.html", "P1+P3 first is itself one of the six decisions, with a recommendation"),
+     ("Ship value before protocol", "decisions-and-evidence.html", "P1+P3 first is itself one of the ten decisions, with a recommendation"),
     ],
     ideas=[
      "Independently shippable phases keep every PR reviewable and every rollback cheap.",
@@ -108,16 +110,58 @@ PACKS = [
     ]),
    dict(slug="decisions-and-evidence", file="06__decisions-and-evidence.md",
     title="06 — Decisions & evidence",
-    role="Six open decisions for the maintainer, and the measured evidence that re-scoped the spec",
-    summary="The maintainer's file: six decisions, each with a recommendation, none blocking P1/P3. And the evidence base that changed the spec: GitHub Pages sends access-control-allow-origin: * by default, so key-on-another-origin moved from 'probably unavailable' to 'supported, asserted at run time'; custody without access structurally requires a manifest, because every filename derives from the read key; and object ids are sha256(ciphertext) with random IVs, so two vaults holding the same document share zero object ids — a fork is unlinkable.",
+    role="Ten open decisions for the maintainer, and the measured evidence that re-scoped the spec",
+    summary="The maintainer's file: ten decisions (up from six after the 18–19 Aug revision), each with a recommendation, none blocking P1/P3. And the evidence base that changed the spec: GitHub Pages sends access-control-allow-origin: * by default, so key-on-another-origin moved from 'probably unavailable' to 'supported, asserted at run time'; custody without access structurally requires a manifest, because every filename derives from the read key; object ids are sha256(ciphertext) with random IVs, so two vaults holding the same document share zero object ids — a fork is unlinkable; and Swagger UI measures 2.7× the vault it documents, which reversed decision 7 to a CDN-with-SRI default.",
     concepts=[
-     ("Measurement over assumption", None, "two source-brief assumptions reversed by a curl and a spike, with reproduction steps"),
+     ("Measurement over assumption", None, "source-brief assumptions — and two of the pack's own — reversed by a curl and a spike, with reproduction steps"),
      ("The unlinkable fork", "../../collection/index.html#attribute", "ciphertext-hashed ids + random IVs: a private fork of a public template is undetectable — a finding with privacy and attribution edges both ways"),
      ("A visibility default that drifts is a disclosure", None, "decision 5's one-line rationale, worth keeping"),
     ],
     ideas=[
      "Every decision ships with a recommendation, so sign-off is a review, not a design session.",
      "Everything measured is reproducible from named scripts — the same dated, re-runnable discipline this site uses.",
+    ]),
+   dict(slug="publish-target", file="07__publish-target.md",
+    title="07 — Where a published folder may live",
+    role="Added 18 Aug from the maintainer's observation: the amplification loop, the containment rule, and the safe default",
+    summary="The maintainer spotted that publishing into the vault's own work tree must not be allowed — and the pack shows it is worse than noise: published ciphertext becomes vault content on the next push, is re-encrypted and republished, and the store roughly doubles on every cycle, silently. Plus three more failures: a --force on an ancestor directory would delete .sg_vault itself; the published read key becomes tracked vault content; and a branch switch eats the output folder. The rule is checked on realpath before anything is written: no containment in either direction, with .sg_vault/publish/ as the always-ignored default for local preview, and an escape hatch that is user-declared (a target the vault's own ignore rules already cover), never magic.",
+    concepts=[
+     ("The amplification loop", None, "publish → push → publish doubles the store each cycle with no error — the same silent-compounding shape as every bug the project has hunted"),
+     ("Refuse containment both ways", None, "a target inside the work tree amplifies; a target that is an ancestor plus --force deletes the vault — different failures, both refused before a byte is written"),
+     ("No new implicit ignore rule", "decisions-and-evidence.html", "adding .site to the always-ignored set would silently drop tracked content from existing vaults on upgrade — a data-loss-shaped change refused on principle"),
+    ],
+    ideas=[
+     "The regression test is behavioural: publish, then push, then assert the object count is unchanged (now invariant I6).",
+     "The escape hatch is declared in a visible, versioned file — someone who wants ./docs published in place adds it to .gitignore, and it works because they said so.",
+     "Refusal messages name all three fixes and write nothing.",
+    ]),
+   dict(slug="api-docs", file="08__api-docs.md",
+    title="08 — Published API docs",
+    role="Added 18 Aug from the maintainer's proposal: openapi.json generated from the manifest, and Swagger UI as CDN-pinned or bundled",
+    summary="Swagger for the published folder is two artefacts with very different costs. The spec (api/openapi.json, a few KB) is generated from manifest.json by the tool that just wrote the folder, so it cannot drift, describes only what the folder actually serves, and uses a relative server URL so it works on any host. The UI is 1.53 MB — measured at 2.7× the entire published vault it documents — so it is opt-in, with CDN-plus-SRI as the default and bundling for offline or no-third-party policies. The non-obvious security interaction: the docs page is same-origin with the loader, which may store keys, so the CDN mode requires the exact-version pin, integrity hashes, crossorigin, no-referrer, and a CSP whose connect-src 'self' means even a script that somehow ran could not exfiltrate a key.",
+    concepts=[
+     ("Generated from the manifest, so it cannot drift", None, "the publisher's spec describes this deployment; the API team's spec describes the live service — complementary, and the conformance loop closes from both ends"),
+     ("SRI is the mitigation, not CDN avoidance", None, "a pinned hash means substituted bytes do not execute; a floating version tag is not acceptable in any mode"),
+     ("A demonstration, not documentation", "../../thesis/index.html", "a Swagger UI whose every operation returns opaque bytes, with no auth scheme at all, makes the zero-knowledge claim visible — the ciphertext panel's argument for a different reader"),
+    ],
+    ideas=[
+     "The root fix belongs in the loader: keep keys in memory, never in localStorage, and the same-origin objection collapses for every script anyone ever adds.",
+     "A published vault becomes self-describing to an agent — a machine-readable contract with no out-of-band explanation.",
+     "The 230 KB standalone preset is simply not emitted: a fixed-spec page never uses it.",
+    ]),
+   dict(slug="asset-origin", file="09__asset-origin.md",
+    title="09 — A first-party asset origin",
+    role="Added 19 Aug from the maintainer's static.sgit.ai proposal: yes to the asset site, no to Pages, and never on the reader's critical path",
+    summary="The maintainer proposed publishing pinned JS and brand assets to a static.sgit.ai site. The pack's answer draws one line: yes to the asset origin — but on S3/CloudFront, not GitHub Pages (Pages stamps max-age=600 on everything, unfit for immutable assets), and only as the publish-time source for bundled assets, never as a read-time origin. Today a published vault makes zero requests to SGit-AI infrastructure — structural, not policy; putting first-party JS on the reader's critical path would make static.sgit.ai a beacon receiving a request from every reader of every vault, joining readership to the operator's logs. At publish time the same mirror is safe and strictly better than a public CDN fetch, because the SRI hash decides and a substituted byte fails closed.",
+    concepts=[
+     ("Prefer the third party who cannot correlate", None, "a CDN learns 'somebody loaded swagger-ui'; a first-party origin joins that to our domains, accounts and hub — a zero-knowledge product cannot operate the beacon every reader pings"),
+     ("Publish-time source, not read-time origin", None, "the fetch happens once on the publisher's machine, hash-verified — every reader-side concern disappears"),
+     ("A permanent public commitment", "../../pki/registry-rules.html", "URLs baked into folders on hosts you do not control can never change: append-only, never rewritten, indefinitely — the registry-rules discipline applied to an asset bucket"),
+    ],
+    ideas=[
+     "The line is drawn by whether the consuming page may hold vault key material — sgit.ai and hub.sgit.ai yes, any published vault folder no.",
+     "'It's just a logo' is exactly how a first-party origin ends up on every reader's critical path.",
+     "Publish the SRI hash next to every asset, so consumers verify the mirror against upstream instead of trusting it.",
     ]),
   ]),
  dict(slug="hub-sgit-ai",
@@ -126,6 +170,8 @@ PACKS = [
   date="18 August 2026 · pack v0",
   origin_short="Explorer/Architect agent, SGit-AI__CLI repo",
   gh_base="https://github.com/SGit-AI/SGit-AI__CLI/blob/claude/sgit-architect-agent-review-3tl5ti/team/explorer/architect/contracts/08/18/hub-sgit-ai/",
+  commit="fbebe0c", captured="18 August 2026",
+  commit_url="https://github.com/SGit-AI/SGit-AI__CLI/commit/fbebe0ce25f63638ec6af12ecf666c07f4445e8a",
   row_date="18 Aug 2026 · design pack",
   one_line="A forge whose application layer is the browser; a hub is itself a vault, so the network is fractal by composition. 9 documents.",
   meta_desc="A design pack, readable in-page: the dev brief, the fractal model, the capability audit and its two findings, architecture &amp; flows, permissions as key topology, commercialisation, mockups, and the roadmap.",
@@ -324,6 +370,7 @@ DOC_PAGE = """<!doctype html>
   <span class="k">Date</span><span class="v">{date}</span>
   <span class="k">Origin</span><span class="v">{origin_short}</span>
   <span class="k">Source</span><span class="v"><a href="src/{file}">raw markdown</a> · <a href="{gh_base}{file}">original on GitHub</a></span>
+  <span class="k">Captured</span><span class="v">{captured}, at commit <a href="{commit_url}"><code>{commit}</code></a> — the raw file under <code>src/</code> is byte-identical to that commit</span>
 </div>
 
 <h2 id="summary">Summary</h2>
@@ -375,7 +422,7 @@ PACK_HUB = """<!doctype html>
 <h1>{pack_name}</h1>
 <p class="lead">{three}</p>
 
-<div class="note"><b>Origin.</b> {origin} Raw sources are captured verbatim under <code>src/</code> (linked from each document page); each document below has a reader page with the same apparatus as the site's <a href="../../documents/index.html">documents</a>.</div>
+<div class="note"><b>Origin.</b> {origin} Captured {captured} at commit <a href="{commit_url}"><code>{commit}</code></a>: the raw sources under <code>src/</code> are byte-identical to that commit's tree — verify with a diff against it. Each document below has a reader page with the same apparatus as the site's <a href="../../documents/index.html">documents</a>.</div>
 
 <h2 id="files">The documents</h2>
 <div class="tablewrap"><table>
@@ -485,6 +532,7 @@ for pack in PACKS:
             title=html.escape(d["title"]), pack=pack["slug"], slug=d["slug"],
             pack_name=html.escape(pack["name"]), pack_name_plain=html.escape(plain),
             date=pack["date"], origin_short=pack["origin_short"], gh_base=pack["gh_base"],
+            commit=pack["commit"], commit_url=pack["commit_url"], captured=pack["captured"],
             role=d["role"], file=d["file"], summary=d["summary"],
             concepts=concepts_li(d["concepts"]), ideas=ideas_li(d["ideas"]),
             prev=prev, prev_label=html.escape(prev_label),
@@ -497,6 +545,7 @@ for pack in PACKS:
         pack=pack["slug"], pack_name=html.escape(pack["name"]),
         pack_name_plain=html.escape(plain), three=pack["three_sentences"],
         origin=pack["origin"], relevance=pack["site_relevance"],
+        commit=pack["commit"], commit_url=pack["commit_url"], captured=pack["captured"],
         meta_desc=pack["meta_desc"],
         readme=pack["readme"], rows="\n".join(rows), first=docs[0]["slug"])
     (pdir / "index.html").write_text(hub)

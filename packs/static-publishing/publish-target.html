@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>07 — Where a published folder may live · Static Publishing, sgit vault serve, and the Publishing Matrix · packs · nhi.sgit.ai</title>
+<meta name="description" content="Added 18 Aug from the maintainer's observation: the amplification loop, the containment rule, and the safe default. Part of the Static Publishing, sgit vault serve, and the Publishing Matrix dev pack — summary, key concepts and the full document, readable in-page.">
+<link rel="canonical" href="https://nhi.sgit.ai/packs/static-publishing/publish-target.html">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+
+<nav class="site"><div class="row">
+  <a class="brand" href="../../index.html">nhi<span>.sgit.ai</span></a>
+  <span class="stage-pill">mvp draft</span>
+  <a class="ver" href="../../admin/versions.html" title="Site release history">v0.1.11</a>
+  <a class="nl" href="../../thesis/index.html">Thesis</a>
+  <a class="nl" href="../../hope/index.html">Hope</a>
+  <a class="nl" href="../../method/index.html">Method</a>
+  <a class="nl" href="../../options/index.html">Options</a>
+  <a class="nl" href="../../industry/index.html">Industry</a>
+  <a class="nl" href="../../collection/index.html">Collection</a>
+  <a class="nl" href="../../frameworks/aomm.html">AOMM</a>
+  <a class="nl" href="../../pki/index.html">PKI</a>
+  <a class="nl" href="../../documents/index.html">Docs</a>
+  <a class="nl here" href="../index.html">Packs</a>
+  <a class="nl" href="../../infographics/index.html">Infographics</a>
+  <a class="nl" href="../../admin/comms.html">Comms</a>
+  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__NHI">★ GitHub</a>
+</div></nav>
+
+<main class="doc">
+<div class="crumb"><a href="../../index.html">nhi.sgit.ai</a> / <a href="../index.html">packs</a> / <a href="index.html">static-publishing</a> / publish-target</div>
+<h1>07 — Where a published folder may live</h1>
+
+<div class="docmeta">
+  <span class="k">Pack</span><span class="v"><a href="index.html">Static Publishing, `sgit vault serve`, and the Publishing Matrix</a></span>
+  <span class="k">Role</span><span class="v">Added 18 Aug from the maintainer's observation: the amplification loop, the containment rule, and the safe default</span>
+  <span class="k">Date</span><span class="v">17–19 August 2026 · pack v0</span>
+  <span class="k">Origin</span><span class="v">Architect-review agent, SGit-AI__CLI repo</span>
+  <span class="k">Source</span><span class="v"><a href="src/07__publish-target.md">raw markdown</a> · <a href="https://github.com/SGit-AI/SGit-AI__CLI/blob/claude/sgit-architect-agent-review-3tl5ti/team/explorer/dev/impl-plans/08/17/static-publishing/07__publish-target.md">original on GitHub</a></span>
+  <span class="k">Captured</span><span class="v">19 August 2026, at commit <a href="https://github.com/SGit-AI/SGit-AI__CLI/commit/65ebfbd17c5ef1488b747def5560960b5ca19b83"><code>65ebfbd</code></a> — the raw file under <code>src/</code> is byte-identical to that commit</span>
+</div>
+
+<h2 id="summary">Summary</h2>
+<p>The maintainer spotted that publishing into the vault's own work tree must not be allowed — and the pack shows it is worse than noise: published ciphertext becomes vault content on the next push, is re-encrypted and republished, and the store roughly doubles on every cycle, silently. Plus three more failures: a --force on an ancestor directory would delete .sg_vault itself; the published read key becomes tracked vault content; and a branch switch eats the output folder. The rule is checked on realpath before anything is written: no containment in either direction, with .sg_vault/publish/ as the always-ignored default for local preview, and an escape hatch that is user-declared (a target the vault's own ignore rules already cover), never magic.</p>
+
+<h2 id="concepts">Key concepts</h2>
+<ul>
+  <li><b>The amplification loop</b> — publish → push → publish doubles the store each cycle with no error — the same silent-compounding shape as every bug the project has hunted</li>
+  <li><b>Refuse containment both ways</b> — a target inside the work tree amplifies; a target that is an ancestor plus --force deletes the vault — different failures, both refused before a byte is written</li>
+  <li><a href="decisions-and-evidence.html"><b>No new implicit ignore rule</b></a> — adding .site to the always-ignored set would silently drop tracked content from existing vaults on upgrade — a data-loss-shaped change refused on principle</li>
+</ul>
+
+<h2 id="ideas">Key ideas</h2>
+<ul>
+  <li>The regression test is behavioural: publish, then push, then assert the object count is unchanged (now invariant I6).</li>
+  <li>The escape hatch is declared in a visible, versioned file — someone who wants ./docs published in place adds it to .gitignore, and it works because they said so.</li>
+  <li>Refusal messages name all three fixes and write nothing.</li>
+</ul>
+
+<h2 id="read">Read the document</h2>
+<div class="mdread-label">📄 Pack document · 07__publish-target.md · rendered from the <a href="src/07__publish-target.md">raw markdown</a> (the source of truth)</div>
+<div class="mdread" id="mdread" data-src="src/07__publish-target.md"><noscript><p class="dim">In-page rendering needs JavaScript — <a href="src/07__publish-target.md">open the raw markdown</a>.</p></noscript></div>
+
+<div class="pagenav">
+  <a href="decisions-and-evidence.html">← 06 — Decisions &amp; evidence</a>
+  <a href="api-docs.html">08 — Published API docs →</a>
+</div>
+</main>
+
+<footer class="site"><div class="cols">
+  <div>
+    <div class="brandline">nhi<span>.sgit.ai</span></div>
+    <p>Non-human identity, blast radius and agentic security — anchored by the two-populations thesis. All content CC BY 4.0.</p>
+    <p class="partnote">⚠ Participant disclosure: published by the sgit project. <a href="../../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
+    <p class="verline">site <a href="../../admin/versions.html">v0.1.11</a> · <a href="../../admin/index.html">engineering</a></p>
+  </div>
+  <div>
+    <h4>The research</h4>
+    <a href="../../thesis/index.html">The thesis</a>
+    <a href="../../method/index.html">Method</a>
+    <a href="../../options/index.html">Options</a>
+    <a href="../../industry/index.html">Industry</a>
+  </div>
+  <div>
+    <h4>The collection</h4>
+    <a href="../../collection/index.html">By question</a>
+    <a href="../../documents/index.html">Documents</a>
+    <a href="../index.html">Packs</a>
+    <a href="../../pki/index.html">PKI</a>
+  </div>
+  <div>
+    <h4>Site</h4>
+    <a href="../../admin/comms.html">Comms</a>
+    <a href="../../admin/versions.html">Versions</a>
+    <a href="../../llms.txt">llms.txt</a>
+    <a href="https://sgit.ai">sgit.ai</a>
+  </div>
+</div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+<script src="../../assets/mdreader.js"></script>
+</body>
+</html>

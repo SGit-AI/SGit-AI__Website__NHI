@@ -8,7 +8,7 @@
 > thesis with evidence, a reproducible research method, dated option assessments, and a
 > curated collection of the underlying corpus.
 
-Site version: v0.1.10 (18 August 2026). Published by the sgit project — participant
+Site version: v0.1.11 (19 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## The research
@@ -77,17 +77,24 @@ disclosure at /about/participant.html. All content CC BY 4.0.
 - [Packs hub](https://nhi.sgit.ai/packs/index.html): implementation-plan packs authored
   by dev agents, captured verbatim with a reader page per document.
 - [Static publishing pack](https://nhi.sgit.ai/packs/static-publishing/index.html)
-  (17 Aug 2026, build spec): a vault publishes to a folder — ciphertext plus a declared
-  plaintext surface — readable by a browser via a loader and by `sgit clone` over plain
-  GETs from any static host, no server, no auth. Five invariants (byte-identical
-  ciphertext everywhere; the key never reaches a server; keyless custody via mandatory
-  manifest.json; byte-identical loader; plaintext only where the key is published),
-  14 test cells collapsed from 240 combinations, 7 shippable phases, and measured
-  evidence including: GitHub Pages sends access-control-allow-origin:* by default, and
-  object ids hash ciphertext with random IVs so a fork is unlinkable. Raw sources under
-  https://nhi.sgit.ai/packs/static-publishing/src/
+  (17–19 Aug 2026, build spec; captured at SGit-AI__CLI commit 65ebfbd): a vault
+  publishes to a folder — ciphertext plus a declared plaintext surface — readable by a
+  browser via a loader and by `sgit clone` over plain GETs from any static host, no
+  server, no auth. Six invariants (byte-identical ciphertext everywhere; the key never
+  reaches a server; keyless custody via mandatory manifest.json; byte-identical loader;
+  plaintext only where the key is published; publishing never changes the vault), 14 test
+  cells collapsed from 240 combinations, shippable phases, and measured evidence
+  including: GitHub Pages sends access-control-allow-origin:* by default, and object ids
+  hash ciphertext with random IVs so a fork is unlinkable. The 18–19 Aug revision added
+  three documents from maintainer review: where a published folder may live (the
+  publish-into-work-tree amplification loop, refused before a byte is written), published
+  API docs (openapi.json generated from the manifest; Swagger UI CDN-pinned with SRI or
+  bundled), and the first-party asset origin (publish-time source yes, read-time origin
+  never — a zero-knowledge product cannot operate the beacon every reader pings). Raw
+  sources under https://nhi.sgit.ai/packs/static-publishing/src/
 - [The fractal forge pack](https://nhi.sgit.ai/packs/hub-sgit-ai/index.html)
-  (18 Aug 2026, design pack): hub.sgit.ai as a forge whose application layer is the
+  (18 Aug 2026, design pack; captured at SGit-AI__CLI commit fbebe0c): hub.sgit.ai as a
+  forge whose application layer is the
   browser — the client holds the key, the server stores ciphertext and reads nothing. A
   hub is itself a vault (cover + catalogue + loader), so hubs can list hubs and the
   network is fractal by composition, with no federation protocol. Two findings about the
