@@ -58,10 +58,10 @@ DOCS = [
   version="v0.33.59", date="16 August 2026", dtype="Strategy brief",
   summary="Scopes pki.sgit.ai — a site and a registry of agent keys — from one historical lesson: the global keyserver network was destroyed in 2019 by a certificate-flooding attack its own maintainer called unsalvageable, and the cause was a stated design goal (never delete), not a bug. The brief turns the three abused properties into registry rules, resolves the tension with the corpus's own append-only pattern precisely (append-only is safe when the writer owns what it writes), makes revocation a signed append rather than a deletion, and separates identity from mandate as independently revocable signed statements. Private registry before public: testable versus commitment.",
   concepts=[
-   ("The 2019 keyserver failure", "../pki/keyserver-failure.html", "~150,000 garbage signatures on one key; unrepairable by design"),
-   ("The ownership rule", "../pki/keyserver-failure.html#append-only", "append-only is a guarantee when writers own their records, an attack surface when anyone appends to another's"),
-   ("The four registry rules", "../pki/registry-rules.html", "owner-only writes, revocation as signed append, size bounds, every entry signed"),
-   ("Identity vs. mandate", "../pki/registry-rules.html#mandate", "who the key belongs to vs. what the agent may do — separately revocable"),
+   ("The 2019 keyserver failure", "https://pki.sgit.ai/failure/index.html", "~150,000 garbage signatures on one key; unrepairable by design"),
+   ("The ownership rule", "https://pki.sgit.ai/failure/index.html#append-only", "append-only is a guarantee when writers own their records, an attack surface when anyone appends to another's"),
+   ("The four registry rules", "https://pki.sgit.ai/rules/index.html", "owner-only writes, revocation as signed append, size bounds, every entry signed"),
+   ("Identity vs. mandate", "https://pki.sgit.ai/mandate/index.html", "who the key belongs to vs. what the agent may do — separately revocable"),
   ],
   ideas=[
    "Third-party attestations are what made the old system valuable and what made it attackable — the central design choice, to be made deliberately.",
@@ -69,7 +69,7 @@ DOCS = [
    "Fractal trust structures require declared roots, or the graph is unevaluable.",
    "Lead with the failure page — the most linkable thing the site will have, and proof the design knew the history.",
   ],
-  pages="Became the PKI section: the hub, the keyserver-failure page, and the registry-rules page."),
+  pages="Became pki.sgit.ai — the failure, rules, mandate and roadmap pages live there now; this site keeps the bridge page at ../pki/index.html and this document page."),
  dict(slug="hope-driven",
   title="The True Scope of Agent Authorization: The Union of Everything Possible",
   md="v0.33.40__arch-brief__sg-send-agent-authorization-union-of-possible-expected-unexpected-delta-blast-radius-hope-driven.md",
@@ -173,7 +173,7 @@ DOCS = [
   summary="Ambient authority — components exercising authority they simply have, rather than authority explicitly granted — is the documented root cause of prompt injection: the attacker asks the deputy to use authority it already holds. A capability is an unforgeable reference to a resource together with permissions over it, granted explicitly; organised by authority rather than by code, plugins become a security boundary. Capabilities should attenuate but never expand, so delegation narrows by construction — and you can instrument every grant before you enforce, turning migration into measurement.",
   concepts=[
    ("Ambient authority", "../hope/index.html#hope-driven", "what 'acting as you' means in practice — the root cause the shared-drives research found live everywhere"),
-   ("Capabilities attenuate, never expand", "../pki/registry-rules.html", "delegation narrows by construction — the same discipline the registry rules carry"),
+   ("Capabilities attenuate, never expand", "https://pki.sgit.ai/rules/index.html", "delegation narrows by construction — the same discipline the registry rules carry"),
    ("Instrument before enforcing", "../frameworks/aomm.html#ladder", "recording every grant is the Enumerated step; enforcement follows measurement"),
   ],
   ideas=[

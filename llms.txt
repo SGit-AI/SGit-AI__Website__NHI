@@ -8,7 +8,7 @@
 > thesis with evidence, a reproducible research method, dated option assessments, and a
 > curated collection of the underlying corpus.
 
-Site version: v0.1.15 (19 August 2026). Published by the sgit project — participant
+Site version: v0.1.16 (19 August 2026). Published by the sgit project — participant
 disclosure at /about/participant.html. All content CC BY 4.0.
 
 ## The research
@@ -127,22 +127,21 @@ disclosure at /about/participant.html. All content CC BY 4.0.
   absences including CI, whose model-consistent answer is a scoped key. Raw sources under
   https://nhi.sgit.ai/packs/hub-sgit-ai/src/
 
-## PKI — preparing pki.sgit.ai
+## PKI — now its own site: pki.sgit.ai
 
-- [PKI hub](https://nhi.sgit.ai/pki/index.html): the cryptographic half of the identity
-  gap — a key registry for agents, staged here before pki.sgit.ai exists.
-- [Why good public key repositories don't exist](https://nhi.sgit.ai/pki/keyserver-failure.html):
-  the 2019 keyserver network destroyed by certificate flooding (~150,000 signatures on
-  one key); three abused properties (unlimited signatures, universal append, unverifiable
-  entries); unrepairable because never-delete was a stated design goal; the replacement
-  stripped third-party signatures and the web of trust with them. The precise lesson:
-  append-only is safe when the writer owns what it writes, fatal when anyone may append
-  to another's record.
-- [The four registry rules](https://nhi.sgit.ai/pki/registry-rules.html): owner-only
-  writes; revocation as a signed append (supersede, not delete); size-bounded records;
-  every entry signed. Identity and mandate as separately revocable signed statements —
-  the direct answer to "everything acts as you". Private registry before public: testable
-  vs. commitment. Source brief:
+The cryptographic half of the identity gap has spun out to https://pki.sgit.ai (live
+19 Aug 2026): the 2019 keyserver failure, the four registry rules, identity vs. mandate,
+and the build roadmap all live there now — see https://pki.sgit.ai/llms.txt. What remains
+here:
+
+- [PKI bridge page](https://nhi.sgit.ai/pki/index.html): the NHI framing — per-agent
+  keys in a registry are what would fill the shared-drives research's three empty rows
+  (no per-agent identity, no agent-level attribution, no encryption to a specific agent)
+  — plus the link map to pki.sgit.ai. The old in-depth pages here forward to their
+  pki.sgit.ai versions.
+- [The scoping brief's document page](https://nhi.sgit.ai/documents/pki-registry.html):
+  the pki.sgit.ai strategy brief (v0.33.59, 16 Aug 2026) stays captured in this site's
+  corpus; raw markdown at
   https://nhi.sgit.ai/briefs/v0.33.59__strategy-brief__pki-sgit-keyserver-failure-append-only-ownership-rule.md
 
 ## The collection

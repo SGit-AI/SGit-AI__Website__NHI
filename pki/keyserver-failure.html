@@ -2,115 +2,16 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Why good public key repositories don't exist — the 2019 keyserver failure · nhi.sgit.ai</title>
-<meta name="description" content="The global keyserver network was destroyed in 2019 by a certificate-flooding attack its own maintainer called unsalvageable. The three abused properties, the design goal that made repair impossible, and what the replacement gave up.">
-<link rel="canonical" href="https://nhi.sgit.ai/pki/keyserver-failure.html">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moved to pki.sgit.ai</title>
+<meta http-equiv="refresh" content="0; url=https://pki.sgit.ai/failure/index.html">
+<link rel="canonical" href="https://pki.sgit.ai/failure/index.html">
 <link rel="stylesheet" href="../assets/site.css">
 </head>
 <body>
-
-<nav class="site"><div class="row">
-  <a class="brand" href="../index.html">nhi<span>.sgit.ai</span></a>
-  <span class="stage-pill">mvp draft</span>
-  <a class="ver" href="../admin/versions.html" title="Site release history">v0.1.15</a>
-  <a class="nl" href="../thesis/index.html">Thesis</a>
-  <a class="nl" href="../hope/index.html">Hope</a>
-  <a class="nl" href="../method/index.html">Method</a>
-  <a class="nl" href="../options/index.html">Options</a>
-  <a class="nl" href="../industry/index.html">Industry</a>
-  <a class="nl" href="../collection/index.html">Collection</a>
-  <a class="nl" href="../frameworks/aomm.html">AOMM</a>
-  <a class="nl here" href="index.html">PKI</a>
-  <a class="nl" href="../documents/index.html">Docs</a>
-  <a class="nl" href="../packs/index.html">Packs</a>
-  <a class="nl" href="../infographics/index.html">Infographics</a>
-  <a class="nl" href="../admin/comms.html">Comms</a>
-  <a class="gh" href="https://github.com/SGit-AI/SGit-AI__Website__NHI">★ GitHub</a>
-</div></nav>
-
-<main class="doc">
-<div class="crumb"><a href="../index.html">nhi.sgit.ai</a> / <a href="index.html">pki</a> / keyserver-failure</div>
-<h1>Why good public key repositories don't exist</h1>
-<p class="lead">They did — and they were destroyed, by an attack whose cause was a stated design goal rather than a bug. Anyone proposing a key registry today should be able to show they designed it with this history in hand. This page is that history, in five minutes, with sources.</p>
-
-<h2 id="attack">June 2019: the certificate-flooding attack</h2>
-<p>An attacker flooded the OpenPGP certificates of two prominent contributors with bogus signatures, uploaded to the global SKS keyserver network. One key reached roughly <b>150,000 signatures</b>. Anyone importing a poisoned certificate would break their own working installation in hard-to-debug ways — so the recommended mitigation became: stop retrieving data from the network entirely. The network's own maintainer called it <b>unsalvageable</b>.</p>
-
-<h2 id="properties">The three abused properties</h2>
-<p>Each one becomes a design rule for any registry built afterwards:</p>
-<div class="tablewrap"><table>
-  <thead><tr><th>Abused property</th><th>Rule it produces</th></tr></thead>
-  <tbody>
-    <tr><td>A certificate may carry <b>unlimited signatures</b></td><td>Bound the size of a record</td></tr>
-    <tr><td><b>Anyone may append</b> to anybody's certificate</td><td>Only the owner may write to their own record</td></tr>
-    <tr><td><b>Nothing distinguishes</b> a legitimate signature from garbage</td><td>Every entry is signed by something you can check</td></tr>
-  </tbody>
-</table></div>
-
-<h2 id="design-goal">Why it could not be repaired</h2>
-<p>The fatal property was not an oversight. It was a design goal stated at the outset: a key server could add information to a certificate but <b>could never delete either a certificate or information about a certificate</b>. The maintainer's own conclusion was that changing a design goal of that magnitude means starting from a fresh sheet of paper rather than fixing anything.</p>
-
-<h2 id="append-only">The precise lesson about append-only</h2>
-<p>That design goal is <em>append-only</em> — a pattern this corpus itself uses in five places (write-only telemetry, staging folders, event ledgers, vault inboxes, relay channels), and rightly. A documented catastrophe caused by append-only deserves a precise resolution, not a shrug:</p>
-<pre class="shell">
-<span class="g">OUR CHANNELS</span>            a component appends to <span class="g">ITS OWN</span> inbox or log
-                        nobody writes into another's record
-                        <span class="cy">-></span> append-only is a <span class="g">guarantee</span>
-
-<span class="r">THE KEY SERVERS</span>         anyone appends to <span class="r">ANYBODY'S</span> certificate
-                        and nothing can be removed
-                        <span class="cy">-></span> append-only is an <span class="r">attack surface</span>
-</pre>
-<p><b>Append-only is safe when a writer appends only to objects it owns. It is fatal when anyone may append to somebody else's object.</b> The rule to carry forward is not "append-only" — it is <em>the writer owns what it writes</em>.</p>
-
-<h2 id="replacement">What the replacement gave up</h2>
-<p>The key server built to replace the broken network (keys.openpgp.org) <b>strips all third-party signatures and unverified identities</b>. That stops the attack completely — third-party signatures were the vector. It also removes the <em>web of trust</em>, the entire model by which one person's endorsement of another's key conveyed confidence. Commentary at the time noted this was not a full solution for exactly that reason, and that no good global answer existed.</p>
-<p>The trade, stated plainly: <b>third-party attestations are what made the old system valuable and what made it attackable.</b> A registry that permits them needs the size bound and the ownership rule; a registry that forbids them is safe and carries no social trust signal at all. For agent identity that choice matters more than usual, because an agent's key is only useful if somebody vouches for what the agent is allowed to do — the <a href="registry-rules.html#mandate">mandate concept</a>.</p>
-
-<h2 id="sources">Sources</h2>
-<ul class="small">
-  <li>The attack, the breakage on import, ~150,000 signatures on one key, the "unsalvageable" assessment, and the stop-using-it recommendation: <a href="https://securityboulevard.com/2019/07/an-attack-on-sks-keyserver-network-a-write-only-program-poisons-two-high-profile-openpgp-certificates/">securityboulevard.com</a>, <a href="https://www.itpro.com/security/33954/decade-old-flaw-in-pgp-is-finally-being-exploited">itpro.com</a></li>
-  <li>The three abused properties: <a href="https://www.gentoo.org/news/2019/07/03/sks-key-poisoning.html">gentoo.org</a></li>
-  <li>The never-delete design goal, and the fresh-sheet-of-paper conclusion: <a href="https://gist.github.com/rjhansen/67ab921ffb4084c865b3618d6955275f">the maintainer's own writeup</a>, <a href="https://securityaffairs.com/88071/hacking/poisoning-pgp-sks-key-network.html">securityaffairs.com</a></li>
-  <li>The replacement's trade — immune, at the cost of stripping signatures and identities; contemporary analysis that no good global answer existed: <a href="https://www.gentoo.org/news/2019/07/03/sks-key-poisoning.html">gentoo.org</a>, <a href="https://blogs.gentoo.org/mgorny/2019/07/04/sks-poisoning-keys-openpgp-org-hagrid-and-other-non-solutions/">blogs.gentoo.org</a></li>
-</ul>
-
-<div class="pagenav">
-  <a href="index.html">← PKI hub</a>
-  <a href="registry-rules.html">Next: the four rules →</a>
-</div>
+<main class="doc" style="padding-top:4rem">
+<h1>This page has moved</h1>
+<p class="lead">The 2019 keyserver-failure analysis now lives on <a href="https://pki.sgit.ai/failure/index.html">pki.sgit.ai</a>, the dedicated site for the agent key registry. You are being redirected; if not, follow the link. The <a href="index.html">PKI bridge page</a> explains what moved and what stays here.</p>
 </main>
-
-<footer class="site"><div class="cols">
-  <div>
-    <div class="brandline">nhi<span>.sgit.ai</span></div>
-    <p>Non-human identity, blast radius and agentic security — anchored by the two-populations thesis. All content CC BY 4.0.</p>
-    <p class="partnote">⚠ Participant disclosure: published by the sgit project. <a href="../about/participant.html" style="display:inline;padding:0">Read the disclosure</a>.</p>
-    <p class="verline">site <a href="../admin/versions.html">v0.1.15</a> · <a href="../admin/index.html">engineering</a></p>
-  </div>
-  <div>
-    <h4>The research</h4>
-    <a href="../thesis/index.html">The thesis</a>
-    <a href="../method/index.html">Method</a>
-    <a href="../options/index.html">Options</a>
-    <a href="../research/shared-drives.html">Shared drives</a>
-  </div>
-  <div>
-    <h4>The collection</h4>
-    <a href="../collection/index.html">By question</a>
-    <a href="../frameworks/aomm.html">The AOMM</a>
-    <a href="../hope/index.html">Hope</a>
-    <a href="index.html">PKI</a>
-  </div>
-  <div>
-    <h4>Site</h4>
-    <a href="../admin/comms.html">Comms</a>
-    <a href="../admin/versions.html">Versions</a>
-    <a href="../llms.txt">llms.txt</a>
-    <a href="https://sgit.ai">sgit.ai</a>
-  </div>
-</div></footer>
-
 </body>
 </html>
